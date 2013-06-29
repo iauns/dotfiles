@@ -12,6 +12,10 @@ source bootstrap
 Although I would just recommend frolicking around in my dotfiles and
 incorporating any humble snippets back into your own.
 
+After running bootstrap I generally run `./.osx` to install or update
+anything. This executable `.osx` script ends up calling `.brew` and all of the
+`.pkg*` executable files.
+
 Special Directories
 ===================
 
