@@ -219,6 +219,7 @@ Bundle 'AndrewRadev/simple_bookmarks.vim.git'
 Bundle 'guns/xterm-color-table.vim.git'
 Bundle 'mattn/zencoding-vim.git'
 Bundle 'Raimondi/delimitMate'
+Bundle 'tikhomirov/vim-glsl'
 " Vim-seek. We use the '-' for seeking. '0', '-', and '\' are the only keys
 " that are really available. May want to consider seek as 's' instead of
 " leader.
