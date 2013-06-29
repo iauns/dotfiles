@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-My very own flavor of unix.
+My very own special flavor of unix!
 
 Special Directories
 ===================
