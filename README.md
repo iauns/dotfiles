@@ -3,6 +3,15 @@ dotfiles
 
 My very own special flavor of unix!
 
+To install it's as simple as:
+
+```bash
+source bootstrap
+```
+
+Although I would just recommend frolicking around in my dotfiles and
+incorporating any humble snippets back into your own.
+
 Special Directories
 ===================
 
