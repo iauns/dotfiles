@@ -741,7 +741,7 @@ noremap <leader>sp [s
 noremap <leader>sa zg
 noremap <leader>sh z=
 
-" ---------------- CTRL-P bindings ------------------
+" ---------------- CTRL-P keys ------------------
 nnoremap <leader>- :CtrlPBufTag<CR>
 nnoremap <leader>pat :CtrlPBufTagAll<CR>
 nnoremap <leader>pf :CtrlPQuickfix<CR>
@@ -758,7 +758,7 @@ nnoremap <leader>pb :CtrlPBuffer<CR>
 "       %:p:h to a directory!
 noremap <silent> <leader>pd :CtrlP <C-R>=expand("%:p:h")<CR><CR>
 
-" ---------------- Fugitive ------------------
+" ---------------- Fugitive keys ------------------
 " http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
 " help :diffget -- see: http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
 " :diffget, :diffput, :diffupdate
@@ -779,39 +779,16 @@ noremap <silent> <leader>gw :Gwrite<CR>
 noremap <silent> <leader>gr :Gread<CR>
 noremap <silent> <leader>gl :Glog<CR>
 
-" ---------------- Tabular ------------------
-" These commands need to be executed from a script in the ~/.vim/after/plugin . Tabular is not loaded by the time that this vimrc is being loaded.
-"AddTabularPattern vdec /\S\+;
-"AddTabularPattern vass /=/l1l0
-"AddTabularPattern arrow /=/l1l0
-
-" ---------------- CTSwitch ------------------
+" ---------------- CTSwitch keys ------------------
 nnoremap <silent> <leader>oc :CTSHere<CR>
 
-" ---------------- System clipboard ------------------
-nnoremap <silent> <leader>op "*
-
-" ---------------- EasyMotion ------------------
-let g:EasyMotion_leader_key='<space>'
-
-call EasyMotion#InitOptions({
-      \   'leader_key'      : '<space><space>'
-      \ , 'keys'            : 'aoeuhtnsbcdgijkmpqrvw'
-      \ , 'do_shade'        : 1
-      \ , 'do_mapping'      : 1
-      \ , 'grouping'        : 1
-      \
-      \ , 'hl_group_target' : 'Question'
-      \ , 'hl_group_shade'  : 'EasyMotionShade'
-      \ })
-
-" ---------------- SkyBison ------------------
+" ---------------- SkyBison keys ------------------
 nnoremap <leader>b :<c-u>call SkyBison("")<cr>
 
-" ---------------- CommandT ------------------
+" ---------------- CommandT keys ------------------
 "nnoremap <silent> <leader>t :CommandT<CR>
 
-" ---------------- LLDB ------------------
+" ---------------- LLDB keys ------------------
 nnoremap <silent> <space>ns :Lstep<CR>
 nnoremap <silent> <space>nn :Lnext<CR>
 nnoremap <silent> <space>nr :Lstart<CR>
@@ -819,12 +796,12 @@ nnoremap <silent> <space>nc :Lcontinue<CR>
 nnoremap <silent> <space>nb :Lbreakpoint<CR>
 nnoremap <silent> <space>nd :Debug<CR>
 
-" ---------------- NerdTree ------------------
+" ---------------- NerdTree keys ------------------
 " Finds the current file in nerdtree.
 nnoremap <silent> <leader>nf :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 noremap <silent> <leader>nn :NERDTreeToggle<CR>
 
-" ---------------- Utl ------------------
+" ---------------- Utl keys ------------------
 " Open manual
 "  " See: <url:vimhelp:uel#^a folder-URL. Utl.vim>
 "<url:http://en.cppreference.com/mwiki/index.php\?title\=Special\%3ASearch\&search\=vector>
@@ -833,19 +810,7 @@ nnoremap <silent> <leader>om :exe ':Utl ol http://en.cppreference.com/mwiki/inde
 nnoremap <silent> <leader>og :exe ':Utl ol https://www.google.com/search?q='.expand("<cword>")<CR>:redraw!<CR> 
 nnoremap <silent> <leader>oh :Utl<CR>:redraw!<CR>
 
-" ---------------- ZenCoding ------------------
-let g:user_zen_leader_key = '<c-f>'
-
-" ---------------- Sessions ------------------
-" We don't want to be asked to autosave sessions.
-let g:session_autosave = 'no'
-
-" ---------------- ZenCoding ------------------
-"let g:SeekKeys = '- _ 0 +'
-let g:SeekKey = '-'
-let g:SeekBackKey = '_'
-
-" ---------------- Unite ------------------
+" ---------------- Unite keys ------------------
 " <F1>: Help
 nmap <F1> [unite]h
 
@@ -906,6 +871,21 @@ end
 "-------------------------------------------------------------------------------
 " Addon settings
 "-------------------------------------------------------------------------------
+"
+" ---------------- EasyMotion ------------------
+let g:EasyMotion_leader_key='<space>'
+
+call EasyMotion#InitOptions({
+      \   'leader_key'      : '<space><space>'
+      \ , 'keys'            : 'aoeuhtnsbcdgijkmpqrvw'
+      \ , 'do_shade'        : 1
+      \ , 'do_mapping'      : 1
+      \ , 'grouping'        : 1
+      \
+      \ , 'hl_group_target' : 'Question'
+      \ , 'hl_group_shade'  : 'EasyMotionShade'
+      \ })
+
 
 " ---------------- CtrlP ---------------- 
 " Set control-p up to search for the root directory of the current file.
@@ -940,8 +920,6 @@ let g:ycm_filetype_blacklist = {
 let g:ycm_min_num_of_chars_for_completion = 2
 
 nnoremap <leader>w :YcmCompleter GoToDefinitionElseDeclaration<CR>
-
-" ----------------- EasyMotion ----------------
 
 " ----------------- UltiSnips ----------------
 so ~/self/unix/vim/toSource/UltiSnipHelpers.vim
@@ -1015,6 +993,18 @@ let g:instant_markdown_slow = 1
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 let g:delimitMate_balance_matchpairs = 1
+
+" ---------------- ZenCoding ------------------
+let g:user_zen_leader_key = '<c-f>'
+
+" ---------------- Sessions ------------------
+" We don't want to be asked to autosave sessions.
+let g:session_autosave = 'no'
+
+" ---------------- ZenCoding ------------------
+"let g:SeekKeys = '- _ 0 +'
+let g:SeekKey = '-'
+let g:SeekBackKey = '_'
 
 " ----------------- Utl ----------------
 if has("win32")
