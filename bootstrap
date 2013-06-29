@@ -159,26 +159,54 @@ install_dotfiles () {
 # Symlink current files and all subdirectories
 install_dotfiles "link" ${HOME}
 
-# Clone small private dotfiles repo (mostly for mutt and ssh config).
-info "Updating private repo."
-if Command -v git > /dev/null; then
-  privateRepoLoc=$DOTFILES_ROOT/private
-  if [ ! -d $privateRepoLoc ]; then
-    git clone private_repo:~/repo/dotFilesPrivate.git ~/dotfiles/private
-  else
-    pushd $privateRepoLoc > /dev/null
-      git pull origin master
-    popd > /dev/null
+# Attempt to find private_repo in user's .ssh/config file.
+use_private_repo=false
+if ! grep "private_repo" ${HOME}/.ssh/config > /dev/null ; then
+  user "private_repo not found in .ssh/config, do you want to create an entry for this? (y/n)"
+  read -n 1
+  echo ''
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    user "Enter repository URI:"
+    read RepoLocation
+    user "Enter repository username:"
+    read RepoUsername
+    if [ ! -f ${HOME}/.ssh/config ]; then
+      echo "Host private_repo" > ${HOME}/.ssh/config
+    else
+      echo "Host private_repo" >> ${HOME}/.ssh/config
+    fi
+    echo "  HostName $RepoLocation" >> ${HOME}/.ssh/config
+    echo "  User $RepoUsername" >> ${HOME}/.ssh/config
+    use_private_repo=true
   fi
 else
-  echo "Unable to find git, please install it before attempting to pull private repos."
+  use_private_repo=true
 fi
 
-info "Linking private files."
-# Symlink private repo files.
-pushd $DOTFILES_ROOT/private > /dev/null
-  install_dotfiles "link" ${HOME}
-popd > /dev/null
+if [ "$use_private_repo" == "true" ]; then
+  # Clone small private dotfiles repo (mostly for mutt and ssh config).
+  info "Updating private repo."
+  if Command -v git > /dev/null; then
+    privateRepoLoc=$DOTFILES_ROOT/private
+    if [ ! -d $privateRepoLoc ]; then
+      git clone private_repo:~/repo/dotFilesPrivate.git ~/dotfiles/private
+    else
+      pushd $privateRepoLoc > /dev/null
+      git pull origin master
+      popd > /dev/null
+    fi
+
+    info "Linking private files."
+    pushd $DOTFILES_ROOT/private > /dev/null
+    install_dotfiles "link" ${HOME}
+    popd > /dev/null
+  else
+    echo "Unable to find git, please install it before attempting to pull private repos."
+  fi
+else
+  info "Skipping private repo."
+fi
+
 
 if [ "$(uname -s)" == "Darwin" ]
 then
