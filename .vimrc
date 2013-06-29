@@ -1,21 +1,13 @@
 " Available top level normal mode keys:
 " \ - Most people use this as their leader key and currently does nothing.
 "     A long reach though.
-" - - The minus key is soft prev line, I never use it and would be a
-"     great key to change. It might even be a good leader key.
 " x - Hardly ever use this key. Same as dl or dh (used with repeat)
 "     I only use this key for swapping two characters, which could easily just
 "     be a leader mapping.
-" s - (remapped) Same story as x. But currently remapped to leader key.
 " space - (remapped) Similar to another leader key - mostly used for easymotion.
 
 " Maybe re-mappable:
 " , - A possibility since its use is very infrequent.
-
-" Vim doesn't like the fish shell...
-"set shell=reattach-to-user-namespace -l /bin/bash
-"set shell=/usr/local/bin/reattach-to-user-namespace -l /bin/bash
-"set shell=/bin/bash
 
 " Shell only gets set in macvim. We don't want it set in the shell because
 " reattach-to-user-namespace wouldn't be called. 
@@ -23,37 +15,12 @@ if has("mac") || has("macunix")"
   set shell=/bin/bash
 endif
 
-" Temporary bindings to nop in order to enforce new muscle memory.
-" Replaced with capitol H
-nnoremap ^ <Nop>
-" Replaced with capitol L
-nnoremap $ <Nop>
-
 " gnome-terminal settings (doesn't advertise 256 color)
 if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-" TODO:
-" Look at colorscheme 'jellybeans'
-
-" Take a look at the following code *and* neobundle. vim_starting may be
-" a great flag to use when resourcing the vimrc.
-"if has ('vim_starting')
-"  set runtimepath+=~/.vim/bundle/neobundle.vim/
-"endif
-
-" Possibly integrate the following leader mappings.
-"" <Leader>p: Copy the full path of the current file to the clipboard
-"nnoremap <silent> <Leader>p :let @+=expand("%:p")<cr>:echo "Copied current file
-"      \ path '".expand("%:p")."' to clipboard"<cr>
-"
-" <Leader>1: Toggle between paste mode
-"nnoremap <silent> <Leader>1 :set paste!<cr>
-"
-" What does the following actually do?
-" N: Find next occurrence backward
-"nnoremap N Nzzzv
+" TODO: Look at colorscheme 'jellybeans'
 
 "-------------------------------------------------------------------------------
 " General VIM settings
@@ -61,7 +28,7 @@ endif
 set nocompatible          " No compatibility with Vi.
 syntax enable             " Turn on color syntax highlighting.
 set background=dark       " Default background is dark.
-colorscheme xoria256    "xoria256       Use two color schemes: xoria256 for dark.
+colorscheme xoria256      " Use two color schemes: xoria256 for dark.
 set background=dark       " The colorscheme above sets the background to light.
                           " (only when in the terminal, curiously).
 set guioptions-=r         " Disable the right scrollbar.
@@ -121,7 +88,14 @@ set shiftround
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set sessionoptions-=options  " Don't save options in sessions. 
 set noshowmatch           " Don't show matching brackets (%).
-set lazyredraw
+
+" Source the :Man command from sources included in vim distro
+runtime ftplugin/man.vim
+runtime macros/matchit.vim
+
+" Never continue a comment when using 'o' or 'O' in normal mode.
+" Comments will only be continued when in insert mode.
+autocmd FileType * setlocal formatoptions-=o
 
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard.
@@ -133,11 +107,9 @@ else
   set clipboard=unnamed
 endif
 
-" Use a low updatetime. This is used by CursorHold
-"set updatetime=1000
-
 " Expands what is considered a 'word'. I generally like the granularity
 " of the default and navigate with capitol 'w' and 'b' when necessary.
+" I keep this around anyways for future reference.
 "set iskeyword+=<,>,[,],:,-,`,!
 "set iskeyword-=_
 
@@ -152,15 +124,11 @@ else
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-" Disable inserting comment characters under any circumstances.
-"autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-"set formatoptions-=q
-
 " Ignore object files and git folders.
 let g:wildignoredefaults='*.o,*.obj,.git,*.a'
 exe 'set wildignore+='.g:wildignoredefaults
 
-" Setup persistent undo/redo.
+" Setup persistent undo/redo. Quite nice.
 silent !mkdir ~/.vim/backups > /dev/null 2>&1
 set undodir=~/.vim/backups
 set undofile
@@ -176,9 +144,8 @@ autocmd BufReadPost *
 " VUNDLE
 "-------------------------------------------------------------------------------
 "
-" TODO:
 " NOTE: May want to switch te Neobundle. It allows you to place compiler
-" directives along with the bundel. This would be helpful for vimproc and
+" directives along with the bundle. This would be helpful for vimproc and
 " youcompleteme. Below is the build directives for vimproc:
 "
 " NeoBundle 'Shougo/vimproc', { 'build': {
@@ -189,42 +156,35 @@ autocmd BufReadPost *
 "      \ } }
 "
 " NeoBundle was inspired by Vundle, so it looks extremelly similar.
+" The only downside is the documentation.
 "
-" Filetype needs to be off with vundle.
+" Filetype needs to be off with vundle,
 " See: https://github.com/gmarik/vundle/issues/16
-" And the precursor: https://bugs.launchpad.net/ultisnips/+bug/1067416
+" And: https://bugs.launchpad.net/ultisnips/+bug/1067416
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-" required! 
 Bundle 'gmarik/vundle'
 
 " build vimproc : % cd dot.vim/bundle/vimproc/ && make -f make_mac.mak
 Bundle 'Shougo/vimproc'
 
 " Rest of Shougo's stuff.
+" Look at the following when digging back into unite:
+" https://github.com/terryma/dotfiles/blob/master/.vimrc
 Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/unite-outline'
 Bundle 'Shougo/unite-help'
 Bundle 'Shougo/unite-session'
 Bundle 'thinca/vim-unite-history'
 
-" Look at this -- be careful though,
-" https://github.com/terryma/dotfiles/blob/master/.vimrc
-" mentions that it causes problems somewhere in his vimrc and is no longer
-" using it.
-" Bundle 'Shougo/neocomplcache'
-
 " Bundles
 Bundle 'Valloric/YouCompleteMe.git'
 Bundle 'godlygeek/tabular.git'
 Bundle 'tpope/vim-markdown.git'
 Bundle 'paradigm/SkyBison.git'
-"Bundle 'majutsushi/tagbar.git'
-"Bundle 'mattn/webapi-vim'
-"Bundle 'mattn/gist-vim'
 Bundle 'vim-scripts/Cpp11-Syntax-Support.git'
 Bundle 'derekwyatt/vim-protodef.git'
 " New motion objects. This introduces the comma ','.
@@ -232,64 +192,51 @@ Bundle 'derekwyatt/vim-protodef.git'
 Bundle 'bkad/CamelCaseMotion.git'
 " Text object based on indentation level. Adds 'i' and 'I' as text objects.
 Bundle 'michaeljsmith/vim-indent-object.git'
-" If we get rid of the following plugin, there is extra baggage in setupMacSystem.sh
-" that we can get rid of as well.
 Bundle 'suan/vim-instant-markdown'
-" vim-table-mode (think editing markdown files on github)
 Bundle 'dhruvasagar/vim-table-mode'
 " Unimpaired plugin (bindings to left and right braces) -- Unimpaired must
 " come before svermeulen's branch of easymotion. Otherwise 'yp' won't be bound
 " correctly.
 Bundle 'tpope/vim-unimpaired.git'
-"" Easy motion (moved to Bundle from VAM). Using alternative which uses two chars.
+" Easy motion (moved to Bundle from VAM). Using alternative which uses two chars.
 Bundle 'iauns/vim-easymotion.git'
 "Bundle 'svermeulen/vim-easymotion'
-" Tim pope repeat
 Bundle 'tpope/vim-repeat.git'
-" Tim pope speed-dating
 Bundle 'tpope/vim-speeddating.git'
 " Narrow region. Lets you edit the selection in a separate buffer.
 " The shortcut is <leader>nr.
 Bundle 'chrisbra/NrrwRgn.git'
-" Mirror of utl library in vimscripts
 Bundle 'vim-scripts/utl.vim.git'
-" Unimpaired plugin (bindings to left and right braces)
 Bundle 'tpope/vim-surround.git'
-" UltiSnips
 Bundle 'SirVer/ultisnips.git'
-" Mayansmoke colorscheme
 Bundle 'vim-scripts/mayansmoke.git'
-" File switching
 Bundle 'derekwyatt/vim-fswitch.git'
-" TPope's Fugitive
 Bundle 'tpope/vim-fugitive.git'
-" CtrlP extension.
 Bundle 'kien/ctrlp.vim.git'
-" Scrooloose - nerdtree
 Bundle 'scrooloose/nerdtree.git'
-" Syntastic
 Bundle 'scrooloose/syntastic.git'
-" Simple bookmarks. Will persist across vim sessions.
 Bundle 'AndrewRadev/simple_bookmarks.vim.git'
-" Nifty little xterm color table
 Bundle 'guns/xterm-color-table.vim.git'
-" Install quick tutorial on learning vim
-Bundle 'dahu/LearnVim.git'
-" Install ZenCoding for quick HTML editing
 Bundle 'mattn/zencoding-vim.git'
-" Delimitmate
 Bundle 'Raimondi/delimitMate'
 " Vim-seek. We use the '-' for seeking. '0', '-', and '\' are the only keys
 " that are really available. May want to consider seek as 's' instead of
 " leader.
 Bundle 'goldfeld/vim-seek.git'
-"" Merlin for OCaml completion
-"Bundle 'def-lkb/merlin', {'rtp' : 'vim/'}
 " Haskell dev plugins (for syntastic and definition of types)
 Bundle 'bitc/vim-hdevtools'
+" Perform ack from within vim! Look into replacing with unit's proc grep.
+Bundle 'mileszs/ack.vim.git'
+
 " Extended session tools
 "Bundle 'xolox/vim-misc.git'
 "Bundle 'xolox/vim-session.git'
+
+" Plugins that I've tried but are currently disabled.
+"Bundle 'majutsushi/tagbar.git'
+"Bundle 'mattn/webapi-vim'
+"Bundle 'mattn/gist-vim'
+"Bundle 'def-lkb/merlin', {'rtp' : 'vim/'}
 
 " Multiedit (haven't experimented with this)
 "Bundle 'https://github.com/hlissner/vim-multiedit.git'
@@ -311,8 +258,6 @@ Bundle 'bitc/vim-hdevtools'
 "Bundle 'sjl/gundo.vim.git'
 "" Plugin to automatically update tags when a file is modified.
 "Bundle 'vim-scripts/AutoTag.git'
-" Perform ack from within vim! Replaced with Unite's grep which is threaded.
-Bundle 'mileszs/ack.vim.git'
 "" Switch.vim - use regular expressions to switch between vim elements.
 "Bundle 'AndrewRadev/switch.vim'
 " Latex box
@@ -365,7 +310,6 @@ Bundle 'mileszs/ack.vim.git'
 "Bundle 'vim-scripts/AutomaticLaTexPlugin.git'
 
 " Rejected plugins:
-" ZenCoding - It rebound C-y. I use that all of the time to scroll up by one.
 " argtextobj - I couldn't get the text object to behave appropriately.
 "
 filetype plugin indent on
@@ -383,14 +327,6 @@ function! JHBGSetup()
     highlight ColorColumn ctermbg=235 guibg=gray15
   endif
 endfunction
-
-function! NumberToggle()
-  if (&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
 
 " Toggle between light and dark backgrounds.
 function! LightDarkToggle()
@@ -666,6 +602,12 @@ endif
 "command! -nargs=1 JHMoveUp execute "let i = ".<args> | execute "if ".i." != 0 | execute 'normal! m`' | endif" | execute "if ".i." == 0 | execute 'normal! k' | else | execute 'normal! ".i."k' | endif"
 "noremap <silent> k :<C-u>JHMoveUp(v:count)<CR>
 
+" Copy the full path of the current file to the clipboard
+nnoremap <silent> <Leader>fp :let @+=expand("%:p")<cr>:echo "Copied current file
+      \ path '".expand("%:p")."' to clipboard"<cr>
+
+" Remap paste mode to <leader>1
+nnoremap <silent> <Leader>1 :set paste!<cr>
 
 " U: Redos since 'u' undos
 nnoremap U <c-r>
@@ -697,17 +639,9 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-" We use these keys for tmux. Instead, in vim, I switch windows with
-" <space>h, <space>j, etc... These overwrite the bindings supplied by
-" Also use <space>s and <space>- for splitting the windows.
-"nnoremap <C-h> <C-w>h
-"nnoremap <C-j> <C-w>j
-"nnoremap <C-k> <C-w>k
-"nnoremap <C-l> <C-w>l
-"nnoremap <silent> <space>h <C-w>h
-"nnoremap <silent> <space>l <C-w>l
-"nnoremap <silent> <space>j <C-w>j
-"nnoremap <silent> <space>k <C-w>k
+" We use the <C-h,j,k,l> keys for tmux. Instead, in vim, I switch windows with
+" <space>h, <space>j, etc... These overwrite the bindings supplied by Also use
+" <space>s and <space>- for splitting the windows.
 nnoremap <silent> <space>s :vsplit<CR>
 nnoremap <silent> <space>- :split<CR>
 
@@ -716,9 +650,6 @@ vnoremap \ <Esc>/\%V
 
 " Remap <C-W><C-W> to move to previously active buffer.
 nnoremap <C-W><C-W> :wincmd p<CR>
-
-" Enable toggling between relativenumber and number.
-noremap <silent> <leader>en :call NumberToggle()<CR>
 
 " Mapping to run make command, but silent! Only pops open quick fix
 " if there were errors. Still need to fix linker error recognition.
@@ -787,7 +718,6 @@ noremap <silent> <leader>ou :GundoToggle<CR>
 noremap <silent> <leader>ol :lopen<cr>
 
 
-
 " ---------------- Run semantic ------------------
 " Run ctangs
 " Run syntastic
@@ -810,11 +740,6 @@ noremap <leader>sn ]s
 noremap <leader>sp [s
 noremap <leader>sa zg
 noremap <leader>sh z=
-
-" ---------------- Clang Complete ------------------
-" Insert mode autocompletion (brings up clang_complete in C/C++ files).
-" This never worked. I just end up doing C-x C-o manually.
-"imap <C-Tab> <C-x><C-o>
 
 " ---------------- CTRL-P bindings ------------------
 nnoremap <leader>- :CtrlPBufTag<CR>
@@ -884,12 +809,7 @@ call EasyMotion#InitOptions({
 nnoremap <leader>b :<c-u>call SkyBison("")<cr>
 
 " ---------------- CommandT ------------------
-nnoremap <silent> <leader>t :CommandT<CR>
-"nnoremap <silent> <leader>b :CommandTBuffer<CR>
-
-" ---------------- Yankring ------------------
-"let g:yankring_replace_n_pkey = '<c-n>'
-"let g:yankring_replace_n_nkey = '<c-b>'
+"nnoremap <silent> <leader>t :CommandT<CR>
 
 " ---------------- LLDB ------------------
 nnoremap <silent> <space>ns :Lstep<CR>
@@ -898,13 +818,6 @@ nnoremap <silent> <space>nr :Lstart<CR>
 nnoremap <silent> <space>nc :Lcontinue<CR>
 nnoremap <silent> <space>nb :Lbreakpoint<CR>
 nnoremap <silent> <space>nd :Debug<CR>
-
-" ---------------- Yankstack ------------------
-"call yankstack#setup()
-"let g:yankstack_map_keys=0
-"" Interestingly, you can't use plug with nnoremap
-"nmap <leader>y <Plug>yankstack_substitute_older_paste
-"nmap <leader>py <Plug>yankstack_substitute_newer_paste
 
 " ---------------- NerdTree ------------------
 " Finds the current file in nerdtree.
@@ -1028,15 +941,7 @@ let g:ycm_min_num_of_chars_for_completion = 2
 
 nnoremap <leader>w :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
-" Pathogen has been superceded by vundle.
-"" ----------------- Pathogen ----------------
-"call pathogen#infect()
-"call pathogen#helptags() " generate helptags for everything in 'runtimepath'
-
 " ----------------- EasyMotion ----------------
-
-" Do not prioritize closer items.
-"let g:EasyMotion_grouping = 2
 
 " ----------------- UltiSnips ----------------
 so ~/self/unix/vim/toSource/UltiSnipHelpers.vim
@@ -1063,45 +968,9 @@ let g:CommandTMatchWindowAtTop=1
 " guesstimation.
 let g:CommandTMaxHeight=40
 
-"" ----------------- Supertab -----------------
-"let g:SuperTabMappingForward='<s-tab>'
-"" Default backward mapping is S-tab
-"let g:SuperTabNoCompleteAfter=[
-"      \ '^',
-"      \ '\s',
-"      \ ';',
-"      \ ','
-"        \]
-"let g:SuperTabLongestHighlight=1
-"let g:SuperTabLongestEnhanced=1
-
-" ----------------- Clang Complete ----------------
-"" Clang library path on OS X. Used to direct clang_complete
-"let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-""let g:clang_complete_copen = 1
-""let g:clang_periodic_quickfix = 1
-"let g:clang_snippets=1
-"let g:clang_auto_select=1
-"" Use C-x C-o in order to initiate clang complete.
-"" Otherwise use C-Space to initiate other auto-complete.
-"let g:clang_complete_auto=0
-
 " ----------------- Tagbar ----------------
 let g:tagbar_autoclose=1
 let g:tagbar_autofocus=1
-
-" ----------------- Syntastic ----------------
-" The large majority of the projects that I will be working with are C++ based. 
-" As such, I set the default compiler to clang++.
-"let g:syntastic_cpp_compiler="clang++"
-" Consider setting errorformat for clang.
-"let g:syntastic_cpp_errorformat
-
-" Tell syntastic *not* to automatically parse files on save.
-"let g:syntastic_mode_map = { 
-"      \ 'mode': 'passive',
-"      \ 'active_filetypes': [],
-"      \ 'passive_filetypes': [] }
 
 " ----------------- Powerline ----------------
 let g:Powerline_symbols = 'fancy'
@@ -1380,125 +1249,6 @@ elseif executable('ack')
   let g:unite_source_grep_recursive_opt = ''
 endif
 
-"-------------------------------------------------------------------------------
-" Custom project setup
-"-------------------------------------------------------------------------------
-
-" Note the three backslashes: \\ = \  and \ is to escape the pipe
-" If this breaks in a newer version of vim, just switch to a shell script prog.
-" com! SSorion      :cd ~/orion/us/genesis/m01/src | set grepprg=rq\ -c\ ~/self/unix/all/recoll/orion\ -b\ '$**'\ \\\|\ sed\ 's/file:\\/\\///'\ \\\|\ xargs\ grep\ -n\ '$*'\ /dev/null | com! SSindex :!recollindex -c ~/self/unix/all/recoll/orion
-
-" The dictionary jh_wildextras and the calls below work beautifully
-" with commandT. The point is to wild ignore certain directories 
-" when working with certain projects.
-let g:jh_wildextras = 
-      \ {
-      \   'ion2'        : 'misc,Designer/Art,Designer/cmake/bin,Designer/bin,Designer/Shaders/Export',
-      \   'orion'       : '0',
-      \   'vis3d'       : '*.gcda,Build,*.png,*.uvf,*.1dt,*.2dt,*.gcno,*.filters,*.user,*.ico,*.rc,*.icns,Doxyfile,*.plist,*.sln,*.vcxproj,*.qrc,*.o',
-      \   'srun5'       : 'bin,jh_srun5,*.log,*.bin',
-      \   'scirun'      : 'bin,src/Externals',
-      \   'spire'       : 'bin,*.out,tags,cscope.files'
-      \ }
-
-" Most of the nerdtree ignores should be files names. Directories aren't that important to ignore.
-" Plus, this is a more strict list. There are a lot more files that we will care about
-" in nerdtree. For example, I care about png files, sln, and vcxproj files in vis3d, but not
-" in the quick lookup.
-let g:jh_nerdtreeIgnores =
-      \ { 
-      \   'ion2'        : [],
-      \   'orion'       : [],
-      \   'vis3d'       : ['\.gcda$', '\.o$', '\.gcno$', '\.user$'],
-      \   'srun5'       : ['\.bin$'],
-      \   'scirun'      : [],
-      \   'spire'       : ['cscope\..*$', 'bin$', 'tags$']
-      \ }
-
-function! RemExtraWildIgnorePats()
-  for key in keys(g:jh_wildextras)
-    exe 'set wildignore-='.g:jh_wildextras[key]
-  endfor
-endfunction
-
-" Function to setup vim settings in preparation for a new project.
-function! DoProjectChange(rootDir, projectKey, grepPrg, makePrg, cppSourceDir, indexCommand, debugExecutable)
-  " Change to the root project directory
-  exe 'cd '.a:rootDir
-
-  " Look for the .clang_complete file in the root directory, and 
-  let clangCompName=a:rootDir.'/.clang_complete'
-  if filereadable(clangCompName)
-    "let syntasticOptions=''
-    "for OPT in readfile(clangCompName)
-    "  let syntasticOptions=syntasticOptions.' '.OPT
-    "endfor
-    "let g:syntastic_cpp_compiler_options=syntasticOptions
-
-    " Update vim's path variable so that gf should always
-    " work when attempting to jump to include directories.
-    " We will only extract the -I options.
-    for OPT in readfile(clangCompName)
-      let res = matchlist(OPT, '^-I\(.*\)')
-      " Get the first group.
-      if len(res) > 1
-        exe 'set path+='.res[1]
-      endif
-    endfor
-  else
-    echom 'Could not find .clang_complete'
-  endif
-
-  " Nerd tree ignores need to be set before nerd tree is opened for the first time.
-  " Also note: We have to append g: to NERDTreeIgnore, or else it makes the variable
-  " local to this function.
-  let g:NERDTreeIgnore=g:jh_nerdtreeIgnores[a:projectKey]
-
-  " Let all appropriate functions know what project we are current on.
-  let g:JHProject=a:projectKey
-
-  " Change the rootdirectory in nerd tree.
-  " By default, nerdtree does NOT use relative numbering, so we toggle it.
-  exe 'NERDTree'.a:rootDir
-  call NumberToggle()
-  NERDTreeToggle()
-
-  " Set compiler options (file mimics clang_complete compiler flags)
-  exe 'set grepprg='.a:grepPrg
-  exe 'set makeprg='.a:makePrg
-
-  " Set cpp source directory. In the past, there was a patch that I had applied
-  " to ProtoDef or FSwitch that used this g:jh_cppSrcDir variable.
-  " I can't remember which one specifically now, or what its purpose was.
-  " But I'm sure I'll run across it again so I'm leaving it here for now.
-  " TODO: We REALLY should set this to a sane value when VIM starts.
-  let g:jh_cppSrcDir=a:cppSourceDir
-
-  " Setup appropriate ignores
-  call RemExtraWildIgnorePats()
-  exe 'set wildignore+='.g:jh_wildextras[a:projectKey]
-
-  " Setup an indexing command (possibly replace with code.google.com/p/codesearch).
-  exe 'com! SSindex :'.a:indexCommand
-
-  " Target
-  exe 'com! Debug :Ltarget '.a:debugExecutable
-endfunction
-
-" Remember, don't do anything after the last com! command. I don't know of
-" a way of separating the commands after com!.
-" makeprg for ion2 will be the cmake project. We will be able to compile everytihng but the interface code.
-com! SSion2       call DoProjectChange(expand('$HOME/ion2'),              'ion2',     'cs-ion2\ $*',      '~/ion2/Designer/cmake/bld.sh',     'code',         'SSindex :!ci-ion2', '')
-com! SSrun5       call DoProjectChange(expand('$HOME/sci/srun5'),         'srun5',    'cs-srun\ $*',      '~/sci/srun5/jh_srun5/safeBld.sh',  'src',          'SSindex :!ci-srun', '~/sci/srun5/bin/SCIRunGUIPrototype_test')
-com! SSscirun     call DoProjectChange(expand('$HOME/sci/SCIRun'),        'scirun',   'cs-srunold\ $*',   '~/sci/SCIRun/build.sh\ --debug',   '',             'SSindex :!ci-srunold', '')
-com! SSorion      call DoProjectChange(expand($ORION_CURRENT.'/src'), 'orion',    'cs-orion\ $*',     $ORION_CURRENT.'/bld.sh',           '',             'SSindex :!ci-orion', '')
-com! SSspire      call DoProjectChange(expand('$HOME/sci/spire'),         'spire',    'cs-spire\ $*',     '~/sci/spire/bld.sh',               'spire',          'SSindex :!ci-spire', '')
-
-" ---------------- ImageVis3D ------------------
-com! SSvis3d      call DoProjectChange(expand('$HOME/sci/imagevis3d'),    'vis3d',    'cs-iv3d\ $*',    'make\ -w\ -j4',                    'imagevis3d',   'SSindex :!ci-iv3d', '')
-com! SSvis3dbatch call DoProjectChange(expand('$HOME/sci/imagevis3d'),    'vis3d',    'cs-iv3d\ $*',    'make\ -w\ -j4',                    'imagevis3d',   'SSindex :!ci-iv3d', '')
-      \ | let g:syntastic_cpp_compiler_options='-std=c++0x -stdlib=libc++ -mmacos-version-min=10.7 -I./Tuvok -I./Tuvok/3rdParty -I./Tuvok/Basics/3rdParty'
-
 "-----------------------------------------------------------------------------
 " Custom au c/cpp
 "-----------------------------------------------------------------------------
@@ -1514,10 +1264,6 @@ endfunction
 
 augroup jh_ccpp
   au!
-  " Automatic folding is NOT my thing, apparently. I'll turn it on if I need it.
-  " set foldlevel=1
-  " set foldnestmax=2
-  " C++11 syntax support
   " Pretty sure that setting the foldmethod=syntax slowed VIM down GREATLY
   " when I was using youcompleteme and easymotion in CPP files.
   "au BufAdd *.c,*.cpp,*.cc,*.cxx,*.h,*.hpp set foldmethod=syntax
@@ -1556,47 +1302,5 @@ let g:mayansmoke_special_key_visibility = 2
 " ---------------- Color column ------------------
 set colorcolumn=81
 call JHBGSetup()
-"augroup column_highlighting
-"  au!
-"  " Set color column when entering c files.
-"  au BufEnter *.c,*.cpp,*.cc,*.cxx,*.rc,*.h,*.hpp set colorcolumn=81 | call JHBGSetup()
-"  au BufEnter *.h,*.hpp set colorcolumn=81 | call JHBGSetup()
-"  " highlight ColorColumn ctermbg=Black guibg=gray12
-"
-"  " Reset color column when leaving c files.
-"  au BufLeave *.cpp,*.cc,*.cxx,*.h,*.hpp set colorcolumn=0
-"augroup END
-
-" Set signcolumn color manually... linking is the only thing that seems to have
-" an affect on the color.
 hi! link SignColumn LineNr
 
-
-"-----------------------------------------------------------------------------
-" Prose / code modes
-"-----------------------------------------------------------------------------
-" Unabashedly stolen from http://alols.github.com/2012/11/07/writing-prose-with-vim/
-"command! Prose inoremap <buffer> . .<C-G>u|
-"            \ inoremap <buffer> ! !<C-G>u|
-"            \ inoremap <buffer> ? ?<C-G>u|
-"            \ setlocal spell spelllang=en
-"            \     nolist nowrap tw=74 fo=t1 nonu|
-"            \ augroup PROSE|
-"            \   autocmd InsertEnter <buffer> set fo+=a|
-"            \   autocmd InsertLeave <buffer> set fo-=a|
-"            \ augroup END
-"
-"command! Code silent! iunmap <buffer> .|
-"            \ silent! iunmap <buffer> !|
-"            \ silent! iunmap <buffer> ?|
-"            \ setlocal nospell
-"            \     tw=74 fo=t fo-=t showbreak=…|
-"            \ silent! autocmd! PROSE * <buffer>
-
-" Source the :Man command from sources included in vim distro
-runtime ftplugin/man.vim
-runtime macros/matchit.vim
-
-" Never continue a comment when using 'o' or 'O' in normal mode.
-" Comments will only be continued when in insert mode.
-autocmd FileType * setlocal formatoptions-=o

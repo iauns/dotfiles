@@ -1,0 +1,120 @@
+
+"-------------------------------------------------------------------------------
+" Custom project setup
+"-------------------------------------------------------------------------------
+
+" Note the three backslashes: \\ = \  and \ is to escape the pipe
+" If this breaks in a newer version of vim, just switch to a shell script prog.
+" com! SSorion      :cd ~/orion/us/genesis/m01/src | set grepprg=rq\ -c\ ~/self/unix/all/recoll/orion\ -b\ '$**'\ \\\|\ sed\ 's/file:\\/\\///'\ \\\|\ xargs\ grep\ -n\ '$*'\ /dev/null | com! SSindex :!recollindex -c ~/self/unix/all/recoll/orion
+
+" The dictionary jh_wildextras and the calls below work beautifully
+" with commandT. The point is to wild ignore certain directories 
+" when working with certain projects.
+let g:jh_wildextras = 
+      \ {
+      \   'ion2'        : 'misc,Designer/Art,Designer/cmake/bin,Designer/bin,Designer/Shaders/Export',
+      \   'orion'       : '0',
+      \   'vis3d'       : '*.gcda,Build,*.png,*.uvf,*.1dt,*.2dt,*.gcno,*.filters,*.user,*.ico,*.rc,*.icns,Doxyfile,*.plist,*.sln,*.vcxproj,*.qrc,*.o',
+      \   'srun5'       : 'bin,jh_srun5,*.log,*.bin',
+      \   'scirun'      : 'bin,src/Externals',
+      \   'spire'       : 'bin,*.out,tags,cscope.files'
+      \ }
+
+" Most of the nerdtree ignores should be files names. Directories aren't that important to ignore.
+" Plus, this is a more strict list. There are a lot more files that we will care about
+" in nerdtree. For example, I care about png files, sln, and vcxproj files in vis3d, but not
+" in the quick lookup.
+let g:jh_nerdtreeIgnores =
+      \ { 
+      \   'ion2'        : [],
+      \   'orion'       : [],
+      \   'vis3d'       : ['\.gcda$', '\.o$', '\.gcno$', '\.user$'],
+      \   'srun5'       : ['\.bin$'],
+      \   'scirun'      : [],
+      \   'spire'       : ['cscope\..*$', 'bin$', 'tags$']
+      \ }
+
+function! RemExtraWildIgnorePats()
+  for key in keys(g:jh_wildextras)
+    exe 'set wildignore-='.g:jh_wildextras[key]
+  endfor
+endfunction
+
+" Function to setup vim settings in preparation for a new project.
+function! DoProjectChange(rootDir, projectKey, grepPrg, makePrg, cppSourceDir, indexCommand, debugExecutable)
+  " Change to the root project directory
+  exe 'cd '.a:rootDir
+
+  " Look for the .clang_complete file in the root directory, and 
+  let clangCompName=a:rootDir.'/.clang_complete'
+  if filereadable(clangCompName)
+    "let syntasticOptions=''
+    "for OPT in readfile(clangCompName)
+    "  let syntasticOptions=syntasticOptions.' '.OPT
+    "endfor
+    "let g:syntastic_cpp_compiler_options=syntasticOptions
+
+    " Update vim's path variable so that gf should always
+    " work when attempting to jump to include directories.
+    " We will only extract the -I options.
+    for OPT in readfile(clangCompName)
+      let res = matchlist(OPT, '^-I\(.*\)')
+      " Get the first group.
+      if len(res) > 1
+        exe 'set path+='.res[1]
+      endif
+    endfor
+  else
+    echom 'Could not find .clang_complete'
+  endif
+
+  " Nerd tree ignores need to be set before nerd tree is opened for the first time.
+  " Also note: We have to append g: to NERDTreeIgnore, or else it makes the variable
+  " local to this function.
+  let g:NERDTreeIgnore=g:jh_nerdtreeIgnores[a:projectKey]
+
+  " Let all appropriate functions know what project we are current on.
+  let g:JHProject=a:projectKey
+
+  " Change the rootdirectory in nerd tree.
+  " By default, nerdtree does NOT use relative numbering, so we toggle it.
+  exe 'NERDTree'.a:rootDir
+  call NumberToggle()
+  NERDTreeToggle()
+
+  " Set compiler options (file mimics clang_complete compiler flags)
+  exe 'set grepprg='.a:grepPrg
+  exe 'set makeprg='.a:makePrg
+
+  " Set cpp source directory. In the past, there was a patch that I had applied
+  " to ProtoDef or FSwitch that used this g:jh_cppSrcDir variable.
+  " I can't remember which one specifically now, or what its purpose was.
+  " But I'm sure I'll run across it again so I'm leaving it here for now.
+  " TODO: We REALLY should set this to a sane value when VIM starts.
+  let g:jh_cppSrcDir=a:cppSourceDir
+
+  " Setup appropriate ignores
+  call RemExtraWildIgnorePats()
+  exe 'set wildignore+='.g:jh_wildextras[a:projectKey]
+
+  " Setup an indexing command (possibly replace with code.google.com/p/codesearch).
+  exe 'com! SSindex :'.a:indexCommand
+
+  " Target
+  exe 'com! Debug :Ltarget '.a:debugExecutable
+endfunction
+
+" Remember, don't do anything after the last com! command. I don't know of
+" a way of separating the commands after com!.
+" makeprg for ion2 will be the cmake project. We will be able to compile everytihng but the interface code.
+com! SSion2       call DoProjectChange(expand('$HOME/ion2'),              'ion2',     'cs-ion2\ $*',      '~/ion2/Designer/cmake/bld.sh',     'code',         'SSindex :!ci-ion2', '')
+com! SSrun5       call DoProjectChange(expand('$HOME/sci/srun5'),         'srun5',    'cs-srun\ $*',      '~/sci/srun5/jh_srun5/safeBld.sh',  'src',          'SSindex :!ci-srun', '~/sci/srun5/bin/SCIRunGUIPrototype_test')
+com! SSscirun     call DoProjectChange(expand('$HOME/sci/SCIRun'),        'scirun',   'cs-srunold\ $*',   '~/sci/SCIRun/build.sh\ --debug',   '',             'SSindex :!ci-srunold', '')
+com! SSorion      call DoProjectChange(expand($ORION_CURRENT.'/src'), 'orion',    'cs-orion\ $*',     $ORION_CURRENT.'/bld.sh',           '',             'SSindex :!ci-orion', '')
+com! SSspire      call DoProjectChange(expand('$HOME/sci/spire'),         'spire',    'cs-spire\ $*',     '~/sci/spire/bld.sh',               'spire',          'SSindex :!ci-spire', '')
+
+" ---------------- ImageVis3D ------------------
+com! SSvis3d      call DoProjectChange(expand('$HOME/sci/imagevis3d'),    'vis3d',    'cs-iv3d\ $*',    'make\ -w\ -j4',                    'imagevis3d',   'SSindex :!ci-iv3d', '')
+com! SSvis3dbatch call DoProjectChange(expand('$HOME/sci/imagevis3d'),    'vis3d',    'cs-iv3d\ $*',    'make\ -w\ -j4',                    'imagevis3d',   'SSindex :!ci-iv3d', '')
+      \ | let g:syntastic_cpp_compiler_options='-std=c++0x -stdlib=libc++ -mmacos-version-min=10.7 -I./Tuvok -I./Tuvok/3rdParty -I./Tuvok/Basics/3rdParty'
+
