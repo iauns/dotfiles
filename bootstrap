@@ -2,6 +2,7 @@
 cd "$(dirname "$0")"
 source .shutils
 
+DOTFILES_ROOT_REL="."
 DOTFILES_ROOT="$HOME/dotfiles"
 
 set -e
@@ -41,7 +42,7 @@ install_dotfiles () {
   skip_all=false
 
   current_dir=$(pwd)
-  for source in `find $DOTFILES_ROOT -type f`
+  for source in `find $DOTFILES_ROOT_REL -type f`
   do
     # Check to see if we should ignore the directory.
     array_skip=false
@@ -81,8 +82,14 @@ install_dotfiles () {
 
     $command_prefix mkdir -p $target_dir/$base_dir
 
-    dest="$target_dir/${source}"
-    source=$current_dir/$source
+    # Strip off the './'
+    sourceMinusDot=${source:2}
+    if [ "$target_dir" == "/" ]; then
+      dest="/$sourceMinusDot"
+    else
+      dest="$target_dir/$sourceMinusDot"
+    fi
+    source=$current_dir/$sourceMinusDot
 
     if [ -f $dest ] || [ -d $dest ]
     then
@@ -155,9 +162,9 @@ if Command -v git > /dev/null; then
   if [ ! -d $privateRepoLoc ]; then
     git clone private_repo:~/repo/dotFilesPrivate.git ~/dotfiles/private
   else
-    pushd $privateRepoLoc
+    pushd $privateRepoLoc > /dev/null
       git pull origin master
-    popd
+    popd > /dev/null
   fi
 else
   echo "Unable to find git, please install it before attempting to pull private repos."
@@ -170,7 +177,7 @@ info "Linking private files."
 # Symlink private repo files.
 pushd $DOTFILES_ROOT/private > /dev/null
   install_dotfiles "link" ${HOME}
-popd
+popd > /dev/null
 
 if [ "$(uname -s)" == "Darwin" ]
 then
@@ -188,18 +195,6 @@ then
   echo " Remember:"
   echo "  Execute ~/.osx to setup OS X settings (and optionally install packages)."
 fi
-
-## If we are on a mac, lets install and setup homebrew
-#if [ "$(uname -s)" == "Darwin" ]
-#then
-#  info "installing dependencies"
-#  if . bin/dot > /tmp/dotfiles-dot 2>&1
-#  then
-#    success "dependencies installed"
-#  else
-#    fail "error installing dependencies"
-#  fi
-#fi
 
 echo ''
 echo '  All installed!'
