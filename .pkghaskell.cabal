@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+source .shutils
+
+cabal install pandoc

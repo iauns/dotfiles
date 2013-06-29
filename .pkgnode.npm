@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+source .shutils
+
+# Required for markdown plugin in vim.
+npm -g install instant-markdown-d

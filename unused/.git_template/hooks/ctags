@@ -1,0 +1,15 @@
+#!/bin/sh
+# Simple tags based lock system. Note, $$ = process ID.
+# Runs tags atomically (useful if you have multiple git commands running,
+# or git commands that generate a large amount of commits or other hooked
+# commands).
+# This set -e path business really gets us going! Necessary for script to work.
+set -e
+PATH="/usr/local/bin:$PATH"
+
+mkdir .git/tags_lock 2>/dev/null || exit 0
+trap "rmdir .git/tags_lock; rm .git/tags.$$" EXIT
+
+ctags --tag-relative -R -f .git/tags.$$ --exclude=.git --exclude=bin --exclude=boost --langmap=OCaml:+.eliom --languages=-sql
+mv .git/tags.$$ .git/tags
+# -javascript

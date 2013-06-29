@@ -1,0 +1,16 @@
+# ~/.tmuxinator/srun.yml
+
+project_name: SCIRun
+project_root: ~/sci/srun5
+#socket_name: foo # Not needed.  Remove to use default socket
+#rvm: 1.9.2@rails_project
+#pre: sudo /etc/rc.d/mysqld start
+tabs:
+  - editor:
+      layout: even-vertical
+      panes:
+        -
+        -
+        -
+  - shell:
+  - logs: tail -f Build/debugLog.txt

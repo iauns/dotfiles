@@ -1,0 +1,107 @@
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+source .shutils
+
+# Test to see if brew is installed. If not, grab it.
+command -v brew > /dev/null 2>&1 || { /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)" ; }
+
+###############################################################################
+# Upgrading packages and brew                                                 #
+###############################################################################
+# Make sure we’re using the latest Homebrew
+brew update
+
+user "Do you want to upgrade already installed formulae? (y/n)"
+read -n 1
+echo ''
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+  # Upgrade any already-installed formulae
+  brew upgrade
+fi
+
+###############################################################################
+# CLI packages                                                                #
+###############################################################################
+
+brew install fish         # Fish shell.
+
+# Use --with-ruby if you want to enable Command-T in vim.
+brew install vim
+brew install wget --enable-iri
+brew install ack
+brew install git
+brew install imagemagick
+brew install tree
+brew install macvim
+brew install watch
+brew install tmux
+brew install hg
+#brew install ctags       # Superceded by semantic queries.
+brew install reattach-to-user-namespace # Copy and paste goodness + tmux.
+brew install bcrypt
+brew install ifstat
+brew install ncftp
+brew install subversion
+brew install ffmpeg
+brew install tcptrack
+brew install nmap
+brew install python       # Careful with this one.
+brew install moreutils    # For sponge
+brew install iftop        # Monitor data usage over an interface.
+brew install ranger       # Awesome file manager.
+brew install htop
+
+# Task / time management
+brew install task
+brew install reminder
+brew install wyrd
+
+# Mutt related packages.
+brew install mutt --with-sidebar-patch    # See Steve Losh's tutorial on mutt.
+brew install msmtp --with-macosx-keyring  # Sending e-mail from mutt
+brew install offlineimap                  # Storing imap messages offline.
+brew install notmuch                      # Indexing e-mails.
+brew install urlview                      # urlview for mutt.
+
+###############################################################################
+# Development packages                                                        #
+###############################################################################
+
+# Install boost with C++11 support... We may need to avoid this and build our own boost.
+# Primarily due to system incompatibilities (mac's g++ and clang standard libraries).
+brew install boost --with-c++11
+brew install devil      # Image library - required for ion2.
+brew install assimp     # Asset import library.
+brew install node
+brew install ocaml
+brew install opam       # Ocaml package manager.
+brew install haskell-platform
+brew install gd         # For hosting a wiki site.
+brew install scons      # Build system.
+brew install perceptualdiff  # For testing graphics algorithms.
+brew install valgrind
+brew install gperftools
+brew install autoconf
+
+###############################################################################
+# Native Apps                                                                 #
+###############################################################################
+brew tap phinze/homebrew-cask
+brew install brew-cask
+
+function installcask() {
+	if brew cask info "${@}" | grep "Not installed" > /dev/null; then
+		brew cask install "${@}"
+	else
+		echo "${@} is already installed."
+	fi
+}
+
+installcask iterm2
+
+###############################################################################
+# Cleanup                                                                     #
+###############################################################################
+
+# Remove outdated versions from the cellar
+brew cleanup

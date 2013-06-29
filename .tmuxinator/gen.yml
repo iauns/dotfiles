@@ -1,0 +1,14 @@
+# ~/.tmuxinator/gen.yml
+# you can make as many tabs as you wish...
+
+project_name: General
+project_root: ${HOME}
+#socket_name: foo # Not needed.  Remove to use default socket
+#pre: sudo /etc/rc.d/mysqld start
+tabs:
+  - general:
+      layout: tiled
+      panes:
+        - cd ~/self
+        - 
+        - mutt

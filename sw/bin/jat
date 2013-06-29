@@ -1,0 +1,17 @@
+#!/bin/bash
+rm /tmp/notifyBuffer.txt &> /dev/null
+echo "now + 15 minutes" > /tmp/notifyBuffer.txt
+echo "Title: Task notifier" >> /tmp/notifyBuffer.txt
+echo "" >> /tmp/notifyBuffer.txt
+vim /tmp/notifyBuffer.txt
+
+AT_TIME=`head -1 /tmp/notifyBuffer.txt`
+# Explanation of sed code below
+# First, delete everything but the second line.
+# Then remove 'Title: ' from the second line.
+TITLE=`sed -e '2!d' -e 's/Title\: //g' /tmp/notifyBuffer.txt`
+MESSAGE=`sed '3!d' /tmp/notifyBuffer.txt`
+
+echo "jnotifyandtxt \"$TITLE\" \"$MESSAGE\"" > /tmp/tmpBuff
+AT_COMMAND='at -f /tmp/tmpBuff -m "$AT_TIME"'
+sudo -u jhughes at -f /tmp/tmpBuff -m $AT_TIME

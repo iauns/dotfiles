@@ -1,0 +1,17 @@
+# ~/.tmuxinator/orion.yml
+
+project_name: orion
+project_root: ~/orion
+#socket_name: foo # Not needed.  Remove to use default socket
+#rvm: 1.9.2@rails_project
+#pre: sudo /etc/rc.d/mysqld start
+# Todo: we need to change one of the windows to be $ORIONCURRENT
+tabs:
+  - editor:
+      layout: even-vertical
+      panes:
+        -
+        - 
+        - 
+  - shell: 
+  - logs: tail -f Build/debugLog.txt

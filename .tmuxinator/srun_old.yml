@@ -1,0 +1,16 @@
+# ~/.tmuxinator/srun_old.yml
+
+project_name: Old SCIRun
+project_root: ~/sci/imagevis3d
+#socket_name: foo # Not needed.  Remove to use default socket
+#rvm: 1.9.2@rails_project
+#pre: sudo /etc/rc.d/mysqld start
+tabs:
+  - editor:
+      layout: even-vertical
+      panes:
+        -
+        - 
+        - 
+  - shell:
+  - logs: tail -f Build/debugLog.txt

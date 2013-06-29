@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# Parameter 1 is the directory, and 2 is a brief description.
+function UpdateRemotes 
+{
+  TARGET_DIR=$1
+  DESC=$2
+
+  echo ""
+  echo "Updating $2"
+
+  if test -d $TARGET_DIR ; then
+    pushd $TARGET_DIR &>/dev/null
+      git pull
+    popd &>/dev/null
+  fi
+} 
+
+echo ""
+
+UpdateRemotes ~/notes "notes"
+UpdateRemotes ~/media "media"
+UpdateRemotes ~/prosp "prosp"
+UpdateRemotes ~/self "self"
+UpdateRemotes ~/sand "sand"
+UpdateRemotes ~/backups "backups"
+UpdateRemotes ~/web/blog "web/blog"
+UpdateRemotes ~/web/ocsi "web/ocsi"

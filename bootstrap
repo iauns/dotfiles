@@ -1,0 +1,205 @@
+#!/usr/bin/env bash
+cd "$(dirname "$0")"
+source .shutils
+
+DOTFILES_ROOT="$HOME/dotfiles"
+
+set -e
+echo ''
+
+# All files / folders placed in the following ignore array will be ignored when
+# traversing the filesystem looking for files to sym-link.
+# Directories as well as files will be checked against this array.
+ignore=( "./root" "./.git" "./.gitignore" "./bootstrap" "./unused" 
+         "./private" "README.md" )
+
+link_files () {
+  $3 ln -s $1 $2
+  success "linked $1 to $2"
+}
+
+copy_files () {
+  $3 cp $1 $2
+  success "copied $1 to $2"
+}
+
+install_dotfiles () {
+  if [ "$1" == "copy" ]
+  then
+    copy_dot_files=true
+  else
+    copy_dot_files=false
+  fi
+  
+  target_dir=$2
+  command_prefix=$3
+
+  info "${1}ing dotfiles to $target_dir"
+
+  overwrite_all=false
+  backup_all=false
+  skip_all=false
+
+  current_dir=$(pwd)
+  for source in `find $DOTFILES_ROOT -type f`
+  do
+    # Check to see if we should ignore the directory.
+    array_skip=false
+    base_dir=$(dirname "$source")
+    for i in "${ignore[@]}"
+    do
+      # Check exact filename match.
+      if [[ "$i" == "$source" ]]
+      then
+        array_skip=true
+      fi
+
+      # Check every possible sub directory
+      base_dir_rec=$base_dir
+      while [[ "$base_dir_rec" != "." ]]
+      do
+        if [[ "$i" ==  "$base_dir_rec" ]]
+        then
+          array_skip=true
+          break
+        fi
+        base_dir_rec=$(dirname "$base_dir_rec")
+      done
+
+      # Break out if we have already determined that we are skipping this 
+      # element.
+      if [ "$array_skip" == "true" ]
+      then
+        break
+      fi
+    done
+
+    if [ "$array_skip" == "true" ]
+    then
+      continue
+    fi
+
+    $command_prefix mkdir -p $target_dir/$base_dir
+
+    dest="$target_dir/${source}"
+    source=$current_dir/$source
+
+    if [ -f $dest ] || [ -d $dest ]
+    then
+
+      overwrite=false
+      backup=false
+      skip=false
+
+      if [ "$overwrite_all" == "false" ] && [ "$backup_all" == "false" ] && [ "$skip_all" == "false" ]
+      then
+        user "File already exists: `basename $source`, what do you want to do?\n        [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+        read -n 1 action
+
+        case "$action" in
+          o )
+            overwrite=true;;
+          O )
+            overwrite_all=true;;
+          b )
+            backup=true;;
+          B )
+            backup_all=true;;
+          s )
+            skip=true;;
+          S )
+            skip_all=true;;
+          * )
+            ;;
+        esac
+      fi
+
+      if [ "$overwrite" == "true" ] || [ "$overwrite_all" == "true" ]
+      then
+        $command_prefix rm -rf $dest
+        success "removed $dest"
+      fi
+
+      if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
+      then
+        $command_prefix mv $dest $dest\.backup
+        success "moved $dest to $dest.backup"
+      fi
+
+      if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
+      then
+        if [ "$copy_dot_files" == "true" ]; then
+          copy_files $source $dest $command_prefix
+        else
+          link_files $source $dest $command_prefix
+        fi
+      else
+        success "skipped $source"
+      fi
+
+    else
+      if [ "$copy_dot_files" == "true" ]; then
+        copy_files $source $dest $command_prefix
+      else
+        link_files $source $dest $command_prefix
+      fi
+    fi
+
+  done
+}
+
+# Clone small private dotfiles repo (mostly for mutt and ssh config).
+info "Updating private repo."
+if Command -v git > /dev/null; then
+  privateRepoLoc=$DOTFILES_ROOT/private
+  if [ ! -d $privateRepoLoc ]; then
+    git clone private_repo:~/repo/dotFilesPrivate.git ~/dotfiles/private
+  else
+    pushd $privateRepoLoc
+      git pull origin master
+    popd
+  fi
+else
+  echo "Unable to find git, please install it before attempting to pull private repos."
+fi
+
+# Symlink current files and all subdirectories
+install_dotfiles "link" ${HOME}
+
+info "Linking private files."
+# Symlink private repo files.
+pushd $DOTFILES_ROOT/private > /dev/null
+  install_dotfiles "link" ${HOME}
+popd
+
+if [ "$(uname -s)" == "Darwin" ]
+then
+  info "On Mac OS X - Asking to install root files."
+  user "Copy contents of dotfiles' \"root\" subdirectory to '/'? (y/n)"
+  read -n 1
+  echo ''
+ if [[ $REPLY =~ ^[Yy]$ ]]; then
+    sudo -v
+    pushd ./root/mac > /dev/null
+      install_dotfiles "copy" "/" "sudo"
+    popd > /dev/null
+  fi
+  echo ''
+  echo " Remember:"
+  echo "  Execute ~/.osx to setup OS X settings (and optionally install packages)."
+fi
+
+## If we are on a mac, lets install and setup homebrew
+#if [ "$(uname -s)" == "Darwin" ]
+#then
+#  info "installing dependencies"
+#  if . bin/dot > /tmp/dotfiles-dot 2>&1
+#  then
+#    success "dependencies installed"
+#  else
+#    fail "error installing dependencies"
+#  fi
+#fi
+
+echo ''
+echo '  All installed!'

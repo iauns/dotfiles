@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+source .shutils
+
+pip install googlecl   # Google command line tools. Primarily for CLI address book.
+

@@ -1,0 +1,17 @@
+# ~/.tmuxinator/iv3d.yml
+
+project_name: ImageVis3D
+project_root: ~/sci/imagevis3d
+#socket_name: foo # Not needed.  Remove to use default socket
+#rvm: 1.9.2@rails_project
+#pre: sudo /etc/rc.d/mysqld start
+tabs:
+  - editor:
+      layout: even-vertical
+      panes:
+        -
+        -
+        -
+  - shell:
+  - logs: tail -f Build/debugLog.txt
+  - orion: #ssh me@myhost

@@ -1,0 +1,43 @@
+"--------------------------------------------------------------------------------
+"1.0
+"--------------------------------------------------------------------------------
+
+loadplugins '\.(js|penta)$'
+group user
+
+" vim: set ft=pentadactyl:
+
+"--------------------------------------------------------------------------------
+" Mappings
+"--------------------------------------------------------------------------------
+" Make j and k scroll faster
+nmap -builtin j 5j
+nmap -builtin k 5k
+
+" swap d/D
+nmap -builtin d D
+nmap -builtin D d
+
+" back/forward (ignoring left / right)
+nmap -builtin h H
+nmap -builtin l <C-i>
+
+"--------------------------------------------------------------------------------
+" Settings
+"--------------------------------------------------------------------------------
+" Highlighting search results
+set hlfind
+
+" Turn on tabnumbers
+set go+=n
+
+" Set editor to mvim
+set editor='/usr/local/bin/mvim -f +<line> +"sil! call cursor(0, <column>)" <file>'
+
+" Turn off the bells with a vengance!
+set noerrorbells
+set novisualbell
+javascript dactyl.beep = function() { return false; }
+
+" Custom hints - Make them much more visible.
+hi Hint font-family: Verdana; font-size: 10px; font-weight: bold; color: white; background-color: red; border-color: ButtonShadow; border-width: 0px; border-style: solid; padding: 0px 1px 0px 1px; 

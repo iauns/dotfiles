@@ -1,0 +1,34 @@
+
+# Use: 'tmux list-windows' to get these layouts.
+#layout: 98df,364x113,0,0{110x113,0,0[110x43,0,0,0,110x12,0,44,7,110x56,0,57,2],253x113,111,0[253x56,111,0,3,253x56,111,57,4]}
+#layout: 190b,364x113,0,0{110x113,0,0[110x39,0,0,3,110x16,0,40,5,110x56,0,57,6],253x113,111,0[253x56,111,0,7,253x56,111,57,8]}
+
+project_name: Work
+project_root: ${HOME}
+#socket_name: foo # Not needed.  Remove to use default socket
+#rvm: 1.9.2@rails_project
+#pre: sudo /etc/rc.d/mysqld start
+tabs:
+  - spire:
+      layout: d236,238x69,0,0[238x52,0,0,16,238x16,0,53{119x16,0,53,17,118x16,120,53,23}]
+      panes:
+        - cd ~/sci/spire
+        - cd ~/prosp/spire
+        - echo "Spire Log" > /tmp/SpireLog; and tail -f /tmp/SpireLog
+  - srun5:
+      layout: d236,238x69,0,0[238x52,0,0,16,238x16,0,53{119x16,0,53,17,118x16,120,53,23}]
+      panes:
+        - cd ~/sci/srun5
+        - cd ~/prosp/srun
+        - cd ~/sci/srun5
+  - tuvok:
+      layout: 640b,364x101,0,0[364x75,0,0{182x75,0,0,2,181x75,183,0,13},364x25,0,76,12]
+      panes:
+        - cd ~/sci/imagevis3d
+        - cd ~/sci/imagevis3d
+        - cd ~/prosp/iv3d
+  - hypack:
+      layout: d27f,272x84,0,0[272x66,0,0,15,272x17,0,67,23]
+      panes:
+        - cd ~/sci/hypack/imagevis3d
+        - cd ~/prosp/hypack

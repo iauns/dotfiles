@@ -1,0 +1,15 @@
+# ~/.tmuxinator/ion2.yml
+
+project_name: ion2
+project_root: ~/ion2
+#socket_name: foo # Not needed.  Remove to use default socket
+#rvm: 1.9.2@rails_project
+#pre: sudo /etc/rc.d/mysqld start
+tabs:
+  - editor:
+      layout: even-vertical
+      panes:
+        -
+        - 
+  - shell:
+  - logs: tail -f Build/debugLog.txt

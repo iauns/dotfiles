@@ -1,0 +1,46 @@
+#!/bin/bash
+
+# Parameter 1 is the directory, and 2 is a brief description.
+function CheckDir 
+{
+  TARGET_DIR=$1
+  DESC=$2
+  if test -d $TARGET_DIR ; then
+    pushd $TARGET_DIR &>/dev/null
+      git ls-changes --no-print
+      # Grab return code and if non-zero, then we have changes
+      rc=$?
+      if [[ $rc != 0 ]] ; then
+        echo "$DESC"
+        git ls-changes --padding
+        echo ""
+      fi
+    popd &>/dev/null
+  fi
+} 
+
+echo ""
+
+CheckDir ~/dotfiles "dotfiles"
+CheckDir ~/dotfiles/private "dotfiles/private"
+CheckDir ~/sci/imagevis3d "sci/imagevis3d"
+CheckDir ~/sci/imagevis3d/Tuvok "sci/imagevis3d/tuvok"
+CheckDir ~/sci/imagevis3d/Tuvok/IO "sci/imagevis3d/tuvok/io"
+CheckDir ~/sci/imagevis3d/Tuvok/Basics "sci/imagevis3d/tuvok/basics"
+CheckDir ~/sci/spire "sci/spire"
+CheckDir ~/sci/srun5 "sci/srun5"
+CheckDir ~/sci/hypack "sci/hypack"
+CheckDir ~/sci/hypack/imagevis3d "sci/hypack/iv3d"
+CheckDir ~/sci/hypack/imagevis3d/Tuvok "sci/hypack/iv3d/Tuvok"
+CheckDir ~/sci/hypack/imagevis3d/Tuvok/IO "sci/hypack/iv3d/Tuvok/IO"
+CheckDir ~/sci/hypack/imagevis3d/Tuvok/Basics "sci/hypack/iv3d/Tuvok/Basics"
+CheckDir ~/prosp "prosp"
+CheckDir ~/self "self"
+CheckDir ~/sand "sand"
+CheckDir ~/backups "backups"
+CheckDir ~/web/blog "web/blog"
+CheckDir ~/web/ocsi "web/ocsi"
+CheckDir ~/ion2 "ion2"
+CheckDir ~/orion "orion"
+CheckDir ~/notes "notes"
+CheckDir ~/media "media"
