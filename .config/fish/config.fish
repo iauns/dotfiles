@@ -80,7 +80,7 @@ function lh
 end
 
 # fish vi-mode
-. $HOME/self/unix/fish/vi-mode.fish
+. $HOME/.config/fish/vi-mode.fish
 
 function fish_user_key_bindings
   vi_mode_insert
