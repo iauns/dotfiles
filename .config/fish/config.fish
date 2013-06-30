@@ -8,10 +8,14 @@ set BROWSER open
 # MANPATH should NOT be set on Mac OS X. See 'man manpath'. Or run 'man -w'.
 
 # The -x exports the variable.
-set -x PATH $HOME/.opam/system/bin $HOME/.cabal/bin /usr/local/sbin /usr/local/bin $HOME/sw/bin /usr/local/share/npm/bin /usr/local/opt/ruby/bin $PATH
+set -x PATH $HOME/.opam/system/bin $HOME/.cabal/bin /usr/local/sbin \
+      /usr/local/bin /usr/local/share/npm/bin $HOME/sw/bin $HOME/.tmuxifier/bin \
+      /usr/local/opt/ruby/bin $PATH
 set -x EDITOR /usr/local/bin/vim
 set -x OCAML_TOPLEVEL_PATH $HOME/.opam/system/lib/toplevel
-set -x CAML_LD_LIBRARY_PATH $HOME/.opam/system/lib/stublibs /usr/local/lib/ocaml/stublibs
+set -x CAML_LD_LIBRARY_PATH $HOME/.opam/system/lib/stublibs \
+      /usr/local/lib/ocaml/stublibs
+set -x TMUXIFIER_LAYOUT_PATH $HOME/.tmuxifier_layouts
 set -x IGNOREOF 10
 set -o ignoreeof
 
@@ -88,6 +92,10 @@ end
 
 function l
   ls
+end
+
+function mux
+  tmuxifier load-session $argv
 end
 
 # Fish prompt that includes git.

@@ -45,7 +45,7 @@ brew install subversion
 brew install ffmpeg
 brew install tcptrack
 brew install nmap
-brew install python       # Careful with this one.
+#brew install python       # Careful with this one. It really messes up lldb.
 brew install moreutils    # For sponge
 brew install iftop        # Monitor data usage over an interface.
 brew install ranger       # Awesome file manager.

@@ -281,6 +281,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
   info "Installing from haskell's cabal."
   ${HOME}/.pkghaskell.cabal
+
+  info "Installing custom packages."
+  ${HOME}/.pkgcustom
 fi
 
 echo ''
