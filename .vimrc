@@ -1002,6 +1002,9 @@ let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
 let g:delimitMate_balance_matchpairs = 1
 
+" Disable delimit mate in unite buffers.
+au FileType unite let b:delimitMate_autoclose = 0
+
 " ---------------- ZenCoding ------------------
 let g:user_zen_leader_key = '<c-f>'
 
@@ -1101,7 +1104,8 @@ call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
       \ '\.git/',
       \ 'git5/.*/review/',
       \ 'google/obj/',
-      \ 'bin/'
+      \ 'bin/',
+      \ '3rdParty/'
       \ ], '\|'))
 
 " Map '-' to the prefix for Unite. Makes sense on dvorak keyboards (next to
@@ -1109,9 +1113,16 @@ call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
 nnoremap [unite] <Nop>
 nmap <leader>u [unite]
 
+"nnoremap <silent> [unite]t :<C-u>UniteWithCurrentDir
+"	        \ -buffer-name=files buffer file_mru bookmark file<CR>
+
 " General fuzzy search
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files buffer file_mru bookmark file_rec/async:!<CR>
-nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
+"nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
+nnoremap <silent> [unite]<space> :<C-u>Unite -buffer-name=files file_mru file_rec/async:!<CR>
+
+" Search current working directory
+nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-insert file<CR>
 
 " Quick registers
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
@@ -1124,6 +1135,9 @@ nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<CR>
 
 " Quick outline
 nnoremap <silent> [unite]o :<C-u>Unite -buffer-name=outline -vertical outline<CR>
+
+" Quick tags
+nnoremap <silent> [unite]t :<C-u>Unite -buffer-name=tags -vertical tag<CR>
 
 " Quick sessions (projects)
 nnoremap <silent> [unite]p :<C-u>Unite -buffer-name=sessions session<CR>
@@ -1139,7 +1153,7 @@ nnoremap <silent> [unite]d
       \ :<C-u>Unite -buffer-name=change-cwd -default-action=lcd directory_mru<CR>
 
 " Quick file search
-nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files file_rec/async file/new<CR>
+"nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files file_rec/async file/new<CR>
 
 " Quick grep from cwd
 nnoremap <silent> [unite]g :<C-u>Unite -buffer-name=grep grep:.<CR>
@@ -1170,51 +1184,61 @@ nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=bookmarks bookmark<CR>
 "nnoremap <silent> [unite]; :<C-u>Unite -buffer-name=history history/command command<CR>
 "
 "" Custom Unite settings
-"autocmd MyAutoCmd FileType unite call s:unite_settings()
-"function! s:unite_settings()
-"
-"  imap <buffer> <C-f> <Plug>(unite_select_next_page)
-"  imap <buffer> <C-b> <Plug>(unite_select_previous_page)
-"
-"  nmap <buffer> <ESC> <Plug>(unite_exit)
-"  imap <buffer> <ESC> <Plug>(unite_exit)
-"" imap <buffer> <c-j> <Plug>(unite_select_next_line)
-"  imap <buffer> <c-j> <Plug>(unite_insert_leave)
-"  nmap <buffer> <c-j> <Plug>(unite_loop_cursor_down)
-"  nmap <buffer> <c-k> <Plug>(unite_loop_cursor_up)
-"  imap <buffer> <c-a> <Plug>(unite_choose_action)
-"  imap <buffer> <Tab> <Plug>(unite_exit_insert)
-"  imap <buffer> jj <Plug>(unite_insert_leave)
-"  imap <buffer> <C-w> <Plug>(unite_delete_backward_word)
-"  imap <buffer> <C-u> <Plug>(unite_delete_backward_path)
-"  imap <buffer> ' <Plug>(unite_quick_match_default_action)
-"  nmap <buffer> ' <Plug>(unite_quick_match_default_action)
-"  nmap <buffer> <C-r> <Plug>(unite_redraw)
-"  imap <buffer> <C-r> <Plug>(unite_redraw)
-"  inoremap <silent><buffer><expr> <C-s> unite#do_action('split')
-"  nnoremap <silent><buffer><expr> <C-s> unite#do_action('split')
-"  inoremap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-"  nnoremap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-"
-"  let unite = unite#get_current_unite()
-"  if unite.buffer_name =~# '^search'
-"    nnoremap <silent><buffer><expr> r unite#do_action('replace')
-"  else
-"    nnoremap <silent><buffer><expr> r unite#do_action('rename')
-"  endif
-"
-"  nnoremap <silent><buffer><expr> cd unite#do_action('lcd')
-"
-"" Using Ctrl-\ to trigger outline, so close it using the same keystroke
-"  if unite.buffer_name =~# '^outline'
-"    imap <buffer> <C-\> <Plug>(unite_exit)
-"  endif
-"
-"" Using Ctrl-/ to trigger line, close it using same keystroke
-"  if unite.buffer_name =~# '^search_file'
-"    imap <buffer> <C-_> <Plug>(unite_exit)
-"  endif
-"endfunction
+autocmd FileType unite call s:unite_my_settings()
+function! s:unite_my_settings()
+
+  " Todo: Unite re-assigns both C-l and C-h for default mappings. Other than
+  " editing the unite code directly, we need to find a way to either tell
+  " unite not to bind these keys or re-bind the tmux keys.
+
+  imap <buffer> <C-n> <Plug>(unite_select_next_page)
+  imap <buffer> <C-p> <Plug>(unite_select_previous_page)
+
+  " Transpose window changes unite's splitting direction.
+	"nmap <buffer> <C-z> <Plug>(unite_toggle_transpose_window)
+	"imap <buffer> <C-z> <Plug>(unite_toggle_transpose_window)
+  nmap <buffer> <C-c> <Plug>(unite_exit)
+  imap <buffer> <C-c> <Plug>(unite_exit)
+  imap <buffer> <c-a> <Plug>(unite_choose_action)
+  imap <buffer> <C-w> <Plug>(unite_delete_backward_word)
+  imap <buffer> <C-u> <Plug>(unite_delete_backward_path)
+  " Quick match is awesome! I use this all of the time.
+  imap <buffer> ' <Plug>(unite_quick_match_default_action)
+  nmap <buffer> ' <Plug>(unite_quick_match_default_action)
+  nmap <buffer> <C-r> <Plug>(unite_redraw)
+  imap <buffer> <C-r> <Plug>(unite_redraw)
+  " The following doesn't work because we rebound these keys in tmux already.
+  "inoremap <silent><buffer><expr> <C-s> unite#do_action('split')
+  "nnoremap <silent><buffer><expr> <C-s> unite#do_action('split')
+  "inoremap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+  "nnoremap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+
+  " Renaming files from the unite buffer... based on the buffer names we have
+  " been assigning to unite.
+  let unite = unite#get_current_unite()
+  if unite.buffer_name =~# '^search'
+    nnoremap <silent><buffer><expr> r unite#do_action('replace')
+  else
+    nnoremap <silent><buffer><expr> r unite#do_action('rename')
+  endif
+
+  " Press 'cd' in normal mode will change vim's current directory to that of
+  " the selected file.
+  nnoremap <silent><buffer><expr> cd unite#do_action('lcd')
+
+  " Using Ctrl-\ to trigger outline, so close it using the same keystroke
+  if unite.buffer_name =~# '^outline'
+    imap <buffer> <C-\> <Plug>(unite_exit)
+  endif
+
+  " Using Ctrl-/ to trigger line, close it using same keystroke
+  if unite.buffer_name =~# '^search_file'
+    imap <buffer> <C-_> <Plug>(unite_exit)
+  endif
+
+	nnoremap <buffer><expr> S      unite#mappings#set_current_filters(
+	        \ empty(unite#mappings#get_current_filters()) ? ['sorter_reverse'] : [])
+endfunction
 
 " Start in insert mode
 let g:unite_enable_start_insert = 1
@@ -1228,11 +1252,13 @@ let g:unite_source_history_yank_enable = 1
 " Shorten the default update date of 500ms
 "let g:unite_update_time = 200
 
-let g:unite_source_file_mru_limit = 1000
+let g:unite_source_file_mru_limit = 200
 let g:unite_cursor_line_highlight = 'TabLineSel'
 " let g:unite_abbr_highlight = 'TabLine'
 
-let g:unite_source_file_mru_filename_format = ':~:.'
+" For optimization leave unite_source_file_mru_filename_format empty.
+let g:unite_source_file_mru_filename_format = ''
+"let g:unite_source_file_mru_filename_format = ':~:.'
 let g:unite_source_file_mru_time_format = ''
 
 " For ack.
