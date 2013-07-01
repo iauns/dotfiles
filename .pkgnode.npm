@@ -3,3 +3,14 @@ source .shutils
 
 # Required for markdown plugin in vim.
 npm -g install instant-markdown-d
+npm -g install browserify
+npm -g install uglify-js
+
+# Modules required for substack.net.
+npm install brfs
+npm install single-page
+npm install hyperquest
+npm install hyperglue
+npm install deck
+npm install through
+npm install inherits
