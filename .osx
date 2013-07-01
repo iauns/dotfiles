@@ -281,7 +281,14 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
   info "Installing from haskell's cabal."
   ${HOME}/.pkghaskell.cabal
+
+  info "Installing custom packages."
+  ${HOME}/.pkgcustom
 fi
+
+# TODO: Fixme! Hardcoded path to dotfiles repo...
+info "Running private OSX setup"
+${HOME}/dotfiles/private/nolink/osx
 
 echo ''
 echo "Done. Note that some of these changes require a logout/restart to take effect."

@@ -18,11 +18,9 @@ function UpdateRemotes
 
 echo ""
 
-UpdateRemotes ~/notes "notes"
+UpdateRemotes ~/me "me"
+UpdateRemotes ~/dotfiles "dotfiles"
+UpdateRemotes ~/dotfiles/private "dotfiles-private"
 UpdateRemotes ~/media "media"
 UpdateRemotes ~/prosp "prosp"
-UpdateRemotes ~/self "self"
-UpdateRemotes ~/sand "sand"
 UpdateRemotes ~/backups "backups"
-UpdateRemotes ~/web/blog "web/blog"
-UpdateRemotes ~/web/ocsi "web/ocsi"

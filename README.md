@@ -39,6 +39,12 @@ private
 A private git sub-repository. I use this to store my more sensitive files like
 my email setup and some SSH settings.
 
+nolink
+------
+
+Contains files that will not be symlinked to the home directory. Useful for
+utility scripts.
+
 Inspirations
 ============
 

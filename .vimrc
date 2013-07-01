@@ -923,7 +923,7 @@ let g:ycm_min_num_of_chars_for_completion = 2
 nnoremap <leader>w :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " ----------------- UltiSnips ----------------
-so ~/self/unix/vim/toSource/UltiSnipHelpers.vim
+so ~/.vim/UltiSnips/UltiSnipHelpers.vim
 " It is legal to set the expand trigger and the jump forward trigger to the
 " same value.
 let g:UltiSnipsExpandTrigger="<C-e>"

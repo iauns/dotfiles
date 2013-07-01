@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+source .shutils
+
+# Install tmuxifier. I prefer this to tmuxinator in that it gives you more
+# flexibility when specifying window layouts.
+if [ ! -d ${HOME}/.tmuxifier ]; then
+  git clone https://github.com/jimeh/tmuxifier.git ${HOME}/.tmuxifier
+else
+  # Update tmuxifier if it is already installed.
+  pushd ${HOME}/.tmuxifier > /dev/null
+    git pull
+  popd > /dev/null
+fi
+

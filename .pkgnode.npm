@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 source .shutils
 
-# Required for markdown plugin in vim.
 npm -g install instant-markdown-d
 npm -g install browserify
 npm -g install uglify-js
+npm -g install jshint
 
-# Modules required for substack.net.
+# Useful node modules.
 npm install brfs
 npm install single-page
 npm install hyperquest

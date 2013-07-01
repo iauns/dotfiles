@@ -9,26 +9,23 @@ project_root: ${HOME}/web
 #rvm: 1.9.2@rails_project
 #pre: sudo /etc/rc.d/mysqld start
 tabs:
-  - sand:
-      layout: tiled
+  - main:
+      layout: main-horizontal
       panes:
-        - cd ~/sand
         - cd ~/sand
         - cd ~/sand
   - web:
       layout: tiled
       panes:
-        -
-        -
+        - cd ~/web
+        - cd ~/web
   - blog:
       layout: tiled
       panes:
         - cd ~/web/blog
         - 
-  - ion2:
+  - game:
       layout: tiled
       panes:
-        - cd ~/ion2
-        - cd ~/ion2
-        -
-  - orion:
+        - cd ~
+        - cd ~
