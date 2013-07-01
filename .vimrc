@@ -220,8 +220,21 @@ Bundle 'goldfeld/vim-seek.git'
 Bundle 'bitc/vim-hdevtools'
 " Perform ack from within vim! Look into replacing with unit's proc grep.
 Bundle 'mileszs/ack.vim.git'
-" Coffeescript support for vim
+
+" I pulled most of the javascript plugins from:
+" https://github.com/joyent/node/wiki/Vim-Plugins
+"
+" Coffeescript support for vim. This is a more active fork of the original repo.
 Bundle "AndrewRadev/vim-coffee-script"
+" Better syntax highlighting for javascript in VIM
+Bundle "jelera/vim-javascript-syntax"
+" Syntax highlighting for stylus (less verbose CSS language, much like
+" Coffeescript is for javascript).
+Bundle "wavded/vim-stylus"
+" omnifunc for node.js -- consider installing teramako/jscomplete-vim for
+" similar javascript functionality.
+Bundle "myhere/vim-nodejs-complete"
+
 
 " Extended session tools
 "Bundle 'xolox/vim-misc.git'
