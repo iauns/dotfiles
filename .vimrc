@@ -228,6 +228,8 @@ Bundle 'goldfeld/vim-seek.git'
 Bundle 'bitc/vim-hdevtools'
 " Perform ack from within vim! Look into replacing with unit's proc grep.
 Bundle 'mileszs/ack.vim.git'
+" Coffeescript support for vim
+Bundle "AndrewRadev/vim-coffee-script"
 
 " Extended session tools
 "Bundle 'xolox/vim-misc.git'
