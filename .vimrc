@@ -89,14 +89,6 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set sessionoptions-=options  " Don't save options in sessions. 
 set noshowmatch           " Don't show matching brackets (%).
 
-" Source the :Man command from sources included in vim distro
-runtime ftplugin/man.vim
-runtime macros/matchit.vim
-
-" Never continue a comment when using 'o' or 'O' in normal mode.
-" Comments will only be continued when in insert mode.
-autocmd FileType * setlocal formatoptions-=o
-
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard.
 " This allows you to simply yank text and it will end up on the system
@@ -1296,4 +1288,14 @@ let g:mayansmoke_special_key_visibility = 2
 set colorcolumn=81
 call JHBGSetup()
 hi! link SignColumn LineNr
+
+" Keep the following at the bottom of the file!
+
+" Source the :Man command from sources included in vim distro
+runtime ftplugin/man.vim
+runtime macros/matchit.vim
+
+" Never continue a comment when using 'o' or 'O' in normal mode.
+" Comments will only be continued when in insert mode.
+autocmd FileType * setlocal formatoptions-=o
 
