@@ -943,7 +943,7 @@ function! Ulti_ExpandOrJump_and_getRes()
   return g:ulti_expand_or_jump_res
 endfunction
 
-inoremap <NL> <C-e>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":IMAP_Jumpfunc('', 0)<CR>
+inoremap <C-e>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":IMAP_Jumpfunc('', 0)<CR>
 
 " ----------------- CommandT -----------------
 " We place the match window at the top of the screen because of laptop use.
@@ -1110,8 +1110,8 @@ nnoremap [unite] <Nop>
 nmap <leader>u [unite]
 
 " General fuzzy search
-nnoremap <silent> [unite]<space> :<C-u>Unite
-      \ -buffer-name=files buffer file_mru bookmark file_rec/async<CR>
+"nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files buffer file_mru bookmark file_rec/async:!<CR>
+nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 
 " Quick registers
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
