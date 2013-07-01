@@ -1149,8 +1149,8 @@ nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources source<CR>
 nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=snippets snippet<CR>
 
 " Quickly switch lcd
-nnoremap <silent> [unite]d
-      \ :<C-u>Unite -buffer-name=change-cwd -default-action=lcd directory_mru<CR>
+"nnoremap <silent> [unite]d
+"      \ :<C-u>Unite -buffer-name=change-cwd -default-action=lcd directory_mru<CR>
 
 " Quick file search
 "nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files file_rec/async file/new<CR>
@@ -1174,7 +1174,11 @@ nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=find find:.<CR>
 nnoremap <silent> [unite]c :<C-u>Unite -buffer-name=commands command<CR>
 
 " Quick bookmarks
-nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=bookmarks bookmark<CR>
+"nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=bookmarks bookmark<CR>
+
+" Quickly search from buffer directory.
+nnoremap <silent> [unite]d  :<C-u>UniteWithBufferDir
+      \ -buffer-name=files -prompt=%\  buffer file_mru bookmark file<CR>
 
 " Fuzzy search from current buffer
 " nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir
