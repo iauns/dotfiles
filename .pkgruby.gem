@@ -4,7 +4,7 @@ source .shutils
 
 function install_gem() {
   if ! gem list | grep $1 > /dev/null ; then
-    sudo gem install terminal-notifier
+    sudo gem install $1
   fi
 }
 
