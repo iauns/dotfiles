@@ -204,7 +204,6 @@ Bundle 'SirVer/ultisnips.git'
 Bundle 'vim-scripts/mayansmoke.git'
 Bundle 'derekwyatt/vim-fswitch.git'
 Bundle 'tpope/vim-fugitive.git'
-Bundle 'kien/ctrlp.vim.git'
 Bundle 'scrooloose/nerdtree.git'
 Bundle 'scrooloose/syntastic.git'
 Bundle 'AndrewRadev/simple_bookmarks.vim.git'
@@ -235,6 +234,8 @@ Bundle "wavded/vim-stylus"
 " similar javascript functionality.
 Bundle "myhere/vim-nodejs-complete"
 
+" CtrlP was replaced by unite.
+"Bundle 'kien/ctrlp.vim.git'
 
 " Extended session tools
 "Bundle 'xolox/vim-misc.git'
@@ -1119,7 +1120,8 @@ nmap <leader>u [unite]
 " General fuzzy search
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files buffer file_mru bookmark file_rec/async:!<CR>
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
-nnoremap <silent> [unite]<space> :<C-u>Unite -buffer-name=files file_mru file_rec/async:!<CR>
+"nnoremap <silent> [unite]<space> :<C-u>Unite -buffer-name=files file_mru file_rec/async:!<CR>
+nnoremap <silent> <C-p> :<C-u>Unite -buffer-name=files file_mru file_rec/async:!<CR>
 
 " Search current working directory
 nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-insert file<CR>
