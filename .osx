@@ -286,5 +286,9 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   ${HOME}/.pkgcustom
 fi
 
+# TODO: Fixme! Hardcoded path to dotfiles repo...
+info "Running private OSX setup"
+${HOME}/dotfiles/private/nolink/osx
+
 echo ''
 echo "Done. Note that some of these changes require a logout/restart to take effect."

@@ -12,7 +12,7 @@ echo ''
 # traversing the filesystem looking for files to sym-link.
 # Directories as well as files will be checked against this array.
 ignore=( "./root" "./.git" "./.gitignore" "./bootstrap" "./unused" 
-         "./private" "./README.md" )
+         "./private" "./README.md" "./nolink" )
 
 link_files () {
   $3 ln -s $1 $2
