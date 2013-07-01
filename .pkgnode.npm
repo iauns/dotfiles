@@ -3,3 +3,4 @@ source .shutils
 
 # Required for markdown plugin in vim.
 npm -g install instant-markdown-d
+npm -g install jshint
