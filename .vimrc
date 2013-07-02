@@ -783,7 +783,7 @@ noremap <silent> <leader>gc :Gcommit<CR>
 noremap <silent> <leader>ge :Gedit<CR>
 noremap <silent> <leader>gd :Gdiff<CR>
 " Simply closes the other diff window (moves to it with C-h)
-noremap <silent> <leader>gD <c-w>h<c-w>c
+noremap <silent> <leader>gD <c-w>h<c-w>czR
 noremap <silent> <leader>gw :Gwrite<CR>
 noremap <silent> <leader>gr :Gread<CR>
 noremap <silent> <leader>gl :Glog<CR>
@@ -1120,7 +1120,7 @@ nmap <leader>u [unite]
 " General fuzzy search
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files buffer file_mru bookmark file_rec/async:!<CR>
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
-"nnoremap <silent> [unite]<space> :<C-u>Unite -buffer-name=files file_mru file_rec/async:!<CR>
+"nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 nnoremap <silent> <C-p> :<C-u>Unite -buffer-name=files file_mru file_rec/async:!<CR>
 
 " Search current working directory
@@ -1130,7 +1130,7 @@ nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-inser
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 
 " Quick buffer and mru
-nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=buffers buffer file_mru<CR>
+nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffers buffer file_mru<CR>
 
 " Quick yank history
 nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<CR>
