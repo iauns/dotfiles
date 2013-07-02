@@ -1124,7 +1124,7 @@ nmap <leader>u [unite]
 nnoremap <silent> <C-p> :<C-u>Unite -buffer-name=files file_mru file_rec/async:!<CR>
 
 " Search current working directory
-nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-insert file<CR>
+nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -start-insert file<CR>
 
 " Quick registers
 nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
@@ -1174,6 +1174,9 @@ nnoremap <silent> [unite]n :<C-u>Unite -buffer-name=find find:.<CR>
 
 " Quick commands
 nnoremap <silent> [unite]c :<C-u>Unite -buffer-name=commands command<CR>
+
+" Quick jumps
+nnoremap <silent> [unite]j :<C-u>Unite -buffer-name=jumps jump<CR>
 
 " Quick bookmarks
 "nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=bookmarks bookmark<CR>
