@@ -1127,7 +1127,9 @@ nnoremap <silent> <C-p> :<C-u>Unite -buffer-name=files file_mru file_rec/async:!
 nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -start-insert file<CR>
 
 " Quick registers
-nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
+"nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
+" Unite resume
+nnoremap <silent> [unite]r :<C-u>UniteResume<CR>
 
 " Quick buffer and mru
 nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffers buffer file_mru<CR>
@@ -1278,7 +1280,7 @@ if executable('ack-grep')
   let g:unite_source_grep_recursive_opt = ''
 elseif executable('ack')
   let g:unite_source_grep_command = 'ack'
-  let g:unite_source_grep_default_opts = '--no-heading --no-color -a -w'
+  let g:unite_source_grep_default_opts = '--no-heading --no-color'
   let g:unite_source_grep_recursive_opt = ''
 endif
 
