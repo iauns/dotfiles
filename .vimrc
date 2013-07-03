@@ -726,6 +726,19 @@ noremap <silent> <leader>ob :TagbarToggle<CR>
 noremap <silent> <leader>ou :GundoToggle<CR>
 noremap <silent> <leader>ol :lopen<cr>
 
+" ---------------- Previous / Next ------------------
+
+" Location list.
+nnoremap <leader>nL :lprevious<CR>
+nnoremap <leader>NL :lprevious<CR>
+nnoremap <leader>nl :lnext<CR>
+
+" ---------------- Maximal ------------------
+
+" Location list
+nnoremap <leader>ml :llast<CR>
+nnoremap <leader>mL :lfirst<CR>
+nnoremap <leader>ML :lfirst<CR>
 
 " ---------------- Run semantic ------------------
 " Run ctangs
@@ -751,21 +764,21 @@ noremap <leader>sa zg
 noremap <leader>sh z=
 
 " ---------------- CTRL-P keys ------------------
-nnoremap <leader>- :CtrlPBufTag<CR>
-nnoremap <leader>pat :CtrlPBufTagAll<CR>
-nnoremap <leader>pf :CtrlPQuickfix<CR>
-nnoremap <leader>pi :CtrlPDir<CR>
-nnoremap <leader>pu :CtrlPUndo<CR>
-nnoremap <leader>pl :CtrlPLine<CR>
-nnoremap <leader>ps :CtrlPRTS<CR>
-nnoremap <leader>pc :CtrlPChange<CR>
-nnoremap <leader>pac :CtrlPChangeAll<CR>
-nnoremap <leader>pt :CtrlPTag<CR>
-nnoremap <leader>pb :CtrlPBuffer<CR>
+"nnoremap <leader>- :CtrlPBufTag<CR>
+"nnoremap <leader>pat :CtrlPBufTagAll<CR>
+"nnoremap <leader>pf :CtrlPQuickfix<CR>
+"nnoremap <leader>pi :CtrlPDir<CR>
+"nnoremap <leader>pu :CtrlPUndo<CR>
+"nnoremap <leader>pl :CtrlPLine<CR>
+"nnoremap <leader>ps :CtrlPRTS<CR>
+"nnoremap <leader>pc :CtrlPChange<CR>
+"nnoremap <leader>pac :CtrlPChangeAll<CR>
+"nnoremap <leader>pt :CtrlPTag<CR>
+"nnoremap <leader>pb :CtrlPBuffer<CR>
 
 " NOTE: The <C-R>= is mandatory! It is the expression buffer that evaluates
 "       %:p:h to a directory!
-noremap <silent> <leader>pd :CtrlP <C-R>=expand("%:p:h")<CR><CR>
+"noremap <silent> <leader>pd :CtrlP <C-R>=expand("%:p:h")<CR><CR>
 
 " ---------------- Fugitive keys ------------------
 " http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
@@ -894,6 +907,12 @@ call EasyMotion#InitOptions({
       \ , 'hl_group_target' : 'Question'
       \ , 'hl_group_shade'  : 'EasyMotionShade'
       \ })
+
+
+" ---------------- Syntastic ---------------- 
+let g:syntastic_error_symbol='✗'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_always_populate_loc_list=1
 
 
 " ---------------- CtrlP ---------------- 
@@ -1096,6 +1115,8 @@ endif
 " Use the fuzzy matcher for everything
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 
+"call unite#custom#source('file,file/new,buffer,file_rec',
+"      \ 'matchers', 'matcher_fuzzy')
 " Use the rank sorter for everything
 call unite#filters#sorter_default#use(['sorter_rank'])
 
@@ -1280,7 +1301,7 @@ if executable('ack-grep')
   let g:unite_source_grep_recursive_opt = ''
 elseif executable('ack')
   let g:unite_source_grep_command = 'ack'
-  let g:unite_source_grep_default_opts = '--no-heading --no-color'
+  let g:unite_source_grep_default_opts = '--no-heading --no-color --text'
   let g:unite_source_grep_recursive_opt = ''
 endif
 
@@ -1292,8 +1313,8 @@ endif
 " (probably something funky to do with my vim rc or extensions)..
 function! JHMakeMapping()
   if !exists('g:disable_protodef_mapping')
-    nnoremap <buffer> <silent> <leader>pp :set paste<cr>i<c-r>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({})<cr><esc>='[:set nopaste<cr>
-    nnoremap <buffer> <silent> <leader>pn :set paste<cr>i<c-r>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({'includeNS' : 0})<cr><esc>='[:set nopaste<cr>
+    nnoremap <buffer> <silent> <leader>PP :set paste<cr>i<c-r>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({})<cr><esc>='[:set nopaste<cr>
+    nnoremap <buffer> <silent> <leader>PN :set paste<cr>i<c-r>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({'includeNS' : 0})<cr><esc>='[:set nopaste<cr>
   endif
 endfunction
 
