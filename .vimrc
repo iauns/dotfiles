@@ -230,9 +230,9 @@ Bundle "jelera/vim-javascript-syntax"
 " Syntax highlighting for stylus (less verbose CSS language, much like
 " Coffeescript is for javascript).
 Bundle "wavded/vim-stylus"
-" omnifunc for node.js -- consider installing teramako/jscomplete-vim for
-" similar javascript functionality.
-Bundle "myhere/vim-nodejs-complete"
+" Full javascript completion engine that integrates with youcompleteme.
+" (omnicomplete)
+Bundle "marijnh/tern_for_vim"
 
 " CtrlP was replaced by unite.
 "Bundle 'kien/ctrlp.vim.git'
