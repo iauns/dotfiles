@@ -3,7 +3,7 @@ session_root "~/sci"
 if initialize_session "Work"; then
 
   load_window "General"
-  load_window "Spire"
+  load_window "SpireDebug"
 
   select_window "General"
 
