@@ -700,8 +700,6 @@ silent! imap <CR> <C-g>u<Plug>delimitMateCR
 " Close buffer: http://vim.wikia.com/wiki/Deleting_a_buffer_without_closing_the_window
 noremap <silent> <leader>cc :close<CR>
 noremap <silent> <leader>h :noh<CR>
-noremap <silent> <leader>cq :cclose<CR>
-noremap <silent> <leader>cl :lclose<cr>
 noremap <silent> <leader>cb :Kwbd<CR>
 " Consider the following binding to turn highlighting off:
 
@@ -711,6 +709,7 @@ noremap <silent> <leader>cb :Kwbd<CR>
 " Open general todolist.
 " Open nerdtree
 noremap <silent> <leader>oq :copen<CR>
+noremap <silent> <leader>oQ :cclose<CR>
 noremap <silent> <leader>ov :call JH_OpenVimRC()<CR>
 noremap <silent> <leader>ott :call JH_OpenTodolist()<CR>
 noremap <silent> <leader>otg :call JH_OpenGenTodoList()<CR>
@@ -725,6 +724,7 @@ noremap <silent> <leader>owg :call JH_OpenWeeklyGoalList()<CR>
 noremap <silent> <leader>ob :TagbarToggle<CR>
 noremap <silent> <leader>ou :GundoToggle<CR>
 noremap <silent> <leader>ol :lopen<cr>
+noremap <silent> <leader>oL :lclose<cr>
 
 " ---------------- Previous / Next ------------------
 
@@ -899,7 +899,7 @@ let g:EasyMotion_leader_key='<space>'
 
 call EasyMotion#InitOptions({
       \   'leader_key'      : '<space><space>'
-      \ , 'keys'            : 'aoeuhtnsbcdgijkmpqrvw'
+      \ , 'keys'            : 'htnsgijkpqrvcmwaoeu'
       \ , 'do_shade'        : 1
       \ , 'do_mapping'      : 1
       \ , 'grouping'        : 1
