@@ -1112,13 +1112,10 @@ endif
 " Unite
 "===============================================================================
 
-" Use the fuzzy matcher for everything
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-
-"call unite#custom#source('file,file/new,buffer,file_rec',
-"      \ 'matchers', 'matcher_fuzzy')
-" Use the rank sorter for everything
-call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#custom#source('file,file_rec', 'sorters', 'sorter_rank')
+call unite#custom#source('file,file/new,buffer,file_rec',
+      \ 'matchers', 'matcher_fuzzy')
 
 " Set up some custom ignores
 call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
@@ -1142,6 +1139,9 @@ nmap <leader>u [unite]
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files buffer file_mru bookmark file_rec/async:!<CR>
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 "nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
+" The exclamation after file_rec/async implies that vim should search for the
+" nearest directory containing a '.git', '.hg', etc... see
+" unite-source-file_rec.
 nnoremap <silent> <C-p> :<C-u>Unite -buffer-name=files file_mru file_rec/async:!<CR>
 
 " Search current working directory

@@ -26,7 +26,11 @@ fi
 brew install fish         # Fish shell.
 
 # Use --with-ruby if you want to enable Command-T in vim.
-brew install vim
+# We use --with-lua since it helps make the unite plugin go a tad bit faster.
+# See the Unite FAQ entry: unite.vim is too slow. Ensure lua is installed BEFORE
+# vim, brew doesn't correctly detect that dependency when using --with-lua.
+brew install lua 
+brew install vim --with-lua
 brew install wget --enable-iri
 brew install ack
 brew install git
