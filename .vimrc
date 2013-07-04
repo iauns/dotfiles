@@ -957,14 +957,6 @@ let g:UltiSnipsExpandTrigger="<C-e>"
 let g:UltiSnipsJumpForwardTrigger="<C-e>"
 let g:UltiSnipsJumpBackwardTrigger="<C-i>"
 
-let g:ulti_expand_or_jump_res = 0 "default value, just set once
-function! Ulti_ExpandOrJump_and_getRes()
-  call UltiSnips_ExpandSnippetOrJump()
-  return g:ulti_expand_or_jump_res
-endfunction
-
-"inoremap <C-e>=(Ulti_ExpandOrJump_and_getRes() > 0)?"":IMAP_Jumpfunc('', 0)<CR>
-
 " ----------------- CommandT -----------------
 " We place the match window at the top of the screen because of laptop use.
 " My fingers often obscure the very bottom of the screen.
