@@ -170,7 +170,6 @@ Bundle 'Shougo/unite.vim'
 Bundle 'Shougo/unite-outline'
 Bundle 'Shougo/unite-help'
 Bundle 'Shougo/unite-session'
-Bundle 'thinca/vim-unite-history'
 
 " Bundles
 Bundle 'Valloric/YouCompleteMe.git'
