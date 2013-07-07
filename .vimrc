@@ -38,8 +38,8 @@ set guioptions-=m         " I don't want the menu. Frees up the alt button.
 set guioptions-=e         " Make mac vim use ASCII tabs (like terminal).
                           " This to get similar color coding as the rest of vim.
 set incsearch             " Enable incremental search.
-set rnu                   " Set relative line numbers. Can easily navigate with 
-                          " #j/k.
+set rnu                   " Set relative line numbers. Can easily navigate with #j/k.
+"set nu                    " Show absolute line number on current line (works in vim 7.4).
 let mapleader="s"         " Set mapleader to 's'. I do not use the substitute 
                           " command all that often (c-<motion>). BUT: this does
                           " mess up nerdtree's vertical split 's' key.
@@ -131,6 +131,10 @@ autocmd BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \   exe "normal! g`\"" |
       \ endif
+
+" Always show the gutter (sign column).
+autocmd BufEnter * sign define dummy
+autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 
 "-------------------------------------------------------------------------------
 " VUNDLE
