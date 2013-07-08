@@ -1297,7 +1297,7 @@ if executable('ack-grep')
   let g:unite_source_grep_recursive_opt = ''
 elseif executable('ack')
   let g:unite_source_grep_command = 'ack'
-  let g:unite_source_grep_default_opts = '--no-heading --no-color --text'
+  let g:unite_source_grep_default_opts = '--no-heading --no-color'
   let g:unite_source_grep_recursive_opt = ''
 endif
 
