@@ -5,6 +5,8 @@
 "     I only use this key for swapping two characters, which could easily just
 "     be a leader mapping.
 " space - (remapped) Similar to another leader key - mostly used for easymotion.
+" m - can be remapping to !. No need to place such an infrequent key close to
+"     home.
 
 " Maybe re-mappable:
 " , - A possibility since its use is very infrequent.
@@ -217,10 +219,6 @@ Bundle 'Raimondi/delimitMate'
 Bundle 'tikhomirov/vim-glsl'
 Bundle 'mhinz/vim-signify'
 Bundle 'svermeulen/vim-easyclip'
-" Vim-seek. We use the '-' for seeking. '0', '-', and '\' are the only keys
-" that are really available. May want to consider seek as 's' instead of
-" leader.
-Bundle 'goldfeld/vim-seek.git'
 " Haskell dev plugins (for syntastic and definition of types)
 Bundle 'bitc/vim-hdevtools'
 " Perform ack from within vim! Look into replacing with unit's proc grep.
@@ -277,6 +275,10 @@ Bundle "marijnh/tern_for_vim"
 "Bundle 'AndrewRadev/switch.vim'
 " Latex box
 "Bundle 'LaTeX-Box-Team/LaTeX-Box'
+" Vim-seek. We use the '-' for seeking. '0', '-', and '\' are the only keys
+" that are really available. May want to consider seek as 's' instead of
+" leader.
+"Bundle 'goldfeld/vim-seek.git'
 
 " Plugins to think about installing:
 " Indent_Guides
@@ -902,24 +904,18 @@ end
 
 " ---------------- Easyclip ------------------
 let g:EasyClipUseSubstituteDefaults = 0
+let g:EasyClipUsePasteDefaults = 0
+let g:EasyClipUseYankDefaults = 0
+let g:EasyClipUseCutDefaults = 0
 
-" Instead of using 's' (my leader key), we use 'x'. Think transform here: xform.
-" Don't forget to modify the plugin so that it doesn't send x to the blackhole
-" register. It resets our keybindings here.
+nmap <silent> - <Plug>SubstituteOverMotionMap
+nmap <silent> _ <Plug>SubstituteToEndOfLine
+nmap -- <Plug>SubstituteLine
+nmap -_ <Plug>NoNewlineSubstituteLine
 
-" Make the 'x' key more useful, paste over a given motion
-nmap <silent> x <Plug>SubstituteOverMotionMap
-nmap <silent> gs <Plug>G_SubstituteOverMotionMap
-nmap <silent> X <Plug>SubstituteToEndOfLine
-nmap <silent> gS <Plug>G_SubstituteToEndOfLine
-nmap xx <Plug>SubstituteLine
-nmap xX <Plug>NoNewlineSubstituteLine
+xmap - p
 
-xmap x p
-
-" Comment these to avoid shadowing M (go to middle of screen)
-nmap M <Plug>MoveMotionEndOfLinePlug
-nmap mM <Plug>MoveMotionReplaceLinePlug
+nmap <silent><leader>d "_d
 
 " Remap ! as mark.
 nnoremap ! m
@@ -1071,8 +1067,8 @@ let g:session_autosave = 'no'
 
 " ---------------- ZenCoding ------------------
 "let g:SeekKeys = '- _ 0 +'
-let g:SeekKey = '-'
-let g:SeekBackKey = '_'
+"let g:SeekKey = '-'
+"let g:SeekBackKey = '_'
 
 " ----------------- Utl ----------------
 if has("win32")
