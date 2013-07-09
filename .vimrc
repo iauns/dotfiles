@@ -909,7 +909,7 @@ let g:signify_mapping_toggle           = '<leader>gt'
 
 let g:signify_sign_overwrite = 0
 
-let g:signify_cursorhold_normal = 1
+let g:signify_cursorhold_normal = 0
 let g:signify_cursorhold_insert = 0
 
 " ---------------- EasyMotion ------------------
