@@ -89,6 +89,7 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set sessionoptions-=options  " Don't save options in sessions. 
 set noshowmatch           " Don't show matching brackets (%).
 
+" Note: Not sure this is necessary with the easy-clip plugin installed.
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard.
 " This allows you to simply yank text and it will end up on the system
@@ -215,6 +216,7 @@ Bundle 'mattn/zencoding-vim.git'
 Bundle 'Raimondi/delimitMate'
 Bundle 'tikhomirov/vim-glsl'
 Bundle 'mhinz/vim-signify'
+Bundle 'svermeulen/vim-easyclip'
 " Vim-seek. We use the '-' for seeking. '0', '-', and '\' are the only keys
 " that are really available. May want to consider seek as 's' instead of
 " leader.
@@ -897,6 +899,30 @@ end
 "-------------------------------------------------------------------------------
 " Addon settings
 "-------------------------------------------------------------------------------
+
+" ---------------- Easyclip ------------------
+let g:EasyClipUseSubstituteDefaults = 0
+
+" Instead of using 's' (my leader key), we use 'x'. Think transform here: xform.
+" Don't forget to modify the plugin so that it doesn't send x to the blackhole
+" register. It resets our keybindings here.
+
+" Make the 'x' key more useful, paste over a given motion
+nmap <silent> x <Plug>SubstituteOverMotionMap
+nmap <silent> gs <Plug>G_SubstituteOverMotionMap
+nmap <silent> X <Plug>SubstituteToEndOfLine
+nmap <silent> gS <Plug>G_SubstituteToEndOfLine
+nmap xx <Plug>SubstituteLine
+nmap xX <Plug>NoNewlineSubstituteLine
+
+xmap x p
+
+" Comment these to avoid shadowing M (go to middle of screen)
+nmap M <Plug>MoveMotionEndOfLinePlug
+nmap mM <Plug>MoveMotionReplaceLinePlug
+
+" Remap ! as mark.
+nnoremap ! m
 
 " ---------------- Signify ------------------
 let g:signify_vcs_lst = [ 'git', 'svn' ]
