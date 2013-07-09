@@ -214,6 +214,7 @@ Bundle 'guns/xterm-color-table.vim.git'
 Bundle 'mattn/zencoding-vim.git'
 Bundle 'Raimondi/delimitMate'
 Bundle 'tikhomirov/vim-glsl'
+Bundle 'mhinz/vim-signify'
 " Vim-seek. We use the '-' for seeking. '0', '-', and '\' are the only keys
 " that are really available. May want to consider seek as 's' instead of
 " leader.
@@ -896,7 +897,21 @@ end
 "-------------------------------------------------------------------------------
 " Addon settings
 "-------------------------------------------------------------------------------
-"
+
+" ---------------- Signify ------------------
+let g:signify_vcs_lst = [ 'git', 'svn' ]
+
+let g:signify_mapping_next_hunk = '<leader>gj'
+let g:signify_mapping_prev_hunk = '<leader>gk'
+
+let g:signify_mapping_toggle_highlight = '<leader>gh'
+let g:signify_mapping_toggle           = '<leader>gt'
+
+let g:signify_sign_overwrite = 0
+
+let g:signify_cursorhold_normal = 1
+let g:signify_cursorhold_insert = 0
+
 " ---------------- EasyMotion ------------------
 let g:EasyMotion_leader_key='<space>'
 
