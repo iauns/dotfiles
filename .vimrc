@@ -701,6 +701,11 @@ nnoremap <leader>j      :m+<CR>==
 "inoremap <CR> <C-G>u<CR>
 silent! imap <CR> <C-g>u<Plug>delimitMateCR
 
+nmap <silent><leader>d "_d
+
+" Remap ! as mark (will replace m eventually -- when a worthy command is found)
+nnoremap ! m
+
 " ---------------- Open/close semantic ------------------
 " Close the current window.
 " Close 'highlighting'.
@@ -901,24 +906,6 @@ end
 "-------------------------------------------------------------------------------
 " Addon settings
 "-------------------------------------------------------------------------------
-
-"" ---------------- Easyclip ------------------
-"let g:EasyClipUseSubstituteDefaults = 0
-"let g:EasyClipUsePasteDefaults = 0
-"let g:EasyClipUseYankDefaults = 0
-"let g:EasyClipUseCutDefaults = 0
-"
-"nmap <silent> - <Plug>SubstituteOverMotionMap
-"nmap <silent> _ <Plug>SubstituteToEndOfLine
-"nmap -- <Plug>SubstituteLine
-"nmap -_ <Plug>NoNewlineSubstituteLine
-"
-"xmap - p
-"
-nmap <silent><leader>d "_d
-
-" Remap ! as mark.
-nnoremap ! m
 
 " ---------------- Signify ------------------
 let g:signify_vcs_lst = [ 'git', 'svn' ]
