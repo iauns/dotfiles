@@ -218,7 +218,7 @@ Bundle 'mattn/zencoding-vim.git'
 Bundle 'Raimondi/delimitMate'
 Bundle 'tikhomirov/vim-glsl'
 Bundle 'mhinz/vim-signify'
-Bundle 'svermeulen/vim-easyclip'
+Bundle 'iauns/vim-subbed'
 " Haskell dev plugins (for syntastic and definition of types)
 Bundle 'bitc/vim-hdevtools'
 " Perform ack from within vim! Look into replacing with unit's proc grep.
@@ -902,19 +902,19 @@ end
 " Addon settings
 "-------------------------------------------------------------------------------
 
-" ---------------- Easyclip ------------------
-let g:EasyClipUseSubstituteDefaults = 0
-let g:EasyClipUsePasteDefaults = 0
-let g:EasyClipUseYankDefaults = 0
-let g:EasyClipUseCutDefaults = 0
-
-nmap <silent> - <Plug>SubstituteOverMotionMap
-nmap <silent> _ <Plug>SubstituteToEndOfLine
-nmap -- <Plug>SubstituteLine
-nmap -_ <Plug>NoNewlineSubstituteLine
-
-xmap - p
-
+"" ---------------- Easyclip ------------------
+"let g:EasyClipUseSubstituteDefaults = 0
+"let g:EasyClipUsePasteDefaults = 0
+"let g:EasyClipUseYankDefaults = 0
+"let g:EasyClipUseCutDefaults = 0
+"
+"nmap <silent> - <Plug>SubstituteOverMotionMap
+"nmap <silent> _ <Plug>SubstituteToEndOfLine
+"nmap -- <Plug>SubstituteLine
+"nmap -_ <Plug>NoNewlineSubstituteLine
+"
+"xmap - p
+"
 nmap <silent><leader>d "_d
 
 " Remap ! as mark.
@@ -939,7 +939,7 @@ let g:EasyMotion_leader_key='<space>'
 
 call EasyMotion#InitOptions({
       \   'leader_key'      : '<space><space>'
-      \ , 'keys'            : 'htnsgijkpqrvcmwaoeu'
+      \ , 'keys'            : 'htnsbcfgijklpzqrvmwaoeu'
       \ , 'do_shade'        : 1
       \ , 'do_mapping'      : 1
       \ , 'grouping'        : 1
@@ -1065,7 +1065,7 @@ let g:user_zen_leader_key = '<c-f>'
 " We don't want to be asked to autosave sessions.
 let g:session_autosave = 'no'
 
-" ---------------- ZenCoding ------------------
+" ---------------- vim-seek ------------------
 "let g:SeekKeys = '- _ 0 +'
 "let g:SeekKey = '-'
 "let g:SeekBackKey = '_'
