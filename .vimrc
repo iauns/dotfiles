@@ -1313,6 +1313,15 @@ let g:unite_source_file_mru_filename_format = ''
 "let g:unite_source_file_mru_filename_format = ':~:.'
 let g:unite_source_file_mru_time_format = ''
 
+" I tend to have relative line numbering turned on, so it's quicker to just
+" type (apstrophe)-relative line number. That's the way this table is setup.
+let g:unite_quick_match_table =
+      \ get(g:, 'unite_quick_match_table', {
+      \     '1' : 0, '2' : 1, '3' : 2, '4' : 3, '5' : 4, '6' : 5, '7' : 6, '8' : 7, '9' : 8, 'a' : 9,
+      \     'o' : 10, 'e' : 11, 'u' : 12, 'h' : 13, 't' : 14, 'n' : 15, 's' : 16, 'p' : 17, 'g' : 18, 'c' : 19,
+      \     'r' : 20, 'l' : 21, 'q' : 22, 'j' : 23, 'k' : 24, 'b' : 25, 'm' : 26, 'w' : 27, 'v' : 28, 'z' : 29,
+      \ })
+
 " For ack.
 if executable('ack-grep')
   let g:unite_source_grep_command = 'ack-grep'
