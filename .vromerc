@@ -1,0 +1,5 @@
+set editor=/usr/local/bin/mvim -f
+
+" Make history navigation a single keypress.
+map  h H
+map  l L

@@ -848,7 +848,20 @@ noremap <silent> <leader>nn :NERDTreeToggle<CR>
 "  " See: <url:vimhelp:uel#^a folder-URL. Utl.vim>
 "<url:http://en.cppreference.com/mwiki/index.php\?title\=Special\%3ASearch\&search\=vector>
 "nnoremap <silent> <leader>om :exe ":Utl ol http://en.cppreference.com/mwiki/index.php?title=Special%3ASearch&search=".expand("<cword>")<CR>:redraw!<CR>
-nnoremap <silent> <leader>om :exe ':Utl ol http://en.cppreference.com/mwiki/index.php\\\\?title=Special%3ASearch\\\\&search='.expand("<cword>")<CR>:redraw!<CR> 
+
+function! JH_JumpToOnlineManual()
+  if &filetype == 'vim'
+    execute "Utl ol https://www.google.com/search?q=site%3Alearnvimscriptthehardway.stevelosh.com%2F%20".expand("<cword>")
+  elseif &filetype == 'cpp'
+    execute "Utl ol http://en.cppreference.com/mwiki/index.php\\\\?title=Special%3ASearch\\\\&search=".expand("<cword>")
+  elseif &filetype == 'javascript'
+    execute "Utl ol https://www.google.com/search?q=site%3Anodemanual.org%2F%20".expand("<cword>")
+  endif
+  execute "redraw!"
+endfunc
+
+nnoremap <silent> <leader>om :call JH_JumpToOnlineManual()<CR>
+"nnoremap <silent> <leader>om :exe ':Utl ol http://en.cppreference.com/mwiki/index.php\\\\?title=Special%3ASearch\\\\&search='.expand("<cword>")<CR>:redraw!<CR> 
 nnoremap <silent> <leader>og :exe ':Utl ol https://www.google.com/search?q='.expand("<cword>")<CR>:redraw!<CR> 
 nnoremap <silent> <leader>oh :Utl<CR>:redraw!<CR>
 

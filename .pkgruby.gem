@@ -15,6 +15,7 @@ install_gem timetrap
 install_gem redcarpet
 install_gem pygments.rb
 install_gem wirble
+install_gem vrome
 
 # Github CLI issues interface.
 install_gem ghi

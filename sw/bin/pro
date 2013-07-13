@@ -1,11 +1,20 @@
 #!/usr/bin/env node
+
+// Filesystem module.
+var fs = require('fs');
+
 var home = process.env.HOME;
-console.log(home + '/prosp');
-console.error('help!');
+//console.log(home + '/prosp');
+
+process.argv.slice(2).forEach(function (fileName) {
+  console.log(fileName)
+});
 
 // Current working directory:
-console.log(process.cwd());
-console.log();
+//console.log(process.cwd());
+//process.argv.forEach(function (val, index, array) {
+//  console.log(index + ': ' + val);
+//});
 
 // Actual directory of the script (__dirname) and full path to the filename of
 // the script (__filename).
