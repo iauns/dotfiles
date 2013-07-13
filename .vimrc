@@ -701,10 +701,17 @@ nnoremap <leader>j      :m+<CR>==
 "inoremap <CR> <C-G>u<CR>
 silent! imap <CR> <C-g>u<Plug>delimitMateCR
 
-nmap <silent><leader>d "_d
+nnoremap <silent><leader>d "_d
 
 " Remap ! as mark (will replace m eventually -- when a worthy command is found)
 nnoremap ! m
+
+" ---------------- Text transformations ------------------
+" Convert inner word to upper case.
+nnoremap <leader>tu viwU
+
+" Swap two characters
+nnoremap <leader>tw "zylx"zp
 
 " ---------------- Open/close semantic ------------------
 " Close the current window.
