@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+var home = process.env.HOME;
+console.log(home + '/prosp');
+console.error('help!');
+
+// Current working directory:
+console.log(process.cwd());
+console.log();
+
+// Actual directory of the script (__dirname) and full path to the filename of
+// the script (__filename).
+//console.log(__dirname);
+//console.log(__filename);

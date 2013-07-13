@@ -5,6 +5,7 @@ npm -g install instant-markdown-d
 npm -g install browserify
 npm -g install uglify-js
 npm -g install jshint
+npm -g install tern
 
 # Useful node modules.
 npm install brfs
