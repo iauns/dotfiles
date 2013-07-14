@@ -2,6 +2,8 @@
 var fs = require('fs');
 var path = require('path');
 var spawn = require('child_process').spawn;
+var exec = require('child_process').exec;
+var execFile = require('child_process').execFile;
 
 // Determine base prosp directory.
 var home = process.env.HOME;
@@ -33,18 +35,46 @@ if (targetDir.length === 0)
 var prospSubDir = path.basename(targetDir);
 prospDir += "/" + prospSubDir;
 
+if (fs.existsSync(prospDir) == false)
+{
+  console.error("Could not find directory '" + prospDir + "'");
+  process.exit(1);
+}
+
 // Construct the executable to call.
 var exeFilename = '';
 if (process.argv.length > 2)
 {
-  process.argv.slice(2).forEach(function (fileName) {
-    if (exeFilename.length === 0) {
-      exeFilename = fileName;
+  // See if the user wants to list all commands (we need some more
+  // sophisticated command line processing).
+  if (process.argv[2] === '-l')
+  {
+    // List all possible commands from the target directory.
+    // Call each command to obtain their description.
+    var files = fs.readdirSync(prospDir);
+    for(var i in files) {
+      var filePath = prospDir + "/" + files[i];
+      // Exclude directories (possibly only check for executable files).
+      if (fs.lstatSync(filePath).isDirectory() == false) {
+        // Exclude hidden files.
+        if (files[i][0] != '.') {
+          child = spawn(filePath, ['-h'], { stdio: 'inherit'  });
+        }
+      }
     }
-    else {
-      exeFilename += "_" + fileName;
-    }
-  });
+    process.exit(0);
+  }
+  else
+  {
+    process.argv.slice(2).forEach(function (fileName) {
+      if (exeFilename.length === 0) {
+        exeFilename = fileName;
+      }
+      else {
+        exeFilename += "_" + fileName;
+      }
+    });
+  }
 }
 else
 {
