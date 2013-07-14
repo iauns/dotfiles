@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 var fs = require('fs');
-var path = require('path')
+var path = require('path');
 var spawn = require('child_process').spawn;
 
 // Determine base prosp directory.
@@ -9,7 +9,7 @@ var prospDir = home + '/prosp';
 
 // Determine subdirectory in prosp (basename of nearest dir containing .git)
 var curDir = path.resolve(process.cwd());
-var targetDir = ''
+var targetDir = '';
 while (curDir != '/') {
   // Check to see if the current directory contains a .git directory.
   if (fs.existsSync(curDir + '/.git'))
@@ -25,7 +25,7 @@ while (curDir != '/') {
 // Exit with failure.
 if (targetDir.length === 0)
 {
-  console.log("Failed to find git directory.");
+  console.error("Failed to find git directory.");
   process.exit(1);
 }
 
@@ -33,19 +33,35 @@ if (targetDir.length === 0)
 var prospSubDir = path.basename(targetDir);
 prospDir += "/" + prospSubDir;
 
-// Construct a executable to call.
-var exeFilename = ''
-process.argv.slice(2).forEach(function (fileName) {
-  if (exeFilename.length === 0) {
-    exeFilename = fileName;
-  }
-  else {
-    exeFilename += "_" + fileName
-  }
-});
-exeFilename += ".sh"
+// Construct the executable to call.
+var exeFilename = '';
+if (process.argv.length > 2)
+{
+  process.argv.slice(2).forEach(function (fileName) {
+    if (exeFilename.length === 0) {
+      exeFilename = fileName;
+    }
+    else {
+      exeFilename += "_" + fileName;
+    }
+  });
+}
+else
+{
+  console.error("At least one parameter required.");
+  process.exit(1);
+}
+var commandName = exeFilename.replace("_", " ");
+exeFilename += ".sh";
 
 var fullExePath = prospDir + "/" + exeFilename;
+
+if (fs.existsSync(fullExePath) == false)
+{
+  console.error("Could not find command '" + commandName + "'");
+  console.error("Absolute filename: '" + fullExePath + "'");
+  process.exit(1);
+}
 console.log("Executing: " + fullExePath);
 
 spawn(fullExePath, [], { stdio: 'inherit'  });
