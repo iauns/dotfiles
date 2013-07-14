@@ -1,20 +1,54 @@
 #!/usr/bin/env node
-
-// Filesystem module.
 var fs = require('fs');
+var path = require('path')
+var spawn = require('child_process').spawn;
 
+// Determine base prosp directory.
 var home = process.env.HOME;
-//console.log(home + '/prosp');
+var prospDir = home + '/prosp';
 
+// Determine subdirectory in prosp (basename of nearest dir containing .git)
+var curDir = path.resolve(process.cwd());
+var targetDir = ''
+while (curDir != '/') {
+  // Check to see if the current directory contains a .git directory.
+  if (fs.existsSync(curDir + '/.git'))
+  {
+    targetDir = curDir;
+    break;
+  }
+
+  // We didn't succeed, grab parent directory.
+  curDir = path.dirname(curDir);
+}
+
+// Exit with failure.
+if (targetDir.length === 0)
+{
+  console.log("Failed to find git directory.");
+  process.exit(1);
+}
+
+// Grab basename. This is what we will use as prosp's directory name.
+var prospSubDir = path.basename(targetDir);
+prospDir += "/" + prospSubDir;
+
+// Construct a executable to call.
+var exeFilename = ''
 process.argv.slice(2).forEach(function (fileName) {
-  console.log(fileName)
+  if (exeFilename.length === 0) {
+    exeFilename = fileName;
+  }
+  else {
+    exeFilename += "_" + fileName
+  }
 });
+exeFilename += ".sh"
 
-// Current working directory:
-//console.log(process.cwd());
-//process.argv.forEach(function (val, index, array) {
-//  console.log(index + ': ' + val);
-//});
+var fullExePath = prospDir + "/" + exeFilename;
+console.log("Executing: " + fullExePath);
+
+spawn(fullExePath, [], { stdio: 'inherit'  });
 
 // Actual directory of the script (__dirname) and full path to the filename of
 // the script (__filename).
