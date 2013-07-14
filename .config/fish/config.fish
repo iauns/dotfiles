@@ -51,6 +51,10 @@ function q
   exit
 end
 
+function p
+  pro $argv
+end
+
 function vi
   vim $argv
 end

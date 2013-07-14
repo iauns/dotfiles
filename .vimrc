@@ -855,7 +855,7 @@ function! JH_JumpToOnlineManual()
   elseif &filetype == 'cpp'
     execute "Utl ol http://en.cppreference.com/mwiki/index.php\\\\?title=Special%3ASearch\\\\&search=".expand("<cword>")
   elseif &filetype == 'javascript'
-    execute "Utl ol https://www.google.com/search?q=site%3Anodemanual.org%2F%20".expand("<cword>")
+    execute "Utl ol https://www.google.com/search?q=site%3Anodejs.org/api%2F%20".expand("<cword>")
   endif
   execute "redraw!"
 endfunc

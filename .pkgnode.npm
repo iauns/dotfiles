@@ -15,3 +15,4 @@ npm install hyperglue
 npm install deck
 npm install through
 npm install inherits
+npm install optimist
