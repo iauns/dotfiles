@@ -198,6 +198,7 @@ Bundle 'dhruvasagar/vim-table-mode'
 Bundle 'tpope/vim-unimpaired.git'
 " Easy motion (moved to Bundle from VAM). Using alternative which uses two chars.
 Bundle 'iauns/vim-easymotion.git'
+Bundle 'iauns/vim-subbed'
 "Bundle 'svermeulen/vim-easymotion'
 Bundle 'tpope/vim-repeat.git'
 Bundle 'tpope/vim-speeddating.git'
@@ -218,7 +219,6 @@ Bundle 'mattn/zencoding-vim.git'
 Bundle 'Raimondi/delimitMate'
 Bundle 'tikhomirov/vim-glsl'
 Bundle 'mhinz/vim-signify'
-Bundle 'iauns/vim-subbed'
 " Haskell dev plugins (for syntastic and definition of types)
 Bundle 'bitc/vim-hdevtools'
 " Perform ack from within vim! Look into replacing with unit's proc grep.
@@ -940,6 +940,10 @@ let g:signify_sign_overwrite = 0
 
 let g:signify_cursorhold_normal = 0
 let g:signify_cursorhold_insert = 0
+
+highlight SignifySignAdd cterm=bold ctermbg=237 ctermfg=119
+highlight SignifySignDelete cterm=bold ctermbg=237 ctermfg=167
+highlight SignifySignChange cterm=bold ctermbg=237 ctermfg=227
 
 " ---------------- EasyMotion ------------------
 let g:EasyMotion_leader_key='<space>'
