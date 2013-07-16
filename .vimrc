@@ -788,7 +788,7 @@ noremap <leader>sh z=
 " ---------------- Tabularize ------------------
 " Align on commas, leaving the commas in-place
 noremap <leader>a= :Tabularize /=<CR>
-noremap <leader>a, :Tabularize /,\zs<CR>
+noremap <leader>a, :Tabularize /,\zs/l1<CR>
 noremap <leader>a: :Tabularize /:\zs<CR>
 
 " ---------------- CTRL-P keys ------------------
