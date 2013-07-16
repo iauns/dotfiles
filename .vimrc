@@ -219,6 +219,8 @@ Bundle 'mattn/zencoding-vim.git'
 Bundle 'Raimondi/delimitMate'
 Bundle 'tikhomirov/vim-glsl'
 Bundle 'mhinz/vim-signify'
+Bundle 'vim-scripts/Tab-Name'
+Bundle 'oinksoft/tcd.vim'
 " Haskell dev plugins (for syntastic and definition of types)
 Bundle 'bitc/vim-hdevtools'
 " Perform ack from within vim! Look into replacing with unit's proc grep.
@@ -708,7 +710,7 @@ nnoremap ! m
 
 " ---------------- Text transformations ------------------
 " Convert inner word to upper case.
-nnoremap <leader>tu viwU
+nnoremap <leader>tu g~iw
 
 " Swap two characters
 nnoremap <leader>tw "zylx"zp
@@ -777,11 +779,17 @@ noremap <leader>rv :source ${HOME}/.vimrc<CR>
 noremap <expr> <leader>ra JH_ArchiveExecuteCountOrMotion()
 
 " ---------------- Spell checking ------------------
-noremap <leader>ss :setlocal spell!<cr>
+noremap <leader>ss :setlocal spell!<CR>
 noremap <leader>sn ]s
 noremap <leader>sp [s
 noremap <leader>sa zg
 noremap <leader>sh z=
+
+" ---------------- Tabularize ------------------
+" Align on commas, leaving the commas in-place
+noremap <leader>a= :Tabularize /=<CR>
+noremap <leader>a, :Tabularize /,\zs<CR>
+noremap <leader>a: :Tabularize /:\zs<CR>
 
 " ---------------- CTRL-P keys ------------------
 "nnoremap <leader>- :CtrlPBufTag<CR>
@@ -826,9 +834,6 @@ nnoremap <silent> <leader>oc :CTSHere<CR>
 
 " ---------------- SkyBison keys ------------------
 nnoremap <leader>b :<c-u>call SkyBison("")<cr>
-
-" ---------------- CommandT keys ------------------
-"nnoremap <silent> <leader>t :CommandT<CR>
 
 " ---------------- LLDB keys ------------------
 nnoremap <silent> <space>ns :Lstep<CR>
