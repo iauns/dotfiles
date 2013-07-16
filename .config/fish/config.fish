@@ -99,6 +99,10 @@ function l
 end
 
 function mux
+  tmuxifier $argv
+end
+
+function muxs
   tmuxifier load-session $argv
 end
 
