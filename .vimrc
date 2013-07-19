@@ -1163,7 +1163,7 @@ endif
 
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#custom#source('file,file_rec', 'sorters', 'sorter_rank')
-call unite#custom#source('file,file/new,buffer,file_rec,file_rec/async,file_mru',
+call unite#custom#source('file,file/new,buffer,file_rec,file_rec/async,file_mru,outline',
       \ 'matchers', 'matcher_fuzzy')
 
 " Set up some custom ignores
