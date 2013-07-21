@@ -224,14 +224,13 @@ if [ "$use_private_repo" == "true" ]; then
     info "Running private bootstrap"
     pushd $DOTFILES_ROOT/private > /dev/null
       $DOTFILES_ROOT/private/bootstrap
-    popd /dev/null
+    popd > /dev/null
   else
     echo "Unable to find git, please install it before attempting to pull private repos."
   fi
 else
   info "Skipping private repo."
 fi
-
 
 if [ "$(uname -s)" == "Darwin" ]
 then
@@ -249,6 +248,16 @@ then
   echo " Remember:"
   echo "  Execute ~/.osx to setup OS X settings (and optionally install packages)."
 fi
+
+echo 'Custom settings'
+# Assume there have been no changes to the following files (mostly settings files).
+git update-index --assume-unchanged $DOTFILES_ROOT/Library/Preferences/com.googlecode.iterm2.plist
+
+# To remove a file from the unchanged list, do:
+#git update-index --no-assume-unchanged <file>
+
+# To list all files that have this modification
+#git ls-files -v|grep '^h'
 
 echo ''
 echo '  All installed!'
