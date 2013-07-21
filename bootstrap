@@ -166,7 +166,7 @@ if ! grep "private_repo" ${HOME}/.ssh/config > /dev/null ; then
   read -n 1
   echo ''
   if [[ $REPLY =~ ^[Yy]$ ]]; then
-    user "Enter repository URI:"
+    user "Enter repository URI (*just* the domain name - repo path added automatically):"
     read RepoLocation
     user "Enter repository username:"
     read RepoUsername
