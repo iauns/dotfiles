@@ -212,14 +212,19 @@ if [ "$use_private_repo" == "true" ]; then
       git clone private_repo:~/repo/dotFilesPrivate.git ~/dotfiles/private
     else
       pushd $privateRepoLoc > /dev/null
-      git pull origin master
+        git pull origin master
       popd > /dev/null
     fi
 
     info "Linking private files."
     pushd $DOTFILES_ROOT/private > /dev/null
-    install_dotfiles "link" ${HOME}
+      install_dotfiles "link" ${HOME}
     popd > /dev/null
+
+    info "Running private bootstrap"
+    pushd $DOTFILES_ROOT/private > /dev/null
+      $DOTFILES_ROOT/private/bootstrap
+    popd /dev/null
   else
     echo "Unable to find git, please install it before attempting to pull private repos."
   fi
