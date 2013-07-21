@@ -3,7 +3,7 @@ cd "$(dirname "$0")"
 source .shutils
 
 # Test to see if brew is installed. If not, grab it.
-command -v brew > /dev/null 2>&1 || { /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)" ; }
+command -v brew > /dev/null 2>&1 || { /usr/bin/ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)" ; }
 
 ###############################################################################
 # Upgrading packages and brew                                                 #

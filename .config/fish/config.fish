@@ -99,11 +99,11 @@ function l
 end
 
 function mux
-  tmuxifier $argv
+  tmuxifier load-session $argv
 end
 
 function muxs
-  tmuxifier load-session $argv
+  tmuxifier $argv
 end
 
 # Fish prompt that includes git.
