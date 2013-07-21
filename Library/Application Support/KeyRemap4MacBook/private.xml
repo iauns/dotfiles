@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<root>
+<item>
+    <name>Command-T to Enter</name>
+    <appendix>My widely used Command-T to enter key.</appendix>
+    <appendix>Be advised! When changing mappings in private.xml, the keybindings are BEFORE dvorak.</appendix>
+    <appendix>So, in order to specify Command-T, I had to use Command-K.</appendix>
+
+    <identifier>jhughes.command_t_to_enter</identifier>
+
+    <autogen>__KeyToKey__ KeyCode::K, ModifierFlag::COMMAND_L, KeyCode::RETURN</autogen>
+</item>
+<item>
+    <name>Command_R to Control_L</name>
+    <appendix>Changes right command to left control.</appendix>
+
+    <identifier>jhughes.command_r_to_control_l</identifier>
+
+    <autogen>KeyCode::COMMAND_R, KeyCode::CONTROL_L</autogen>
+</item>
+</root>
