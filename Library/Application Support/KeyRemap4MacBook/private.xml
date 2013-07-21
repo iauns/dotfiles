@@ -16,6 +16,6 @@
 
     <identifier>jhughes.command_r_to_control_l</identifier>
 
-    <autogen>KeyCode::COMMAND_R, KeyCode::CONTROL_L</autogen>
+    <autogen>__KeyToKey__ KeyCode::COMMAND_R, KeyCode::CONTROL_L</autogen>
 </item>
 </root>
