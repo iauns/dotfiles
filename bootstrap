@@ -65,7 +65,6 @@ install_dotfiles () {
     # Check to see if we should ignore the directory.
     array_skip=false
     base_dir=$(dirname "$source")
-    echo $base_dir
     for i in "${ignore[@]}"
     do
       # Check exact filename match.
@@ -99,7 +98,7 @@ install_dotfiles () {
       continue
     fi
 
-    $command_prefix mkdir -p $target_dir/$base_dir
+    $command_prefix mkdir -p "$target_dir/$base_dir"
 
     # Strip off the './'
     sourceMinusDot="${source:2}"
