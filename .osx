@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-cd "$(dirname "$0")"
+#cd "$(dirname "$0")"
+# Make sure we are in the home directory before executing this script.
+cd $HOME
 source .shutils
 
 # ~/.osx — http://mths.be/osx
