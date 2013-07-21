@@ -14,6 +14,9 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 info "Updating general system settings."
 
+# NOTE: To identify these default settings, run strings against an application 
+# of interest, or goto secrets.blacktree.com.
+
 ###############################################################################
 # General CLI                                                                 #
 ###############################################################################
@@ -79,6 +82,7 @@ systemsetup -setrestartfreeze on
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write -g com.apple.trackpad.scaling -float 5.0
 
 # Disable “natural” (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false

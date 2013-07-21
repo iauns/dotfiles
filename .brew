@@ -102,6 +102,8 @@ function installcask() {
 }
 
 installcask iterm2
+installcask keyremap4macbook
+installcask pc-keyboardhack
 
 ###############################################################################
 # Cleanup                                                                     #

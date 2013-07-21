@@ -15,7 +15,7 @@ ignore=( "./root" "./.git" "./.gitignore" "./bootstrap" "./unused"
          "./private" "./README.md" "./nolink" )
 
 link_files () {
-  $3 ln -s $1 $2
+  $3 ln -s "$1" "$2"
   success "linked $1 to $2"
 }
 
@@ -42,11 +42,30 @@ install_dotfiles () {
   skip_all=false
 
   current_dir=$(pwd)
-  for source in `find $DOTFILES_ROOT_REL -type f`
+  #for source in `find $DOTFILES_ROOT_REL -type f`
+  #for source in `find . -type f -print0 | xargs -0 echo`
+  # The complication below exists so that we can handle spaces in the output of
+  # find...
+
+  # Save and change IFS (we have spaces in the directory names)
+  OLDIFS=$IFS
+  IFS=$'\n'
+
+  # Read all directories into an array.
+  fileArray=($(find $DOTFILES_ROOT_REL -type f))
+
+  # Restore IFS
+  IFS=$OLDIFS
+
+  # get length of array
+  tLen=${#fileArray[@]}
+
+  for source in "${fileArray[@]}"
   do
     # Check to see if we should ignore the directory.
     array_skip=false
     base_dir=$(dirname "$source")
+    echo $base_dir
     for i in "${ignore[@]}"
     do
       # Check exact filename match.
@@ -83,15 +102,15 @@ install_dotfiles () {
     $command_prefix mkdir -p $target_dir/$base_dir
 
     # Strip off the './'
-    sourceMinusDot=${source:2}
+    sourceMinusDot="${source:2}"
     if [ "$target_dir" == "/" ]; then
       dest="/$sourceMinusDot"
     else
       dest="$target_dir/$sourceMinusDot"
     fi
-    source=$current_dir/$sourceMinusDot
+    source="$current_dir/$sourceMinusDot"
 
-    if [ -f $dest ] || [ -d $dest ]
+    if [ -f "$dest" ] || [ -d "$dest" ]
     then
 
       overwrite=false
@@ -123,22 +142,22 @@ install_dotfiles () {
 
       if [ "$overwrite" == "true" ] || [ "$overwrite_all" == "true" ]
       then
-        $command_prefix rm -rf $dest
+        $command_prefix rm "$dest"
         success "removed $dest"
       fi
 
       if [ "$backup" == "true" ] || [ "$backup_all" == "true" ]
       then
-        $command_prefix mv $dest $dest\.backup
+        $command_prefix mv "$dest" "$dest\.backup"
         success "moved $dest to $dest.backup"
       fi
 
       if [ "$skip" == "false" ] && [ "$skip_all" == "false" ]
       then
         if [ "$copy_dot_files" == "true" ]; then
-          copy_files $source $dest $command_prefix
+          copy_files "$source" "$dest" "$command_prefix"
         else
-          link_files $source $dest $command_prefix
+          link_files "$source" "$dest" "$command_prefix"
         fi
       else
         success "skipped $source"
@@ -146,9 +165,9 @@ install_dotfiles () {
 
     else
       if [ "$copy_dot_files" == "true" ]; then
-        copy_files $source $dest $command_prefix
+        copy_files "$source" "$dest" "$command_prefix"
       else
-        link_files $source $dest $command_prefix
+        link_files "$source" "$dest" "$command_prefix"
       fi
     fi
 
