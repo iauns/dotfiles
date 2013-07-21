@@ -170,6 +170,8 @@ if ! grep "private_repo" ${HOME}/.ssh/config > /dev/null ; then
     read RepoLocation
     user "Enter repository username:"
     read RepoUsername
+    
+    mkdir ${HOME}/.ssh
     if [ ! -f ${HOME}/.ssh/config ]; then
       echo "Host private_repo" > ${HOME}/.ssh/config
     else
