@@ -1027,11 +1027,8 @@ let g:CommandTMaxHeight=40
 let g:tagbar_autoclose=1
 let g:tagbar_autofocus=1
 
-" ----------------- Powerline ----------------
-let g:Powerline_symbols = 'fancy'
-
-" Change the default font to suite powerline
-set guifont=Menlo\ Regular\ for\ Powerline:h14
+"set guifont=Source\ Code\ Pro:h14
+set guifont=Menlo:h14
 " Another useful way of changing the font in macvim is :set gfn=*
 " This will open up a font dialog where you can choose your font.
 
