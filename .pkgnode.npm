@@ -6,13 +6,16 @@ npm -g install browserify
 npm -g install uglify-js
 npm -g install jshint
 npm -g install tern
+npm -g install glog
 
 # Useful node modules.
 npm install brfs
 npm install single-page
 npm install hyperquest
 npm install hyperglue
+npm install hyperspace
 npm install deck
 npm install through
 npm install inherits
 npm install optimist
+npm install querystring
