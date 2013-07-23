@@ -1185,12 +1185,11 @@ nmap <leader>u [unite]
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files buffer file_mru bookmark file_rec/async:!<CR>
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 "nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
+" Remember, order matters!
+nnoremap <silent> <C-p> :<C-u>Unite -buffer-name=files file_rec/async file_mru<CR>
 " The exclamation after file_rec/async implies that vim should search for the
 " nearest directory containing a '.git', '.hg', etc... see
 " unite-source-file_rec.
-" Remember, order matters!
-nnoremap <silent> <C-p> :<C-u>Unite -buffer-name=files file_rec/async:! file_mru<CR>
-"nnoremap <silent> <C-P> :<C-u>Unite -buffer-name=files file_mru file_rec/async:!<CR>
 nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=files file_mru file_rec/async:!<CR>
 
 " Search current working directory
