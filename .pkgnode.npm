@@ -7,6 +7,7 @@ npm -g install uglify-js
 npm -g install jshint
 npm -g install tern
 npm -g install glog
+npm -g install marked
 
 # Useful node modules.
 npm install brfs
@@ -19,3 +20,6 @@ npm install through
 npm install inherits
 npm install optimist
 npm install querystring
+npm install git-file
+npm install marked
+npm install concat-stream
