@@ -23,3 +23,4 @@ npm install querystring
 npm install git-file
 npm install marked
 npm install concat-stream
+npm install ordered-emitter
