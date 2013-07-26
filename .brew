@@ -54,6 +54,7 @@ brew install moreutils    # For sponge
 brew install iftop        # Monitor data usage over an interface.
 brew install ranger       # Awesome file manager.
 brew install htop
+brew install pidof        # Grab pid of process
 
 # Task / time management
 brew install task
