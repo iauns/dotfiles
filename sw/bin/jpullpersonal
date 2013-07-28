@@ -19,6 +19,7 @@ function UpdateRemotes
 echo ""
 
 UpdateRemotes ~/me "me"
+UpadteRemotes ~/me/web/blog "blog"
 UpdateRemotes ~/dotfiles "dotfiles"
 UpdateRemotes ~/dotfiles/private "dotfiles-private"
 UpdateRemotes ~/media "media"
