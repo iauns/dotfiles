@@ -1170,7 +1170,8 @@ call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
       \ 'git5/.*/review/',
       \ 'google/obj/',
       \ 'bin/',
-      \ '3rdParty/'
+      \ '3rdParty/',
+      \ '*\.png'
       \ ], '\|'))
 
 " Map '-' to the prefix for Unite. Makes sense on dvorak keyboards (next to
