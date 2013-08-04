@@ -1,0 +1,21 @@
+#/bin/sh
+
+echo "Crunch bang setup."
+
+echo "Initializing vundle for vim."
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+
+echo "*** Video card installation ***"
+echo "For instructions on installing nvidia drivers, go here: "
+echo "http://crunchbang.org/forums/viewtopic.php?id=11900"
+
+echo "For instructions on apt-pinning, go here:"
+echo "(apt-pinning is for installing more recent packages,"
+echo " like a more recent git or vim)."
+echo "http://jaqque.sbih.org/kplug/apt-pinning.html"
+echo ""
+echo "The brief of pinning:"
+echo "1) Update /etc/apt/sources.list to include unstable and testing"
+echo "2) Update /etc/apt/preferences to give unstable and testing lower pin priority than stable"
+echo "3) apt-get update"
+echo "4) apt-get -t unstable install <package>"
