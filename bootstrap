@@ -189,7 +189,7 @@ if ! grep "private_repo" ${HOME}/.ssh/config > /dev/null ; then
     user "Enter repository username:"
     read RepoUsername
     
-    mkdir ${HOME}/.ssh
+    mkdir -p ${HOME}/.ssh
     if [ ! -f ${HOME}/.ssh/config ]; then
       echo "Host private_repo" > ${HOME}/.ssh/config
     else
@@ -206,7 +206,7 @@ fi
 if [ "$use_private_repo" == "true" ]; then
   # Clone small private dotfiles repo (mostly for mutt and ssh config).
   info "Updating private repo."
-  if Command -v git > /dev/null; then
+  if command -v git > /dev/null; then
     privateRepoLoc=$DOTFILES_ROOT/private
     if [ ! -d $privateRepoLoc ]; then
       git clone private_repo:~/repo/dotFilesPrivate.git ~/dotfiles/private
