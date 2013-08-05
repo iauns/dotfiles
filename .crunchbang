@@ -9,6 +9,12 @@ sudo apt-get -t unstable install vim-nox
 echo "Installing latest version of git."
 sudo apt-get -t unstable install git
 
+echo "Installing tmux"
+sudo apt-get -t unstable install tmux
+
+echo "Installing fish shell. Remember to use chsh."
+sudo apt-get -t unstable install fish
+
 echo "Initializing vundle for vim."
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
