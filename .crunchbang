@@ -15,6 +15,9 @@ sudo apt-get -t unstable install tmux
 echo "Installing fish shell. Remember to use chsh."
 sudo apt-get -t unstable install fish
 
+echo "Installing various development tools."
+sudo apt-get -t unstable install cmake
+
 echo "Initializing vundle for vim."
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
