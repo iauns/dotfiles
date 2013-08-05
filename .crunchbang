@@ -18,6 +18,9 @@ sudo apt-get -t unstable install fish
 echo "Installing various development tools."
 sudo apt-get -t unstable install cmake
 
+echo "Installing ruby."
+sudo apt-get -t unstable install ruby
+
 echo "Initializing vundle for vim."
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 
