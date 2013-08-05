@@ -39,3 +39,8 @@ echo "2) Update /etc/apt/preferences to give unstable and testing lower pin prio
 echo "3) apt-get update"
 echo "4) apt-get -t unstable install <package>"
 
+echo ""
+echo "*** Brightness controls ***"
+echo "See: http://linuxon1001p.blogspot.com/2010/03/fixing-brightness-controls.html"
+echo "Edit /etc/default/grub and add acpi_osi=Linux acpi_backlight=vendor"
+echo "to the 'default' line."
