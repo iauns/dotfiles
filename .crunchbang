@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 echo "Crunch bang setup."
 
 # Install a version of vim with python support
