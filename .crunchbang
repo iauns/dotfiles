@@ -42,5 +42,13 @@ echo "4) apt-get -t unstable install <package>"
 echo ""
 echo "*** Brightness controls ***"
 echo "See: http://linuxon1001p.blogspot.com/2010/03/fixing-brightness-controls.html"
+echo "And: http://dustinmoorman.com/2012/07/11/solved-samsung-np-q430-ubuntu-12-04lts-backlight-operational/"
+echo "And: code.google.com/p/easy-slow-down-manager/issues/detail?id=11"
 echo "Edit /etc/default/grub and add acpi_osi=Linux acpi_backlight=vendor"
 echo "to the 'default' line."
+echo "Updating grub is vital."
+echo Then make sure Option "RegistryDwords" "EnableBrightnessControl=1"
+echo is set in xorg.conf.
+echo This xorg.conf option was the key! Make sure that is set.
+echo I do know that setting the linux parameters in grub changed the apci settings.
+echo This may be mandatory.
