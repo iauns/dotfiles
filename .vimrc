@@ -15,6 +15,8 @@
 " reattach-to-user-namespace wouldn't be called. 
 if has("mac") || has("macunix")"
   set shell=/bin/bash
+else
+  set shell=/bin/bash
 endif
 
 " gnome-terminal settings (doesn't advertise 256 color)
