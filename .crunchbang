@@ -2,8 +2,12 @@
 echo "Crunch bang setup."
 
 # Install a version of vim with python support
+# If you can't find unstable, read the section about apt-pinning below.
 echo "Installing latest version of vim."
 sudo apt-get -t unstable install vim-nox
+
+echo "Installing latest version of git."
+sudo apt-get -t unstable install git
 
 echo "Initializing vundle for vim."
 git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
