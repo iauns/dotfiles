@@ -663,8 +663,8 @@ vnoremap : ;
 " We use the <C-h,j,k,l> keys for tmux. Instead, in vim, I switch windows with
 " <space>h, <space>j, etc... These overwrite the bindings supplied by Also use
 " <space>s and <space>- for splitting the windows.
-nnoremap <silent> <space>s :vsplit<CR>
-nnoremap <silent> <space>- :split<CR>
+nnoremap <silent> <space>- :vsplit<CR>
+nnoremap <silent> <space>s :split<CR>
 
 " Exits visual mode and initiates a search within the last visual selection.
 vnoremap \ <Esc>/\%V
