@@ -17,9 +17,11 @@ AT_TIME=`head -1 /tmp/notifyBuffer.txt`
 TITLE=`sed -e '2!d' -e 's/Title\:\s*//g' /tmp/notifyBuffer.txt`
 # Sed code same as above, just modified for the task.
 TASK=`sed -e '3!d' -e 's/Task\:\s*//g' /tmp/notifyBuffer.txt`
-END_ACTION=`sed -e '4!d' -e 's/Final Action\:\s*//g' /tmp/notifyBuffer.txt`
+END_ACTION=`sed -e '4!d' -e 's/Final Action\: \s*//g' -e 's/\n/ /g' /tmp/notifyBuffer.txt`
 # Fifth line is the message.
 MESSAGE=`sed '5!d' /tmp/notifyBuffer.txt`
+
+echo \"$END_ACTION\"
 
 # Stop current timetrap task and checkin with the new task.
 t out
