@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Remove last jat command, if any.
+if [ -e "/tmp/lastJat" ]; then
+  at -r $(cat /tmp/lastJat)
+  rm /tmp/lastJat
+fi
+
+# Stop current timetrap task.
+t out
+

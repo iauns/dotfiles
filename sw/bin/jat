@@ -21,7 +21,11 @@ END_ACTION=`sed -e '4!d' -e 's/Final Action\: \s*//g' -e 's/\n/ /g' /tmp/notifyB
 # Fifth line is the message.
 MESSAGE=`sed '5!d' /tmp/notifyBuffer.txt`
 
-echo \"$END_ACTION\"
+# Remove last jat command, if any.
+if [ -e "/tmp/lastJat" ]; then
+  at -r $(cat /tmp/lastJat)
+  rm /tmp/lastJat
+fi
 
 # Stop current timetrap task and checkin with the new task.
 t out
@@ -32,4 +36,4 @@ t in $MESSAGE
 # notify and text).
 echo "jnotifyandtxt \"$TITLE\" \"$MESSAGE\" \"$END_ACTION\"" > /tmp/tmpBuff
 AT_COMMAND='at -f /tmp/tmpBuff -m "$AT_TIME"'
-sudo -u jhughes at -f /tmp/tmpBuff -m $AT_TIME
+sudo -u jhughes at -f /tmp/tmpBuff -m $AT_TIME 2>&1 | tail -1 | cut -f2 -d" " | sponge /tmp/lastJat
