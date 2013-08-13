@@ -56,6 +56,7 @@ brew install ranger       # Awesome file manager.
 brew install htop
 brew install pidof        # Grab pid of process
 
+
 # Task / time management
 brew install task
 brew install reminder

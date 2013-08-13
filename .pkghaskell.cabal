@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 source .shutils
 
+cabal update
+
 cabal install pandoc

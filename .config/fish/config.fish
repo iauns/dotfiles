@@ -10,7 +10,7 @@ set BROWSER open
 # The -x exports the variable.
 set -x PATH $HOME/.opam/system/bin $HOME/.cabal/bin /usr/local/sbin \
       /usr/local/bin /usr/local/share/npm/bin $HOME/sw/bin $HOME/.tmuxifier/bin \
-      /usr/local/opt/ruby/bin $PATH
+      /usr/local/opt/ruby/bin /Applications/git-annex.app/Contents/MacOS $PATH
 set -x EDITOR /usr/local/bin/vim
 set -x OCAML_TOPLEVEL_PATH $HOME/.opam/system/lib/toplevel
 set -x CAML_LD_LIBRARY_PATH $HOME/.opam/system/lib/stublibs \
