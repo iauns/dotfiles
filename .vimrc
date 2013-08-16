@@ -1175,7 +1175,8 @@ call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
       \ '3rdParty/',
       \ '.*\.png',
       \ 'node_modules/',
-      \ '\.gitignore'
+      \ '\.gitignore',
+      \ 'Externals/'
       \ ], '\|'))
 
 " Map '-' to the prefix for Unite. Makes sense on dvorak keyboards (next to
