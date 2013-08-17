@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 source .shutils
 
+# Utilities used from the command line.
 npm -g install instant-markdown-d
 npm -g install browserify
 npm -g install uglify-js
@@ -8,19 +9,10 @@ npm -g install jshint
 npm -g install tern
 npm -g install glog
 npm -g install marked
+npm -g install coffee-script
 
-# Useful node modules.
-npm install brfs
-npm install single-page
-npm install hyperquest
-npm install hyperglue
-npm install hyperspace
-npm install deck
-npm install through
-npm install inherits
-npm install optimist
-npm install querystring
-npm install git-file
-npm install marked
-npm install concat-stream
-npm install ordered-emitter
+# Non-global modules that aren't used on the command line should be installed by
+# the packages that use the modules. This is because the packages then select
+# the appropriate version of the modules to install. No more versioning BS that
+# we run into with all of the other package managers.
+

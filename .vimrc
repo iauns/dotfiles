@@ -232,7 +232,7 @@ Bundle 'mileszs/ack.vim.git'
 " https://github.com/joyent/node/wiki/Vim-Plugins
 "
 " Coffeescript support for vim. This is a more active fork of the original repo.
-Bundle "AndrewRadev/vim-coffee-script"
+Bundle "kchmck/vim-coffee-script"
 " Better syntax highlighting for javascript in VIM
 Bundle "jelera/vim-javascript-syntax"
 " Syntax highlighting for stylus (less verbose CSS language, much like
