@@ -534,6 +534,76 @@ function! JH_ArchiveExecuteCountOrMotion()
   endif
 endfunction
 
+function! JH_OpenContextTodo()
+  " Markers representing where we want to stop climbing for project directory.
+  let markers = ['.git', '.hg', '.svn', '.bzr', '_darcs']
+  let root = JH_findroot(getcwd(), markers, 0, 0)
+  echomsg root
+endfunc
+
+fu! JH_GlobPath(dirs, depth)
+	let entries = split(globpath(a:dirs, s:glob), "\n")
+	let [dnf, depth] = [JH_dirnfile(entries), a:depth + 1]
+	cal extend(g:ctrlp_allfiles, dnf[1])
+	if !empty(dnf[0]) && !s:maxf(len(g:ctrlp_allfiles)) && depth <= s:maxdepth
+		cal JH_GlobPath(join(map(dnf[0], 's:fnesc(v:val, "g", ",")'), ','), depth)
+	en
+endf
+
+fu! JH_dirnfile(entries)
+	let [items, cwd] = [[[], []], getcwd().'/']
+	for each in a:entries
+		let etype = getftype(each)
+		if s:igntype >= 0 && s:usrign(each, etype) | con | en
+		if etype == 'dir'
+			if s:showhidden | if each !~ '[\/]\.\{1,2}$'
+				cal add(items[0], each)
+			en | el
+				cal add(items[0], each)
+			en
+		elsei etype == 'link'
+			if s:folsym
+				let isfile = !isdirectory(each)
+				if s:folsym == 2 || !s:samerootsyml(each, isfile, cwd)
+					cal add(items[isfile], each)
+				en
+			en
+		elsei etype == 'file'
+			cal add(items[1], each)
+		en
+	endfo
+	retu items
+endf
+
+" Stolen from control-p.
+fu! JH_findroot(curr, mark, depth, type)
+	let [depth, fnd] = [a:depth + 1, 0]
+	if type(a:mark) == 1
+    " Mark is a string
+		let fnd = s:glbpath(s:fnesc(a:curr, 'g', ','), a:mark, 1) != ''
+  elseif type(a:mark) == 3
+    " Mark is a list
+		for markr in a:mark
+			if s:glbpath(s:fnesc(a:curr, 'g', ','), markr, 1) != ''
+				let fnd = 1
+				brea
+			en
+		endfo
+	en
+	if fnd
+		if !a:type | cal ctrlp#setdir(a:curr) | en
+		retu [exists('markr') ? markr : a:mark, a:curr]
+	elsei depth > s:maxdepth
+		cal ctrlp#setdir(s:cwd)
+	el
+		let parent = s:getparent(a:curr)
+		if parent != a:curr
+			retu s:findroot(parent, a:mark, depth, a:type)
+		en
+	en
+	retu []
+endf
+
 " ---------------- System Specific Keybindings ------------------
 " Bindings involving the command/windows key
 " These bindings do not affect the console.
@@ -735,6 +805,7 @@ noremap <silent> <leader>cb :Kwbd<CR>
 noremap <silent> <leader>oq :copen<CR>
 noremap <silent> <leader>oQ :cclose<CR>
 noremap <silent> <leader>ov :call JH_OpenVimRC()<CR>
+noremap <silent> <leader>x :call JH_OpenContextTodo()<CR>
 noremap <silent> <leader>ott :call JH_OpenTodolist()<CR>
 noremap <silent> <leader>otg :call JH_OpenGenTodoList()<CR>
 noremap <silent> <leader>otw :call JH_OpenSCITodoList()<CR>
