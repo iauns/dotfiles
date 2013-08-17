@@ -253,6 +253,7 @@ echo 'Custom settings'
 # Assume there have been no changes to the following files (mostly settings files).
 git update-index --assume-unchanged $DOTFILES_ROOT/Library/Preferences/com.googlecode.iterm2.plist
 git update-index --assume-unchanged $DOTFILES_ROOT/Library/Preferences/org.pqrs.KeyRemap4MacBook.plist
+git update-index --assume-unchanged $DOTFILES_ROOT/Library/Preferences/org.pqrs.PCKeyboardHack.plist
 
 # To remove a file from the unchanged list, do:
 #git update-index --no-assume-unchanged <file>
