@@ -28,5 +28,6 @@ UpdateRemotes ~/backups "backups"
 UpdateRemotes ~/art "art"
 
 echo "rsyncing ~/me/sync"
+echo ""
 ${HOME}/me/scripts/performSync
 

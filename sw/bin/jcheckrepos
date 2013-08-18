@@ -42,5 +42,6 @@ CheckDir ~/art "art"
 ${HOME}/me/scripts/checkrepos
 
 echo "rsyncing ~/me/sync"
+echo ""
 ${HOME}/me/scripts/performSync
 
