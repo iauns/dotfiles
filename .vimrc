@@ -363,130 +363,23 @@ function! LightDarkToggle()
   call JHBGSetup()
 endfunc
 
-" Look into how these will function with vim-pad.
-" It's likely we will just seach for a particular prefix.
-let g:JHProject='.'
-function! JH_OpenTodolist()
-  let targDir=$HOME.'/prosp/notes/'.g:JHProject
-  if !isdirectory(targDir)
-    call mkdir(targDir, "p")
-  endif
-  exe 'e '.targDir.'/todo'
-  " The following buffer variable ensures that ctrl-p will act as though
-  " it is still a part of the project, instead of trying to ctrl-p from
-  " the prosp directory.
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenGenTodoList()
-  exe 'e '.$HOME.'/prosp/notes/todo'
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenSCITodoList()
-  " This mkdir line is causing terminal vim to freak out when loading files.
-  let targDir=$HOME.'/prosp/notes/sci'
-  if !isdirectory(targDir)
-    call mkdir(targDir, "p")
-  endif
-  exe 'e '.targDir.'/todo'
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenIaunsTodoList()
-  let targDir=$HOME.'/prosp/notes/iauns'
-  if !isdirectory(targDir)
-    call mkdir(targDir, "p")
-  endif
-  exe 'e '.targDir.'/todo'
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenVimTipList()
-  let targDir=$HOME.'/prosp/notes/vim'
-  if !isdirectory(targDir)
-    call mkdir(targDir, "p")
-  endif
-  exe 'e '.targDir.'/tips'
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenPriorityList()
-  let targDir=$HOME.'/prosp'
-  if !isdirectory(targDir)
-    call mkdir(targDir, "p")
-  endif
-  exe 'e '.targDir.'/priorities'
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenDailyTodoList()
-  let templateFile=$HOME.'/prosp/notes/daily/template'
-  let targDir=$HOME.'/prosp/notes/daily/'.strftime("%Y/%m")
-  let targFile=targDir.'/'.strftime("%d")
-  if !isdirectory(targDir)
-    silent call mkdir(targDir, "p")
-  endif
-  " If the file does not exist populate it with the daily defaults.
-  " Use a unix command to do this
-  if !filereadable(targFile)
-    let readLines = readfile(templateFile)
-    call writefile(readLines, l:targFile)
-  endif
-  exe 'e '.targFile
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenWeeklyGoalList()
-  let templateFile=$HOME.'/prosp/notes/goals/weekly/template'
-  let targDir=$HOME.'/prosp/notes/goals/weekly/'.strftime("%Y")
-  let targFile=targDir.'/'.strftime("%V")
-  if !isdirectory(targDir)
-    silent call mkdir(targDir, "p")
-  endif
-  " If the file does not exist populate it with the daily defaults.
-  " Use a unix command to do this
-  if !filereadable(targFile)
-    let readLines = readfile(templateFile)
-    call writefile(readLines, l:targFile)
-  endif
-  exe 'e '.targFile
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenDailyPriorityList()
-  let templateFile=$HOME.'/prosp/priorities'
-  let targDir=$HOME.'/prosp/notes/daily/'.strftime("%Y/%m")
-  let targFile=targDir.'/'.strftime("%d-priorities")
-  if !isdirectory(targDir)
-    silent call mkdir(targDir, "p")
-  endif
-  " If the file does not exist populate it with the daily defaults.
-  " Use a unix command to do this
-  if !filereadable(targFile)
-    let readLines = readfile(templateFile)
-    call writefile(readLines, l:targFile)
-  endif
-  exe 'e '.targFile
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenDailySchedule()
-  let templateFile=$HOME.'/prosp/schedule'
-  let targDir=$HOME.'/prosp/notes/daily/'.strftime("%Y/%m")
-  let targFile=targDir.'/'.strftime("%d-schedule")
-  if !isdirectory(targDir)
-    silent call mkdir(targDir, "p")
-  endif
-  " If the file does not exist populate it with the daily defaults.
-  " Use a unix command to do this
-  if !filereadable(targFile)
-    let readLines = readfile(templateFile)
-    call writefile(readLines, l:targFile)
-  endif
-  exe 'e '.targFile
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
+" Function saved for future reference.
+"function! JH_OpenDailyTodoList()
+"  let templateFile=$HOME.'/me/self/daily/template'
+"  let targDir=$HOME.'/me/self/daily/'.strftime("%Y/%m")
+"  let targFile=targDir.'/'.strftime("%d")
+"  if !isdirectory(targDir)
+"    silent call mkdir(targDir, "p")
+"  endif
+"  " If the file does not exist populate it with the daily defaults.
+"  " Use a unix command to do this
+"  if !filereadable(targFile)
+"    let readLines = readfile(templateFile)
+"    call writefile(readLines, l:targFile)
+"  endif
+"  exe 'e '.targFile
+"  exe 'let b:ctrlp_working_path_mode="wr"'
+"endfunc
 
 function! JH_OpenVimRC()
   exe 'e '.$HOME.'/.vimrc'
@@ -592,9 +485,9 @@ endfunction
 function! s:OpenFileInProjectSpecificContext(file)
   let root = s:FindRootDirectory()
   if empty(root)
-    " Just use the current file's directory as root, even though there is no
+    " Just use the current file's directory as root if there is no
     " .git directory.
-    root = expand('%:p:h');
+    let root = expand('%:p:h')
   endif
 
   " Remove the trailing slash off the end if it exists
@@ -827,16 +720,6 @@ noremap <silent> <leader>oq :copen<CR>
 noremap <silent> <leader>oQ :cclose<CR>
 noremap <silent> <leader>ov :call JH_OpenVimRC()<CR>
 noremap <silent> <leader>x :call JH_OpenContextTodo()<CR>
-noremap <silent> <leader>ott :call JH_OpenTodolist()<CR>
-noremap <silent> <leader>otg :call JH_OpenGenTodoList()<CR>
-noremap <silent> <leader>otw :call JH_OpenSCITodoList()<CR>
-noremap <silent> <leader>oti :call JH_OpenIaunsTodoList()<CR>
-noremap <silent> <leader>otv :call JH_OpenVimTipList()<CR>
-noremap <silent> <leader>otdd :call JH_OpenDailyTodoList()<CR>
-noremap <silent> <leader>otdp :call JH_OpenDailyPriorityList()<CR>
-noremap <silent> <leader>otds :call JH_OpenDailySchedule()<CR>
-noremap <silent> <leader>otp :call JH_OpenPriorityList()<CR>
-noremap <silent> <leader>owg :call JH_OpenWeeklyGoalList()<CR>
 noremap <silent> <leader>ob :TagbarToggle<CR>
 noremap <silent> <leader>ou :GundoToggle<CR>
 noremap <silent> <leader>ol :lopen<cr>

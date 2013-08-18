@@ -62,9 +62,6 @@ prospDir += prospSubDir;
 if (argv.i) {
   console.log("Initializing prosp directory '" + prospDir + "'");
   mkdirp.sync(prospDir);
-
-  /// TODO: Populate the directory with basic tools and utilities.
-
   process.exit(0);
 }
 
