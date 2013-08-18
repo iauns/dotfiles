@@ -621,7 +621,7 @@ function! s:OpenFileInProjectSpecificContext(file)
 endfunction
 
 function! JH_OpenContextTodo()
-  call s:OpenFileInProjectSpecificContext('.prospdocs/todo')
+  call s:OpenFileInProjectSpecificContext('pdocs/todo')
 endfunc
 
 
