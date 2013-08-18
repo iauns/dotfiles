@@ -39,5 +39,5 @@ CheckDir ~/media "media"
 CheckDir ~/art "art"
 
 # Run checkrepos from me repository (which contains subrepos)
-${HOME}/me/checkrepos
+${HOME}/me/scripts/checkrepos
 
