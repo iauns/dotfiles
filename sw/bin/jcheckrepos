@@ -41,3 +41,6 @@ CheckDir ~/art "art"
 # Run checkrepos from me repository (which contains subrepos)
 ${HOME}/me/scripts/checkrepos
 
+echo "rsyncing ~/me/sync"
+${HOME}/me/scripts/performSync
+

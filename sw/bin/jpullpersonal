@@ -26,3 +26,7 @@ UpdateRemotes ~/media "media"
 UpdateRemotes ~/prosp "prosp"
 UpdateRemotes ~/backups "backups"
 UpdateRemotes ~/art "art"
+
+echo "rsyncing ~/me/sync"
+${HOME}/me/scripts/performSync
+
