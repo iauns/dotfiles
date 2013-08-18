@@ -592,18 +592,30 @@ endfunction
 function! s:OpenFileInProjectSpecificContext(file)
   let root = s:FindRootDirectory()
   if !empty(root)
-    " whack the trailing slash off the end if it exists
+    " Remove the trailing slash off the end if it exists
     let fullpath = substitute(root, '\(\\\|\/\)$', '', '')
 
-    " Get the name of the parent directory of root.
-    let parentDir = fnamemodify(fullpath, ":t")
+    " TODO: Add variable determining if we should use path to home directory
+    "       when determining prosp subdirectory.
 
-    let prospDir = g:prosp_directory . '/' . parentDir . '/' . fnamemodify(a:file, ":h:t")
-    call mkdir(prospDir, "p")
+    " Get the path from the parent root directory to the user's home
+    " directory.
+    " \V turns on very nomagic mode. Only special regex characters accepted
+    " must be escaped with \
+    let searchExpr = '\V'.escape($HOME.'', '\')
+    let homeToRoot = substitute(root, searchExpr, '', '')
 
-    " Find and open todo in alternate directory. Or create one if it does
-    " not exist.
-    exe 'e ' . g:prosp_directory . '/' . parentDir . '/' . a:file
+    " Create the appropriate subdirectory within prosp
+    let prospDir = g:prosp_directory . homeToRoot . '/' . fnamemodify(a:file, ":h:t")
+    silent! call mkdir(prospDir, "p")
+    echo prospDir
+
+    " Open target file.
+    exe 'e ' . g:prosp_directory . homeToRoot . '/' . a:file
+
+    "" To get the name of *just* the parent directory of root, do the
+    "" following:
+    "let parentDir = fnamemodify(fullpath, ":t")
   else
     echomsg "No root project directory found."
   endif

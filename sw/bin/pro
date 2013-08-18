@@ -4,10 +4,24 @@ var path = require('path');
 var spawn = require('child_process').spawn;
 var exec = require('child_process').exec;
 var execFile = require('child_process').execFile;
-var argv = require('optimist')
+var optimist = require('optimist')
+    .usage('Helps manage build scripts in a project specific (~/prosp) directory.\nTo use, run commands like "p b v"; running this command would execute the b_v.sh command in the prosp directory.\n\nUsage: $0')
     .boolean('e')
+    .alias('e','edit')
+    .describe('e', 'Edit the script instead of execute it.')
     .boolean('l')
-    .argv;
+    .alias('l', 'list')
+    .describe('l', 'List all possible executable scripts and their descriptions.')
+    .alias('h', 'help')
+    .describe('h', 'Display this help.');
+
+var argv = optimist.argv;
+
+// Check to see if user wants to display the help.
+if (argv.h) {
+  optimist.showHelp();
+  process.exit(1);
+}
 
 // Determine base prosp directory.
 var home = process.env.HOME;
