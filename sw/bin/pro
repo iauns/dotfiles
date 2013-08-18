@@ -103,8 +103,7 @@ if (fs.existsSync(fullExePath) == false)
 // Check to see if the user wants to edit the file.
 if (argv.e) {
   child = spawn("vim", [fullExePath], { stdio: 'inherit'  });
-}
-else {
+} else {
   spawn(fullExePath, [], { stdio: 'inherit'  });
 }
 

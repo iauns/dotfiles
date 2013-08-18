@@ -534,75 +534,87 @@ function! JH_ArchiveExecuteCountOrMotion()
   endif
 endfunction
 
+" Project specific directory.
+let g:prosp_directory = $HOME.'/prosp'
+
+" Utility {{{
+function! s:IsVirtualFileSystem()
+  return match(expand('%:p'), '^\w\+://.*') != -1
+endfunction
+
+function! s:IsNormalFile()
+  return empty(&buftype)
+endfunction
+
+function! s:ChangeDirectory(directory)
+  let cmd = g:rooter_use_lcd == 1 ? 'lcd' : 'cd'
+  execute ':' . cmd . ' ' . fnameescape(a:directory)
+endfunction
+
+function! s:IsDirectory(pattern)
+  return stridx(a:pattern, '/') != -1
+endfunction
+" }}}
+
+" Taken from: https://github.com/airblade/vim-rooter
+" Great example of finding a parent directory containing a SCM dir.
+function! s:FindInCurrentPath(pattern)
+  let dir_current_file = fnameescape(expand('%:p:h'))
+
+  if s:IsDirectory(a:pattern)
+    let match = finddir(a:pattern, dir_current_file . ';')
+    if empty(match)
+      return ''
+    endif
+    return fnamemodify(match, ':p:h:h')
+  else
+    let match = findfile(a:pattern, dir_current_file . ';')
+    if empty(match)
+      return ''
+    endif
+    return fnamemodify(match, ':p:h')
+  endif
+endfunction
+
+" Returns the root directory for the current file based on the list of
+" known SCM directory names.
+function! s:FindRootDirectory()
+  let rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/']
+  for pattern in rooter_patterns
+    let result = s:FindInCurrentPath(pattern)
+    if !empty(result)
+      return result
+    endif
+  endfor
+  return ''
+endfunction
+
+function! s:OpenFileInProjectSpecificContext(file)
+  let root = s:FindRootDirectory()
+  if !empty(root)
+    " whack the trailing slash off the end if it exists
+    let fullpath = substitute(root, '\(\\\|\/\)$', '', '')
+
+    " Get the name of the parent directory of root.
+    let parentDir = fnamemodify(fullpath, ":t")
+
+    let prospDir = g:prosp_directory . '/' . parentDir . '/' . fnamemodify(a:file, ":h:t")
+    silent! call mkdir(prospDir, "d")
+
+    echomsg parentDir
+
+    " Find and open todo in alternate directory. Or create one if it does
+    " not exist.
+    exe 'e ' . g:prosp_directory . '/' . parentDir . '/' . a:file
+  else
+    echomsg "No root project directory found."
+  endif
+endfunction
+
 function! JH_OpenContextTodo()
-  " Markers representing where we want to stop climbing for project directory.
-  let markers = ['.git', '.hg', '.svn', '.bzr', '_darcs']
-  let root = JH_findroot(getcwd(), markers, 0, 0)
-  echomsg root
+  call s:OpenFileInProjectSpecificContext('docs/todo')
 endfunc
 
-fu! JH_GlobPath(dirs, depth)
-	let entries = split(globpath(a:dirs, s:glob), "\n")
-	let [dnf, depth] = [JH_dirnfile(entries), a:depth + 1]
-	cal extend(g:ctrlp_allfiles, dnf[1])
-	if !empty(dnf[0]) && !s:maxf(len(g:ctrlp_allfiles)) && depth <= s:maxdepth
-		cal JH_GlobPath(join(map(dnf[0], 's:fnesc(v:val, "g", ",")'), ','), depth)
-	en
-endf
-
-fu! JH_dirnfile(entries)
-	let [items, cwd] = [[[], []], getcwd().'/']
-	for each in a:entries
-		let etype = getftype(each)
-		if s:igntype >= 0 && s:usrign(each, etype) | con | en
-		if etype == 'dir'
-			if s:showhidden | if each !~ '[\/]\.\{1,2}$'
-				cal add(items[0], each)
-			en | el
-				cal add(items[0], each)
-			en
-		elsei etype == 'link'
-			if s:folsym
-				let isfile = !isdirectory(each)
-				if s:folsym == 2 || !s:samerootsyml(each, isfile, cwd)
-					cal add(items[isfile], each)
-				en
-			en
-		elsei etype == 'file'
-			cal add(items[1], each)
-		en
-	endfo
-	retu items
-endf
-
-" Stolen from control-p.
-fu! JH_findroot(curr, mark, depth, type)
-	let [depth, fnd] = [a:depth + 1, 0]
-	if type(a:mark) == 1
-    " Mark is a string
-		let fnd = s:glbpath(s:fnesc(a:curr, 'g', ','), a:mark, 1) != ''
-  elseif type(a:mark) == 3
-    " Mark is a list
-		for markr in a:mark
-			if s:glbpath(s:fnesc(a:curr, 'g', ','), markr, 1) != ''
-				let fnd = 1
-				brea
-			en
-		endfo
-	en
-	if fnd
-		if !a:type | cal ctrlp#setdir(a:curr) | en
-		retu [exists('markr') ? markr : a:mark, a:curr]
-	elsei depth > s:maxdepth
-		cal ctrlp#setdir(s:cwd)
-	el
-		let parent = s:getparent(a:curr)
-		if parent != a:curr
-			retu s:findroot(parent, a:mark, depth, a:type)
-		en
-	en
-	retu []
-endf
 
 " ---------------- System Specific Keybindings ------------------
 " Bindings involving the command/windows key

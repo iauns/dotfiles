@@ -16,3 +16,7 @@ npm -g install coffee-script
 # the appropriate version of the modules to install. No more versioning BS that
 # we run into with all of the other package managers.
 
+# We do install the following packages due to commands that I haven't moved into
+# their own repositories. These packages mostly reside in my dotfiles repo.
+npm install optimist
+
