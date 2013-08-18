@@ -599,9 +599,7 @@ function! s:OpenFileInProjectSpecificContext(file)
     let parentDir = fnamemodify(fullpath, ":t")
 
     let prospDir = g:prosp_directory . '/' . parentDir . '/' . fnamemodify(a:file, ":h:t")
-    silent! call mkdir(prospDir, "d")
-
-    echomsg parentDir
+    call mkdir(prospDir, "p")
 
     " Find and open todo in alternate directory. Or create one if it does
     " not exist.
