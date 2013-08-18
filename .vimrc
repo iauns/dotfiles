@@ -591,38 +591,37 @@ endfunction
 
 function! s:OpenFileInProjectSpecificContext(file)
   let root = s:FindRootDirectory()
-  if !empty(root)
-    " Remove the trailing slash off the end if it exists
-    let fullpath = substitute(root, '\(\\\|\/\)$', '', '')
-
-    " TODO: Add variable determining if we should use path to home directory
-    "       when determining prosp subdirectory.
-
-    " Get the path from the parent root directory to the user's home
-    " directory.
-    " \V turns on very nomagic mode. Only special regex characters accepted
-    " must be escaped with \
-    let searchExpr = '\V'.escape($HOME.'', '\')
-    let homeToRoot = substitute(root, searchExpr, '', '')
-
-    " Create the appropriate subdirectory within prosp
-    let prospDir = g:prosp_directory . homeToRoot . '/' . fnamemodify(a:file, ":h:t")
-    silent! call mkdir(prospDir, "p")
-    echo prospDir
-
-    " Open target file.
-    exe 'e ' . g:prosp_directory . homeToRoot . '/' . a:file
-
-    "" To get the name of *just* the parent directory of root, do the
-    "" following:
-    "let parentDir = fnamemodify(fullpath, ":t")
-  else
-    echomsg "No root project directory found."
+  if empty(root)
+    " Just use the current file's directory as root, even though there is no
+    " .git directory.
+    root = expand('%:p:h');
   endif
+
+  " Remove the trailing slash off the end if it exists
+  let fullpath = substitute(root, '\(\\\|\/\)$', '', '')
+
+  " Get the path from the parent root directory to the user's home
+  " directory.
+  " \V turns on very nomagic mode. Only special regex characters accepted
+  " must be escaped with \
+  let searchExpr = '\V'.escape($HOME.'', '\')
+  let homeToRoot = substitute(root, searchExpr, '', '')
+
+  " Create the appropriate subdirectory within prosp
+  let prospDir = g:prosp_directory . homeToRoot . '/' . fnamemodify(a:file, ":h:t")
+  silent! call mkdir(prospDir, "p")
+  echo prospDir
+
+  " Open target file.
+  exe 'e ' . g:prosp_directory . homeToRoot . '/' . a:file
+
+  "" To get the name of *just* the parent directory of root, do the
+  "" following:
+  "let parentDir = fnamemodify(fullpath, ":t")
 endfunction
 
 function! JH_OpenContextTodo()
-  call s:OpenFileInProjectSpecificContext('docs/todo')
+  call s:OpenFileInProjectSpecificContext('.prospdocs/todo')
 endfunc
 
 

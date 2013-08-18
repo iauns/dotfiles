@@ -19,4 +19,5 @@ npm -g install coffee-script
 # We do install the following packages due to commands that I haven't moved into
 # their own repositories. These packages mostly reside in my dotfiles repo.
 npm install optimist
+npm install mkdirp
 

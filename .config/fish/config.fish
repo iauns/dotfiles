@@ -98,6 +98,11 @@ function l
   ls
 end
 
+# Letters getting dropped so much by iTerm that this is very useful binding.
+function s
+  ls
+end
+
 function mux
   tmuxifier load-session $argv
 end
