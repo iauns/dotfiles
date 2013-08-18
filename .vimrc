@@ -483,6 +483,10 @@ function! s:FindRootDirectory()
 endfunction
 
 function! s:OpenFileInProjectSpecificContext(file)
+  " Check to see if the file exists without navigating to root.
+  " This is plausible since we may want to have little 'havens' inside of
+  " a git repo.
+
   let root = s:FindRootDirectory()
   if empty(root)
     " Just use the current file's directory as root if there is no
