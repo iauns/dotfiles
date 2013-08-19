@@ -2,7 +2,7 @@
 formatter_search_paths: 
 - /Users/jhughes/.timetrap/formatters
 append_notes_delimiter: " "
-database_file: /Users/jhughes/prosp/timetrap.db
+database_file: /Users/jhughes/me/sync/timetrap.db
 default_command: 
 default_formatter: text
 round_in_seconds: 900

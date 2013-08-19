@@ -1,19 +1,35 @@
 #!/usr/bin/env node
-var fs = require('fs');
-var path = require('path');
-var spawn = require('child_process').spawn;
-var exec = require('child_process').exec;
+var fs       = require('fs');
+var path     = require('path');
+var spawn    = require('child_process').spawn;
+var exec     = require('child_process').exec;
 var execFile = require('child_process').execFile;
-var argv = require('optimist')
+var mkdirp   = require('mkdirp');
+var optimist = require('optimist')
+    .usage('Helps manage build scripts in a project specific (~/prosp) directory.\nFinds the nearest the parent directory containing a .git subdirectory (root),\nand uses the path from root to $HOME as a lookup in the prosp directory.\n\nExample: "p b v" - running this command would execute the b_v.sh command in the prosp directory.\n\nUsage: $0')
+    .boolean('i')
+    .alias('i', 'init')
+    .describe('i', 'Initialize current repository inside of prosp directory.')
     .boolean('e')
+    .alias('e','edit')
+    .describe('e', 'Edit a script instead of executing it.')
     .boolean('l')
-    .argv;
+    .alias('l', 'list')
+    .describe('l', 'List all possible executable scripts and their descriptions.')
+    .alias('h', 'help')
+    .describe('h', 'Display this help.');
 
-// Determine base prosp directory.
-var home = process.env.HOME;
-var prospDir = home + '/prosp';
+var argv = optimist.argv;
+
+// Check to see if user wants to display the help.
+if (argv.h) {
+  optimist.showHelp();
+  process.exit(1);
+}
 
 // Determine subdirectory in prosp (basename of nearest dir containing .git)
+var home = process.env.HOME;
+var prospDir = home + '/prosp';
 var curDir = path.resolve(process.cwd());
 var targetDir = '';
 while (curDir != '/') {
@@ -28,24 +44,37 @@ while (curDir != '/') {
   curDir = path.dirname(curDir);
 }
 
-// Exit with failure.
-if (targetDir.length === 0)
-{
-  console.error("Failed to find git directory.");
-  process.exit(1);
+// Warn the user if we didn't find a parent .git directory.
+if (targetDir.length === 0) {
+  //console.warn("Warning: Did not find parent directory with .git, using current directory.");
+  targetDir = path.resolve(process.cwd());
 }
 
-// Grab basename. This is what we will use as prosp's directory name.
-var prospSubDir = path.basename(targetDir);
-prospDir += "/" + prospSubDir;
+// Once we remove HOME from the directory, we end up with a forward slash at
+// the beginning of the string (prospSubDir in this case).
+var prospSubDir = targetDir.replace(process.env.HOME, '');
 
+// Grab basename. This is what we will use as prosp's directory name.
+//var prospSubDir = path.basename(targetDir);
+prospDir += prospSubDir;
+
+// Initialize prosp directory.
+if (argv.i) {
+  console.log("Initializing prosp directory '" + prospDir + "'");
+  mkdirp.sync(prospDir);
+  process.exit(0);
+}
+
+// Ensure directory exists before continuing.
 if (fs.existsSync(prospDir) === false) {
-  console.error("Could not find directory '" + prospDir + "'");
+  console.error("Error: Failed to find directory '" + prospDir + "'");
+  console.error("Try initializing prosp directory with 'pro -i'");
   process.exit(1);
 }
 
 // Check to see if the use wants to list all of the possible programs to execute.
 if (argv.l) {
+  console.log("Prosp directory: '" + prospDir + "'");
   // List all possible commands from the target directory.
   // Call each command to obtain their description.
   var files = fs.readdirSync(prospDir);
@@ -103,8 +132,7 @@ if (fs.existsSync(fullExePath) == false)
 // Check to see if the user wants to edit the file.
 if (argv.e) {
   child = spawn("vim", [fullExePath], { stdio: 'inherit'  });
-}
-else {
+} else {
   spawn(fullExePath, [], { stdio: 'inherit'  });
 }
 

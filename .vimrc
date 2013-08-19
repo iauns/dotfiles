@@ -234,7 +234,7 @@ Bundle 'vim-scripts/Parameter-Text-Objects.git'
 " https://github.com/joyent/node/wiki/Vim-Plugins
 "
 " Coffeescript support for vim. This is a more active fork of the original repo.
-Bundle "AndrewRadev/vim-coffee-script"
+Bundle "kchmck/vim-coffee-script"
 " Better syntax highlighting for javascript in VIM
 Bundle "jelera/vim-javascript-syntax"
 " Syntax highlighting for stylus (less verbose CSS language, much like
@@ -365,130 +365,23 @@ function! LightDarkToggle()
   call JHBGSetup()
 endfunc
 
-" Look into how these will function with vim-pad.
-" It's likely we will just seach for a particular prefix.
-let g:JHProject='.'
-function! JH_OpenTodolist()
-  let targDir=$HOME.'/prosp/notes/'.g:JHProject
-  if !isdirectory(targDir)
-    call mkdir(targDir, "p")
-  endif
-  exe 'e '.targDir.'/todo'
-  " The following buffer variable ensures that ctrl-p will act as though
-  " it is still a part of the project, instead of trying to ctrl-p from
-  " the prosp directory.
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenGenTodoList()
-  exe 'e '.$HOME.'/prosp/notes/todo'
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenSCITodoList()
-  " This mkdir line is causing terminal vim to freak out when loading files.
-  let targDir=$HOME.'/prosp/notes/sci'
-  if !isdirectory(targDir)
-    call mkdir(targDir, "p")
-  endif
-  exe 'e '.targDir.'/todo'
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenIaunsTodoList()
-  let targDir=$HOME.'/prosp/notes/iauns'
-  if !isdirectory(targDir)
-    call mkdir(targDir, "p")
-  endif
-  exe 'e '.targDir.'/todo'
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenVimTipList()
-  let targDir=$HOME.'/prosp/notes/vim'
-  if !isdirectory(targDir)
-    call mkdir(targDir, "p")
-  endif
-  exe 'e '.targDir.'/tips'
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenPriorityList()
-  let targDir=$HOME.'/prosp'
-  if !isdirectory(targDir)
-    call mkdir(targDir, "p")
-  endif
-  exe 'e '.targDir.'/priorities'
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenDailyTodoList()
-  let templateFile=$HOME.'/prosp/notes/daily/template'
-  let targDir=$HOME.'/prosp/notes/daily/'.strftime("%Y/%m")
-  let targFile=targDir.'/'.strftime("%d")
-  if !isdirectory(targDir)
-    silent call mkdir(targDir, "p")
-  endif
-  " If the file does not exist populate it with the daily defaults.
-  " Use a unix command to do this
-  if !filereadable(targFile)
-    let readLines = readfile(templateFile)
-    call writefile(readLines, l:targFile)
-  endif
-  exe 'e '.targFile
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenWeeklyGoalList()
-  let templateFile=$HOME.'/prosp/notes/goals/weekly/template'
-  let targDir=$HOME.'/prosp/notes/goals/weekly/'.strftime("%Y")
-  let targFile=targDir.'/'.strftime("%V")
-  if !isdirectory(targDir)
-    silent call mkdir(targDir, "p")
-  endif
-  " If the file does not exist populate it with the daily defaults.
-  " Use a unix command to do this
-  if !filereadable(targFile)
-    let readLines = readfile(templateFile)
-    call writefile(readLines, l:targFile)
-  endif
-  exe 'e '.targFile
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenDailyPriorityList()
-  let templateFile=$HOME.'/prosp/priorities'
-  let targDir=$HOME.'/prosp/notes/daily/'.strftime("%Y/%m")
-  let targFile=targDir.'/'.strftime("%d-priorities")
-  if !isdirectory(targDir)
-    silent call mkdir(targDir, "p")
-  endif
-  " If the file does not exist populate it with the daily defaults.
-  " Use a unix command to do this
-  if !filereadable(targFile)
-    let readLines = readfile(templateFile)
-    call writefile(readLines, l:targFile)
-  endif
-  exe 'e '.targFile
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
-
-function! JH_OpenDailySchedule()
-  let templateFile=$HOME.'/prosp/schedule'
-  let targDir=$HOME.'/prosp/notes/daily/'.strftime("%Y/%m")
-  let targFile=targDir.'/'.strftime("%d-schedule")
-  if !isdirectory(targDir)
-    silent call mkdir(targDir, "p")
-  endif
-  " If the file does not exist populate it with the daily defaults.
-  " Use a unix command to do this
-  if !filereadable(targFile)
-    let readLines = readfile(templateFile)
-    call writefile(readLines, l:targFile)
-  endif
-  exe 'e '.targFile
-  exe 'let b:ctrlp_working_path_mode="wr"'
-endfunc
+" Function saved for future reference.
+"function! JH_OpenDailyTodoList()
+"  let templateFile=$HOME.'/me/self/daily/template'
+"  let targDir=$HOME.'/me/self/daily/'.strftime("%Y/%m")
+"  let targFile=targDir.'/'.strftime("%d")
+"  if !isdirectory(targDir)
+"    silent call mkdir(targDir, "p")
+"  endif
+"  " If the file does not exist populate it with the daily defaults.
+"  " Use a unix command to do this
+"  if !filereadable(targFile)
+"    let readLines = readfile(templateFile)
+"    call writefile(readLines, l:targFile)
+"  endif
+"  exe 'e '.targFile
+"  exe 'let b:ctrlp_working_path_mode="wr"'
+"endfunc
 
 function! JH_OpenVimRC()
   exe 'e '.$HOME.'/.vimrc'
@@ -535,6 +428,101 @@ function! JH_ArchiveExecuteCountOrMotion()
     return 'g@g@'
   endif
 endfunction
+
+" Project specific directory.
+let g:prosp_directory = $HOME.'/prosp'
+
+" Utility {{{
+function! s:IsVirtualFileSystem()
+  return match(expand('%:p'), '^\w\+://.*') != -1
+endfunction
+
+function! s:IsNormalFile()
+  return empty(&buftype)
+endfunction
+
+function! s:ChangeDirectory(directory)
+  let cmd = g:rooter_use_lcd == 1 ? 'lcd' : 'cd'
+  execute ':' . cmd . ' ' . fnameescape(a:directory)
+endfunction
+
+function! s:IsDirectory(pattern)
+  return stridx(a:pattern, '/') != -1
+endfunction
+" }}}
+
+" Taken from: https://github.com/airblade/vim-rooter
+" Great example of finding a parent directory containing a SCM dir.
+function! s:FindInCurrentPath(pattern)
+  let dir_current_file = fnameescape(expand('%:p:h'))
+
+  if s:IsDirectory(a:pattern)
+    let match = finddir(a:pattern, dir_current_file . ';')
+    if empty(match)
+      return ''
+    endif
+    return fnamemodify(match, ':p:h:h')
+  else
+    let match = findfile(a:pattern, dir_current_file . ';')
+    if empty(match)
+      return ''
+    endif
+    return fnamemodify(match, ':p:h')
+  endif
+endfunction
+
+" Returns the root directory for the current file based on the list of
+" known SCM directory names.
+function! s:FindRootDirectory()
+  let rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/']
+  for pattern in rooter_patterns
+    let result = s:FindInCurrentPath(pattern)
+    if !empty(result)
+      return result
+    endif
+  endfor
+  return ''
+endfunction
+
+function! s:OpenFileInProjectSpecificContext(file)
+  " Check to see if the file exists without navigating to root.
+  " This is plausible since we may want to have little 'havens' inside of
+  " a git repo.
+
+  let root = s:FindRootDirectory()
+  if empty(root)
+    " Just use the current file's directory as root if there is no
+    " .git directory.
+    let root = expand('%:p:h')
+  endif
+
+  " Remove the trailing slash off the end if it exists
+  let fullpath = substitute(root, '\(\\\|\/\)$', '', '')
+
+  " Get the path from the parent root directory to the user's home
+  " directory.
+  " \V turns on very nomagic mode. Only special regex characters accepted
+  " must be escaped with \
+  let searchExpr = '\V'.escape($HOME.'', '\')
+  let homeToRoot = substitute(root, searchExpr, '', '')
+
+  " Create the appropriate subdirectory within prosp
+  let prospDir = g:prosp_directory . homeToRoot . '/' . fnamemodify(a:file, ":h:t")
+  silent! call mkdir(prospDir, "p")
+  echo prospDir
+
+  " Open target file.
+  exe 'e ' . g:prosp_directory . homeToRoot . '/' . a:file
+
+  "" To get the name of *just* the parent directory of root, do the
+  "" following:
+  "let parentDir = fnamemodify(fullpath, ":t")
+endfunction
+
+function! JH_OpenContextTodo()
+  call s:OpenFileInProjectSpecificContext('pdocs/todo')
+endfunc
+
 
 " ---------------- System Specific Keybindings ------------------
 " Bindings involving the command/windows key
@@ -737,16 +725,7 @@ noremap <silent> <leader>cb :Kwbd<CR>
 noremap <silent> <leader>oq :copen<CR>
 noremap <silent> <leader>oQ :cclose<CR>
 noremap <silent> <leader>ov :call JH_OpenVimRC()<CR>
-noremap <silent> <leader>ott :call JH_OpenTodolist()<CR>
-noremap <silent> <leader>otg :call JH_OpenGenTodoList()<CR>
-noremap <silent> <leader>otw :call JH_OpenSCITodoList()<CR>
-noremap <silent> <leader>oti :call JH_OpenIaunsTodoList()<CR>
-noremap <silent> <leader>otv :call JH_OpenVimTipList()<CR>
-noremap <silent> <leader>otdd :call JH_OpenDailyTodoList()<CR>
-noremap <silent> <leader>otdp :call JH_OpenDailyPriorityList()<CR>
-noremap <silent> <leader>otds :call JH_OpenDailySchedule()<CR>
-noremap <silent> <leader>otp :call JH_OpenPriorityList()<CR>
-noremap <silent> <leader>owg :call JH_OpenWeeklyGoalList()<CR>
+noremap <silent> <leader>x :call JH_OpenContextTodo()<CR>
 noremap <silent> <leader>ob :TagbarToggle<CR>
 noremap <silent> <leader>ou :GundoToggle<CR>
 noremap <silent> <leader>ol :lopen<cr>
@@ -1177,7 +1156,8 @@ call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
       \ '3rdParty/',
       \ '.*\.png',
       \ 'node_modules/',
-      \ '\.gitignore'
+      \ '\.gitignore',
+      \ 'Externals/'
       \ ], '\|'))
 
 " Map '-' to the prefix for Unite. Makes sense on dvorak keyboards (next to
