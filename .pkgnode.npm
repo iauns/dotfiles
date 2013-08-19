@@ -20,4 +20,5 @@ npm -g install coffee-script
 # their own repositories. These packages mostly reside in my dotfiles repo.
 npm install optimist
 npm install mkdirp
+npm install underscore
 
