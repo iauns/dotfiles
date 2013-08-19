@@ -227,6 +227,8 @@ Bundle 'oinksoft/tcd.vim'
 Bundle 'bitc/vim-hdevtools'
 " Perform ack from within vim! Look into replacing with unit's proc grep.
 Bundle 'mileszs/ack.vim.git'
+" Parameter / Argument text objects.
+Bundle 'vim-scripts/Parameter-Text-Objects.git'
 
 " I pulled most of the javascript plugins from:
 " https://github.com/joyent/node/wiki/Vim-Plugins
