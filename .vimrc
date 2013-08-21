@@ -244,6 +244,11 @@ Bundle "wavded/vim-stylus"
 " (omnicomplete)
 Bundle "marijnh/tern_for_vim"
 
+" Vim wiki. Replacing my personal wiki. While this isn't a semantic wiki,
+" there are better ways of tracking progress other than using a semantic wiki.
+" Additionally there were HTTPS concerns with the full-blown wiki approach.
+Bundle "vimwiki/vimwiki"
+
 " CtrlP was replaced by unite.
 "Bundle 'kien/ctrlp.vim.git'
 
@@ -1065,6 +1070,9 @@ let g:session_autosave = 'no'
 "let g:SeekKeys = '- _ 0 +'
 "let g:SeekKey = '-'
 "let g:SeekBackKey = '_'
+
+" ---------------- vim-wiki ------------------
+let g:vimwiki_list = [{'path': '~/me/wiki'}]
 
 " ----------------- Utl ----------------
 if has("win32")
