@@ -9,8 +9,8 @@ To install it's as simple as:
 source bootstrap
 ```
 
-Although I would just recommend frolicking around in my dotfiles and
-incorporating any humble snippets back into your own.
+Although I would just recommend rummaging around in my dotfiles and
+incorporating any snippets you find back into your own.
 
 After running bootstrap I generally run `./.osx` to install or update
 anything. The `.osx` script ends up calling `.brew` and all of the
