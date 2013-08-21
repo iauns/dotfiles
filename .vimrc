@@ -93,6 +93,8 @@ set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 set sessionoptions-=options  " Don't save options in sessions. 
 set noshowmatch           " Don't show matching brackets (%).
 
+set so=2                  " Lines of context at the bottom / top of document.
+
 " Note: Not sure this is necessary with the easy-clip plugin installed.
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard.
