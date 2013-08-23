@@ -702,8 +702,6 @@ nnoremap <leader>j      :m+<CR>==
 "inoremap <CR> <C-G>u<CR>
 silent! imap <CR> <C-g>u<Plug>delimitMateCR
 
-nnoremap <silent><leader>d "_d
-
 " Remap ! as mark (will replace m eventually -- when a worthy command is found)
 nnoremap ! m
 
@@ -994,7 +992,7 @@ let g:ycm_filetype_blacklist = {
 
 let g:ycm_min_num_of_chars_for_completion = 2
 
-nnoremap <leader>w :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <silent><leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " ----------------- UltiSnips ----------------
 so ~/.vim/UltiSnips/UltiSnipHelpers.vim
