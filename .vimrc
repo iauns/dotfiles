@@ -89,7 +89,7 @@ set pastetoggle=<F10>     " F10 to enter paste mode. Super useful if you are
                           " trying to paste into terminal vim.
 set linebreak             " Wraps at 'breakat' instead of in the middle.
 set shiftround
-set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set sessionoptions-=options  " Don't save options in sessions. 
 set noshowmatch           " Don't show matching brackets (%).
 
@@ -862,6 +862,9 @@ nnoremap <silent> <leader>oh :Utl<CR>:redraw!<CR>
 " <F1>: Help
 nmap <F1> [unite]h
 
+" ---------------- Vimwiki keys ------------------
+nnoremap <silent> <leader>wg :VimwikiGoto 
+
 " ---------------- Tmux pane integration ---------------
 " Maps <C-h/j/k/l> to switch vim splits in the given direction. If there are
 " no more windows in that direction, forwards the operation to tmux.
@@ -937,6 +940,10 @@ let g:signify_cursorhold_insert = 0
 highlight SignifySignAdd cterm=bold ctermbg=237 ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237 ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237 ctermfg=227
+
+" Must manually toggle signify (if you want navigation).
+" Toggle with :SignifyToggle (mapped to <leader>gt above)
+let g:signify_disable_by_default = 1
 
 " ---------------- EasyMotion ------------------
 let g:EasyMotion_leader_key='<space>'
@@ -1073,6 +1080,7 @@ let g:session_autosave = 'no'
 
 " ---------------- vim-wiki ------------------
 let g:vimwiki_list = [{'path': '~/me/wiki'}]
+let g:vimwiki_url_maxsave = 0
 
 " ----------------- Utl ----------------
 if has("win32")
