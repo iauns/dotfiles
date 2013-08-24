@@ -18,14 +18,18 @@ function UpdateRemotes
 
 echo ""
 
-UpdateRemotes ~/me "me"
-UpdateRemotes ~/me/web/blog "blog"
 UpdateRemotes ~/dotfiles "dotfiles"
 UpdateRemotes ~/dotfiles/private "dotfiles-private"
 UpdateRemotes ~/media "media"
 UpdateRemotes ~/prosp "prosp"
 UpdateRemotes ~/backups "backups"
 UpdateRemotes ~/art "art"
+UpdateRemotes ~/me "me"
+
+echo ""
+echo "Pulling ~/me remotes"
+echo ""
+${HOME}/me/scripts/pullpersonal
 
 echo "rsyncing ~/me/sync"
 echo ""
