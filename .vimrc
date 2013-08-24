@@ -863,7 +863,8 @@ nnoremap <silent> <leader>oh :Utl<CR>:redraw!<CR>
 nmap <F1> [unite]h
 
 " ---------------- Vimwiki keys ------------------
-nnoremap <silent> <leader>wg :VimwikiGoto 
+nnoremap <silent> <leader>wo :VimwikiGoto 
+nnoremap <silent> <leader>we :VimwikiSearch 
 
 " ---------------- Tmux pane integration ---------------
 " Maps <C-h/j/k/l> to switch vim splits in the given direction. If there are
@@ -1079,7 +1080,11 @@ let g:session_autosave = 'no'
 "let g:SeekBackKey = '_'
 
 " ---------------- vim-wiki ------------------
-let g:vimwiki_list = [{'path': '~/me/wiki'}]
+let g:vimwiki_list = [
+      \{'path':              '~/me/wiki/central',
+      \ 'template_path':     '~/me/wiki/templates',
+      \ 'template_default':  'default',
+      \ 'template_ext':      '.html'}]
 let g:vimwiki_url_maxsave = 0
 
 " ----------------- Utl ----------------
