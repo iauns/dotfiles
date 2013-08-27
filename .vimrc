@@ -251,6 +251,9 @@ Bundle "marijnh/tern_for_vim"
 " Additionally there were HTTPS concerns with the full-blown wiki approach.
 Bundle "vimwiki/vimwiki"
 
+" Alternative to powerline and airline.
+Bundle 'itchyny/lightline.vim'
+
 " CtrlP was replaced by unite.
 "Bundle 'kien/ctrlp.vim.git'
 
