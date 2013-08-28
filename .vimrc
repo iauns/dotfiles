@@ -677,7 +677,7 @@ nnoremap <C-W><C-W> :wincmd p<CR>
 "noremap <leader>m :make \| :redraw! \| :botright :cw<cr>
 
 " Color scheme extensions
-noremap <silent> <leader>ew :call LightDarkToggle()<CR>
+noremap <silent> <leader>ow :call LightDarkToggle()<CR>
 
 " Remap apostrophe to backtick
 nnoremap ' `
@@ -696,6 +696,8 @@ nnoremap gb :ls<CR>:b
 " move the current line up and down
 nnoremap <leader>k      :m-2<CR>==
 nnoremap <leader>j      :m+<CR>==
+
+nnoremap <silent><leader>d "_d
 
 " Set an undo break on every 'return' key press in insert mode.
 " Makes vim undo more granualar (well, per-line granularity)
@@ -1003,7 +1005,7 @@ let g:ycm_filetype_blacklist = {
 
 let g:ycm_min_num_of_chars_for_completion = 2
 
-nnoremap <silent><leader>d :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <silent><leader>e :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 " ----------------- UltiSnips ----------------
 so ~/.vim/UltiSnips/UltiSnipHelpers.vim
@@ -1197,7 +1199,7 @@ nmap <leader>u [unite]
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 "nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 " Remember, order matters!
-nnoremap <silent> <C-p> :<C-u>Unite -buffer-name=files file_rec/async file_mru<CR>
+nnoremap <silent> <C-p> :<C-u>Unite -buffer-name=files file_rec/async:! file_mru<CR>
 " The exclamation after file_rec/async implies that vim should search for the
 " nearest directory containing a '.git', '.hg', etc... see
 " unite-source-file_rec.
