@@ -880,7 +880,6 @@ if exists('$TMUX')
 
   let s:tmux_is_last_pane = 0
   au WinEnter * let s:tmux_is_last_pane = 0
-  "echomsg 'Binding.'
 
   " Like `wincmd` but also change tmux panes instead of vim windows when needed.
   function s:TmuxWinCmd(direction)
