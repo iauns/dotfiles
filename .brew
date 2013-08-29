@@ -57,6 +57,8 @@ brew install htop
 brew install pidof        # Grab pid of process
 brew install pv           # Pipe viewer! View progress of tar! Try:
                           # dd if=/dev/urandom | pv -petra | dd of=/dev/null 
+brew install atool        # General tool used for extracting various types of
+                          # compressed archives.
 
 
 # Task / time management
