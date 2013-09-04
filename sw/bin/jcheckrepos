@@ -23,14 +23,8 @@ echo ""
 
 CheckDir ~/dotfiles "dotfiles"
 CheckDir ~/dotfiles/private "dotfiles/private"
-CheckDir ~/sci/imagevis3d "sci/imagevis3d"
-CheckDir ~/sci/imagevis3d/Tuvok "sci/imagevis3d/tuvok"
-CheckDir ~/sci/imagevis3d/Tuvok/IO "sci/imagevis3d/tuvok/io"
-CheckDir ~/sci/imagevis3d/Tuvok/Basics "sci/imagevis3d/tuvok/basics"
-CheckDir ~/sci/spire "sci/spire"
-CheckDir ~/sci/srun5 "sci/srun5"
-CheckDir ~/sci/hypack "sci/hypack"
 CheckDir ~/prosp "prosp"
+CheckDir ~/sci "sci"
 CheckDir ~/me "me"
 CheckDir ~/backups "backups"
 CheckDir ~/ion2 "ion2"
@@ -44,4 +38,7 @@ ${HOME}/me/scripts/checkrepos
 echo "rsyncing ~/me/sync"
 echo ""
 ${HOME}/me/scripts/performSync
+
+# Run checkrepos from sci repository (which contains subrepos).
+${HOME}/sci/scripts/checkrepos
 

@@ -35,3 +35,7 @@ echo "rsyncing ~/me/sync"
 echo ""
 ${HOME}/me/scripts/performSync
 
+echo ""
+echo "Pulling ~/sci remotes"
+echo ""
+${HOME}/sci/scripts/pullpersonal
