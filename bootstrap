@@ -52,7 +52,7 @@ install_dotfiles () {
   IFS=$'\n'
 
   # Read all directories into an array.
-  fileArray=($(find $DOTFILES_ROOT_REL -type f))
+  fileArray=($(find $DOTFILES_ROOT_REL -type f -o -type l))
 
   # Restore IFS
   IFS=$OLDIFS
