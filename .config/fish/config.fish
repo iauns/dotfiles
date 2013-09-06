@@ -107,11 +107,11 @@ function s
 end
 
 function mux
-  tmuxifier load-session $argv
+  tmuxifier $argv
 end
 
 function muxs
-  tmuxifier $argv
+  tmuxifier load-session $argv
 end
 
 # Fish prompt that includes git.

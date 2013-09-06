@@ -252,7 +252,7 @@ Bundle "marijnh/tern_for_vim"
 Bundle "vimwiki/vimwiki"
 
 " Alternative to powerline and airline.
-Bundle 'itchyny/lightline.vim'
+"Bundle 'itchyny/lightline.vim'
 
 " CtrlP was replaced by unite.
 "Bundle 'kien/ctrlp.vim.git'
@@ -801,6 +801,35 @@ noremap <leader>a: :Tabularize /:\zs<CR>
 "       %:p:h to a directory!
 "noremap <silent> <leader>pd :CtrlP <C-R>=expand("%:p:h")<CR><CR>
 
+"" ---------------- lightline settings ------------------
+"	let g:lightline = {
+"		\ 'colorscheme': 'wombat',
+"		\ 'active': {
+"		\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+"		\ },
+"		\ 'component_function': {
+"		\   'fugitive': 'MyFugitive',
+"		\   'filename': 'MyFilename'
+"		\ }
+"		\ }
+"	function! MyModified()
+"		return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+"	endfunction
+"	function! MyReadonly()
+"		return &ft !~? 'help\|vimfiler' && &readonly ? 'RO' : ''
+"	endfunction
+"	function! MyFilename()
+"		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+"		\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+"		\  &ft == 'unite' ? unite#get_status_string() :
+"		\  &ft == 'vimshell' ? vimshell#get_status_string() :
+"		\ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+"		\ ('' != MyModified() ? ' ' . MyModified() : '')
+"	endfunction
+"	function! MyFugitive()
+"		return &ft !~? 'vimfiler' && exists("*fugitive#head") && strlen(fugitive#head()) ? fugitive#head() : ''
+"	endfunction
+"
 " ---------------- Fugitive keys ------------------
 " http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
 " help :diffget -- see: http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
