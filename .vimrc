@@ -231,6 +231,8 @@ Bundle 'bitc/vim-hdevtools'
 Bundle 'mileszs/ack.vim.git'
 " Parameter / Argument text objects.
 Bundle 'vim-scripts/Parameter-Text-Objects.git'
+" Slime
+Bundle 'jpalardy/vim-slime.git'
 
 " I pulled most of the javascript plugins from:
 " https://github.com/joyent/node/wiki/Vim-Plugins
@@ -276,7 +278,8 @@ Bundle "vimwiki/vimwiki"
 " lldb debugger for vim. Official lldb repo.
 " This was bugging out hard when I updated to the latest xcode.
 " I'll keep an eye on this in the future.
-" Bundle 'http://llvm.org/git/lldb', {'rtp' : 'utils/vim-lldb/'}
+"Bundle 'http://llvm.org/git/lldb', {'rtp' : 'utils/vim-lldb/'}
+"Bundle 'iauns/vim-lldb'
 "" Merlin for OCaml completion
 "Bundle 'def-lkb/merlin', {'rtp' : 'vim/'}
 " Railcasts colorscheme
@@ -760,7 +763,7 @@ nnoremap <leader>ML :lfirst<CR>
 " Run syntastic
 " Run/source vimrc
 " Run archive on lines
-noremap <leader>rt c!ctags -R<CR>
+"noremap <leader>rt c!ctags -R<CR>
 "noremap <leader>rs :SyntasticCheck<CR>
 "noremap <leader>rl :sign unplace *<CR>:YcmForceCompileAndDiagnostics<CR>
 "noremap <leader>rs :sign unplace *<CR>:YcmDiags<CR>
@@ -869,6 +872,9 @@ nnoremap <silent> <space>nd :Debug<CR>
 " Finds the current file in nerdtree.
 nnoremap <silent> <leader>nf :NERDTree<CR><C-w>p:NERDTreeFind<CR>
 noremap <silent> <leader>nn :NERDTreeToggle<CR>
+
+" ---------------- Slime ------------------
+let g:slime_target = "tmux"
 
 " ---------------- Utl keys ------------------
 " Open manual
