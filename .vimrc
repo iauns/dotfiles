@@ -534,6 +534,10 @@ function! JH_OpenContextTodo()
   call s:OpenFileInProjectSpecificContext('pdocs/todo')
 endfunc
 
+function! JH_OpenContextDebug()
+  call s:OpenFileInProjectSpecificContext('pdocs/debug')
+endfunc
+
 
 " ---------------- System Specific Keybindings ------------------
 " Bindings involving the command/windows key
@@ -737,6 +741,7 @@ noremap <silent> <leader>oq :copen<CR>
 noremap <silent> <leader>oQ :cclose<CR>
 noremap <silent> <leader>ov :call JH_OpenVimRC()<CR>
 noremap <silent> <leader>x :call JH_OpenContextTodo()<CR>
+noremap <silent> <leader>l :call JH_OpenContextDebug()<CR>
 noremap <silent> <leader>ob :TagbarToggle<CR>
 noremap <silent> <leader>ou :GundoToggle<CR>
 noremap <silent> <leader>ol :lopen<cr>
@@ -785,52 +790,6 @@ noremap <leader>a= :Tabularize /=<CR>
 noremap <leader>a, :Tabularize /,\zs/l1<CR>
 noremap <leader>a: :Tabularize /:\zs<CR>
 
-" ---------------- CTRL-P keys ------------------
-"nnoremap <leader>- :CtrlPBufTag<CR>
-"nnoremap <leader>pat :CtrlPBufTagAll<CR>
-"nnoremap <leader>pf :CtrlPQuickfix<CR>
-"nnoremap <leader>pi :CtrlPDir<CR>
-"nnoremap <leader>pu :CtrlPUndo<CR>
-"nnoremap <leader>pl :CtrlPLine<CR>
-"nnoremap <leader>ps :CtrlPRTS<CR>
-"nnoremap <leader>pc :CtrlPChange<CR>
-"nnoremap <leader>pac :CtrlPChangeAll<CR>
-"nnoremap <leader>pt :CtrlPTag<CR>
-"nnoremap <leader>pb :CtrlPBuffer<CR>
-
-" NOTE: The <C-R>= is mandatory! It is the expression buffer that evaluates
-"       %:p:h to a directory!
-"noremap <silent> <leader>pd :CtrlP <C-R>=expand("%:p:h")<CR><CR>
-
-"" ---------------- lightline settings ------------------
-"	let g:lightline = {
-"		\ 'colorscheme': 'wombat',
-"		\ 'active': {
-"		\   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-"		\ },
-"		\ 'component_function': {
-"		\   'fugitive': 'MyFugitive',
-"		\   'filename': 'MyFilename'
-"		\ }
-"		\ }
-"	function! MyModified()
-"		return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-"	endfunction
-"	function! MyReadonly()
-"		return &ft !~? 'help\|vimfiler' && &readonly ? 'RO' : ''
-"	endfunction
-"	function! MyFilename()
-"		return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-"		\ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-"		\  &ft == 'unite' ? unite#get_status_string() :
-"		\  &ft == 'vimshell' ? vimshell#get_status_string() :
-"		\ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-"		\ ('' != MyModified() ? ' ' . MyModified() : '')
-"	endfunction
-"	function! MyFugitive()
-"		return &ft !~? 'vimfiler' && exists("*fugitive#head") && strlen(fugitive#head()) ? fugitive#head() : ''
-"	endfunction
-"
 " ---------------- Fugitive keys ------------------
 " http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
 " help :diffget -- see: http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
