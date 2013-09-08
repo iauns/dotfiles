@@ -276,10 +276,8 @@ Bundle "vimwiki/vimwiki"
 " Powerline -- this is the new powerline
 "Bundle 'Lokaltog/powerline.git'
 " lldb debugger for vim. Official lldb repo.
-" This was bugging out hard when I updated to the latest xcode.
-" I'll keep an eye on this in the future.
+" Using slime instead.
 "Bundle 'http://llvm.org/git/lldb', {'rtp' : 'utils/vim-lldb/'}
-"Bundle 'iauns/vim-lldb'
 "" Merlin for OCaml completion
 "Bundle 'def-lkb/merlin', {'rtp' : 'vim/'}
 " Railcasts colorscheme
@@ -859,14 +857,6 @@ nnoremap <silent> <leader>oc :CTSHere<CR>
 
 " ---------------- SkyBison keys ------------------
 nnoremap <leader>b :<c-u>call SkyBison("")<cr>
-
-" ---------------- LLDB keys ------------------
-nnoremap <silent> <space>ns :Lstep<CR>
-nnoremap <silent> <space>nn :Lnext<CR>
-nnoremap <silent> <space>nr :Lstart<CR>
-nnoremap <silent> <space>nc :Lcontinue<CR>
-nnoremap <silent> <space>nb :Lbreakpoint<CR>
-nnoremap <silent> <space>nd :Debug<CR>
 
 " ---------------- NerdTree keys ------------------
 " Finds the current file in nerdtree.
