@@ -8,6 +8,12 @@ DOTFILES_ROOT="$HOME/dotfiles"
 set -e
 echo ''
 
+# Ensure dotfiles-slim is also present in-case any scripts rely on sourcing
+# its contents.
+if [ ! -d ${HOME}/dotfiles/nolink/dotfiles-slim ]; then
+  git clone https://github.com/iauns/dotfiles-slim ${HOME}/dotfiles/nolink/dotfiles-slim
+fi
+
 # All files / folders placed in the following ignore array will be ignored when
 # traversing the filesystem looking for files to sym-link.
 # Directories as well as files will be checked against this array.

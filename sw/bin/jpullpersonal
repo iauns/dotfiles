@@ -20,6 +20,7 @@ echo ""
 
 UpdateRemotes ~/dotfiles "dotfiles"
 UpdateRemotes ~/dotfiles/private "dotfiles-private"
+UpdateRemotes ~/dotfiles/nolink/dotfiles-slim "dotfiles-slim"
 UpdateRemotes ~/media "media"
 UpdateRemotes ~/prosp "prosp"
 UpdateRemotes ~/backups "backups"

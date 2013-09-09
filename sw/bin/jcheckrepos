@@ -23,6 +23,7 @@ echo ""
 
 CheckDir ~/dotfiles "dotfiles"
 CheckDir ~/dotfiles/private "dotfiles/private"
+CheckDir ~/dotfiles/nolink/dotfiles-slim "dotfiles-slim"
 CheckDir ~/prosp "prosp"
 CheckDir ~/sci "sci"
 CheckDir ~/me "me"
