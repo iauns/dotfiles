@@ -233,6 +233,9 @@ Bundle 'mileszs/ack.vim.git'
 Bundle 'vim-scripts/Parameter-Text-Objects.git'
 " Slime
 Bundle 'jpalardy/vim-slime.git'
+" Clever-f - gets rid of ; and , when searching. Replaced by 'f' and 'F'.
+" Makes sense considering I never use multiple searches in a row.
+Bundle 'rhysd/clever-f.vim.git'
 
 " I pulled most of the javascript plugins from:
 " https://github.com/joyent/node/wiki/Vim-Plugins
@@ -937,6 +940,17 @@ let g:signify_disable_by_default = 1
 " ---------------- EasyMotion ------------------
 let g:EasyMotion_leader_key = '<space>'
 let g:EasyMotion_keys       = 'htnsbcfgijklpzqrvmwaoeu'
+
+call EasyMotion#InitOptions({
+      \   'leader_key'      : '<space><space>'
+      \ , 'keys'            : 'htnsbcfgijklpzqrvmwaoeu'
+      \ , 'do_shade'        : 1
+      \ , 'do_mapping'      : 1
+      \ , 'grouping'        : 1
+      \
+      \ , 'hl_group_target' : 'Question'
+      \ , 'hl_group_shade'  : 'EasyMotionShade'
+      \ })
 
 " ---------------- Syntastic ---------------- 
 let g:syntastic_error_symbol='✗'
