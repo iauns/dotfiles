@@ -827,6 +827,10 @@ noremap <silent> <leader>nn :NERDTreeToggle<CR>
 
 " ---------------- Slime ------------------
 let g:slime_target = "tmux"
+let g:slime_no_mappings = 1
+xmap <leader>i <Plug>SlimeRegionSend
+nmap <leader>i <Plug>SlimeMotionSend
+nmap <leader>il <Plug>SlimeLineSend
 
 " ---------------- Utl keys ------------------
 " Open manual
