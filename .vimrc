@@ -11,13 +11,8 @@
 " Maybe re-mappable:
 " , - A possibility since its use is very infrequent.
 
-" Shell only gets set in macvim. We don't want it set in the shell because
-" reattach-to-user-namespace wouldn't be called. 
-if has("mac") || has("macunix")"
-  set shell=/bin/bash
-else
-  set shell=/bin/bash
-endif
+" We usually use the fish shell which doesn't play nicely with Vim...
+set shell=/bin/bash
 
 " gnome-terminal settings (doesn't advertise 256 color)
 if $COLORTERM == 'gnome-terminal'
@@ -904,7 +899,9 @@ if exists('$TMUX')
   inoremap <c-l> <ESC>:call <SID>TmuxWinCmd('l')<cr>
   nnoremap <c-\> <ESC>:call <SID>TmuxWinCmd('p')<cr>
   inoremap <c-\> <ESC>:call <SID>TmuxWinCmd('p')<cr>
-else
+end
+
+if has("gui_running")
   map <C-h> <C-w>h
   map <C-j> <C-w>j
   map <C-k> <C-w>k
@@ -913,6 +910,19 @@ else
   " Splits the current window in half. s = horizontal, S = vertical.
   noremap <C-_> :split<CR>
   noremap <C-s> :vsplit<CR>
+
+  " Hacky but simple binding of C-b <number>
+  nnoremap <C-b> <nop>
+  nnoremap <C-b>1 1gt
+  nnoremap <C-b>2 2gt
+  nnoremap <C-b>3 3gt
+  nnoremap <C-b>4 4gt
+  nnoremap <C-b>5 5gt
+  nnoremap <C-b>6 6gt
+  nnoremap <C-b>7 7gt
+  nnoremap <C-b>8 8gt
+  nnoremap <C-b>9 9gt
+  nnoremap <C-b>0 0gt
 end
 
 "-------------------------------------------------------------------------------
