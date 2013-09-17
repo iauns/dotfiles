@@ -1199,19 +1199,19 @@ nmap <leader>u [unite]
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 "nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 " Remember, order matters!
-nnoremap <silent> <C-p> :<C-u>Unite -buffer-name=files file_rec/async:! file_mru<CR>
+nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_rec/async:! file_mru<CR>
 " The exclamation after file_rec/async implies that vim should search for the
 " nearest directory containing a '.git', '.hg', etc... see
 " unite-source-file_rec.
 nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=files file_mru file_rec/async:!<CR>
 
 " Search current working directory
-nnoremap <silent> [unite]f :<C-u>Unite -buffer-name=files -start-insert file<CR>
+nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-insert file<CR>
 
 " Quick registers
 "nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 " Unite resume
-nnoremap <silent> [unite]r :<C-u>UniteResume<CR>
+nnoremap <silent> [unite]r :<C-u>UniteResume -no-split<CR>
 
 " Quick buffer and mru
 nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffers buffer file_mru<CR>
@@ -1374,6 +1374,14 @@ elseif executable('ack')
   let g:unite_source_grep_default_opts = '--no-heading --no-color'
   let g:unite_source_grep_recursive_opt = ''
 endif
+
+" Ability to use -no-split. Affects resume.
+augroup unite
+  au!
+  "au BufLeave \[unite\]* if "nofile" ==# &buftype | setlocal bufhidden=wipe | endif
+  autocmd BufLeave \*unite\** if "nofile" ==# &buftype | setlocal bufhidden=wipe | endif
+  autocmd BufLeave \[unite\]* if "nofile" ==# &buftype | setlocal bufhidden=wipe | endif
+augroup END
 
 "-----------------------------------------------------------------------------
 " Custom au c/cpp
