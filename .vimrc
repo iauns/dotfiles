@@ -908,8 +908,8 @@ if has("gui_running")
   map <C-l> <C-w>l
 
   " Splits the current window in half. s = horizontal, S = vertical.
-  noremap <C-_> :split<CR>
-  noremap <C-s> :vsplit<CR>
+  noremap <C-_> :vsplit<CR>
+  noremap <C-s> :split<CR>
 
   " Hacky but simple binding of C-b <number>
   nnoremap <C-b> <nop>
@@ -1183,7 +1183,8 @@ call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
       \ '.*\.png',
       \ 'node_modules/',
       \ '\.gitignore',
-      \ 'Externals/'
+      \ 'Externals/',
+      \ '\.svn/'
       \ ], '\|'))
 
 " Map '-' to the prefix for Unite. Makes sense on dvorak keyboards (next to
