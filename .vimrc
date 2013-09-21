@@ -335,12 +335,6 @@ Bundle "vimwiki/vimwiki"
 " RepeatLast - I like the idea, but it needs a little bit more work.
 "Bundle 'vim-scripts/RepeatLast.vim'
 "
-
-" YANKSTACK SETUP -- Necessary for rebinding Y to y$.
-"call yankstack#setup()
-" Automatic latex plugin -- seemed too heavy weight, switched to latex box.
-"Bundle 'vim-scripts/AutomaticLaTexPlugin.git'
-
 " Rejected plugins:
 " argtextobj - I couldn't get the text object to behave appropriately.
 "
