@@ -851,49 +851,6 @@ nmap <F1> [unite]h
 nnoremap <silent> <leader>wo :VimwikiGoto 
 nnoremap <silent> <leader>we :VimwikiSearch 
 
-" ---------------- Tmux pane integration ---------------
-" Maps <C-h/j/k/l> to switch vim splits in the given direction. If there are
-" no more windows in that direction, forwards the operation to tmux.
-" Additionally, <C-\> toggles between last active vim splits/tmux panes.
-" See: https://gist.github.com/mislav/5189704
-if exists('$TMUX')
-
-  let s:tmux_is_last_pane = 0
-  au WinEnter * let s:tmux_is_last_pane = 0
-
-  " Like `wincmd` but also change tmux panes instead of vim windows when needed.
-  function s:TmuxWinCmd(direction)
-    let nr = winnr()
-    let tmux_last_pane = (a:direction == 'p' && s:tmux_is_last_pane)
-    if !tmux_last_pane
-      " try to switch windows within vim
-      exec 'wincmd ' . a:direction
-    endif
-    " Forward the switch panes command to tmux if:
-    " a) we're toggling between the last tmux pane;
-    " b) we tried switching windows in vim but it didn't have effect.
-    if tmux_last_pane || nr == winnr()
-      let cmd = 'tmux select-pane -' . tr(a:direction, 'phjkl', 'lLDUR')
-      call system(cmd)
-      let s:tmux_is_last_pane = 1
-      echo cmd
-    else
-      let s:tmux_is_last_pane = 0
-    endif
-  endfunction
-
-  " navigate between split windows/tmux panes
-  nnoremap <c-j> <ESC>:call <SID>TmuxWinCmd('j')<cr>
-  inoremap <c-j> <ESC>:call <SID>TmuxWinCmd('j')<cr>
-  nnoremap <c-k> <ESC>:call <SID>TmuxWinCmd('k')<cr>
-  inoremap <c-k> <ESC>:call <SID>TmuxWinCmd('k')<cr>
-  nnoremap <c-h> <ESC>:call <SID>TmuxWinCmd('h')<cr>
-  inoremap <c-h> <ESC>:call <SID>TmuxWinCmd('h')<cr>
-  nnoremap <c-l> <ESC>:call <SID>TmuxWinCmd('l')<cr>
-  inoremap <c-l> <ESC>:call <SID>TmuxWinCmd('l')<cr>
-  nnoremap <c-\> <ESC>:call <SID>TmuxWinCmd('p')<cr>
-  inoremap <c-\> <ESC>:call <SID>TmuxWinCmd('p')<cr>
-end
 
 if has("gui_running")
   map <C-h> <C-w>h
@@ -917,6 +874,50 @@ if has("gui_running")
   nnoremap <C-b>8 8gt
   nnoremap <C-b>9 9gt
   nnoremap <C-b>0 0gt
+else
+  " ---------------- Tmux pane integration ---------------
+  " Maps <C-h/j/k/l> to switch vim splits in the given direction. If there are
+  " no more windows in that direction, forwards the operation to tmux.
+  " Additionally, <C-\> toggles between last active vim splits/tmux panes.
+  " See: https://gist.github.com/mislav/5189704
+  if exists('$TMUX')
+
+    let s:tmux_is_last_pane = 0
+    au WinEnter * let s:tmux_is_last_pane = 0
+
+    " Like `wincmd` but also change tmux panes instead of vim windows when needed.
+    function s:TmuxWinCmd(direction)
+      let nr = winnr()
+      let tmux_last_pane = (a:direction == 'p' && s:tmux_is_last_pane)
+      if !tmux_last_pane
+        " try to switch windows within vim
+        exec 'wincmd ' . a:direction
+      endif
+      " Forward the switch panes command to tmux if:
+      " a) we're toggling between the last tmux pane;
+      " b) we tried switching windows in vim but it didn't have effect.
+      if tmux_last_pane || nr == winnr()
+        let cmd = 'tmux select-pane -' . tr(a:direction, 'phjkl', 'lLDUR')
+        call system(cmd)
+        let s:tmux_is_last_pane = 1
+        echo cmd
+      else
+        let s:tmux_is_last_pane = 0
+      endif
+    endfunction
+
+    " navigate between split windows/tmux panes
+    nnoremap <c-j> <ESC>:call <SID>TmuxWinCmd('j')<cr>
+    inoremap <c-j> <ESC>:call <SID>TmuxWinCmd('j')<cr>
+    nnoremap <c-k> <ESC>:call <SID>TmuxWinCmd('k')<cr>
+    inoremap <c-k> <ESC>:call <SID>TmuxWinCmd('k')<cr>
+    nnoremap <c-h> <ESC>:call <SID>TmuxWinCmd('h')<cr>
+    inoremap <c-h> <ESC>:call <SID>TmuxWinCmd('h')<cr>
+    nnoremap <c-l> <ESC>:call <SID>TmuxWinCmd('l')<cr>
+    inoremap <c-l> <ESC>:call <SID>TmuxWinCmd('l')<cr>
+    nnoremap <c-\> <ESC>:call <SID>TmuxWinCmd('p')<cr>
+    inoremap <c-\> <ESC>:call <SID>TmuxWinCmd('p')<cr>
+  end
 end
 
 "-------------------------------------------------------------------------------
