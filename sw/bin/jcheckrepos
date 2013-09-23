@@ -1,5 +1,6 @@
 #!/bin/bash
 
+FAILED_ONE=false
 # Parameter 1 is the directory, and 2 is a brief description.
 function CheckDir 
 {
@@ -14,12 +15,11 @@ function CheckDir
         echo "$DESC"
         git ls-changes --padding
         echo ""
+        FAILED_ONE=true
       fi
     popd &>/dev/null
   fi
 } 
-
-echo ""
 
 CheckDir ~/dotfiles "dotfiles"
 CheckDir ~/dotfiles/private "dotfiles/private"
@@ -36,14 +36,11 @@ CheckDir ~/art "art"
 # Run checkrepos from me repository (which contains subrepos)
 ${HOME}/me/scripts/checkrepos
 
-echo "rsyncing ~/me/sync"
-echo ""
-${HOME}/me/scripts/performSync
-
 # Run checkrepos from sci repository (which contains subrepos).
 ${HOME}/sci/scripts/checkrepos
 
-# Check timetrap (we need a more sophisticated check)
-echo "Timetrap:"
-t now
-
+if $FAILED_ONE; then
+  exit 1
+else
+  exit 0
+fi
