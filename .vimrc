@@ -1048,8 +1048,8 @@ augroup END
 " FSwitch auto execute mappings.
 augroup fswitch
   au!
-  au BufEnter *.c,*.cpp,*.cc,*.cxx,*.mm,*.m let b:fswitchdst = 'h' | let b:fswitchlocs = '.,../inc'
-  au BufEnter *.h,*.hpp let b:fswitchdst = 'cpp,cc,cxx,c,mm,m'
+  au BufEnter *.c,*.cpp,*.cc,*.cxx,*.mm,*.m let b:fswitchdst = 'hpp,h' | let b:fswitchlocs = '.,../inc'
+  au BufEnter *.hpp,*.h let b:fswitchdst = 'cpp,cc,cxx,c,mm,m'
 augroup END
 
 " ----------------- Simple bookmarks ----------------
