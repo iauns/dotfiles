@@ -10,6 +10,8 @@ var optimist = require('optimist')
     .boolean('i')
     .alias('i', 'init')
     .describe('i', 'Initialize current repository inside of prosp directory.')
+    .alias('n', 'no-git')
+    .describe('f', 'Will not check for a .git directory when initializing. Will use current directory.')
     .boolean('e')
     .alias('e','edit')
     .describe('e', 'Edit a script instead of executing it.')
@@ -27,14 +29,60 @@ if (argv.h) {
   process.exit(1);
 }
 
-// Determine subdirectory in prosp (basename of nearest dir containing .git)
 var home = process.env.HOME;
-var prospDir = home + '/prosp';
+var prospBaseDir = home + '/prosp';
 var curDir = path.resolve(process.cwd());
+
+// Check to see if current directory already exists in prosp.
+// If so, use the current directory as the targetDir.
+function checkIfPathInProsp(ourDir)
+{
+  var prospCheckDir = path.resolve(ourDir);
+  var pathInProsp   = prospBaseDir + prospCheckDir.replace(process.env.HOME, '');
+  
+  if (fs.existsSync(pathInProsp))
+    return true;
+  else
+    return false;
+}
+
+function getCorrespondingProspDir(ourDir)
+{
+  fullPath = path.resolve(ourDir);
+  var prospSubDir = fullPath.replace(process.env.HOME, '');
+  return prospBaseDir + prospSubDir;
+}
+
+if (argv.i && argv.n) {
+  targetDir = getCorrespondingProspDir(curDir);
+  if (!fs.existsSync(targetDir)) {
+    console.log("Initializing prosp directory *without* searching for parent .git.");
+    console.log("Directory: '" + targetDir + "'");
+    mkdirp.sync(targetDir);
+
+    initScript = prospBaseDir + '/common/postInit.sh';
+    child = spawn(initScript, [curDir, targetDir], { stdio: 'inherit'  });
+    process.exit(0);
+  } else {
+    console.log('Directory to be initialized already exists:');
+    console.log(targetDir);
+    console.log('Aborting.');
+    process.exit(0);
+  }
+}
+
+// Determine subdirectory in prosp (basename of nearest dir containing .git)
 var targetDir = '';
 while (curDir != '/') {
   // Check to see if the current directory contains a .git directory.
   if (fs.existsSync(curDir + '/.git'))
+  {
+    targetDir = curDir;
+    break;
+  }
+
+  // Check to see if the directory is already in prosp.
+  if (checkIfPathInProsp(curDir))
   {
     targetDir = curDir;
     break;
@@ -45,24 +93,32 @@ while (curDir != '/') {
 }
 
 // Warn the user if we didn't find a parent .git directory.
-if (targetDir.length === 0) {
+if (targetDir.length === 0){
   //console.warn("Warning: Did not find parent directory with .git, using current directory.");
   targetDir = path.resolve(process.cwd());
 }
 
-// Once we remove HOME from the directory, we end up with a forward slash at
-// the beginning of the string (prospSubDir in this case).
-var prospSubDir = targetDir.replace(process.env.HOME, '');
+var prospDir = getCorrespondingProspDir(targetDir);
 
-// Grab basename. This is what we will use as prosp's directory name.
-//var prospSubDir = path.basename(targetDir);
-prospDir += prospSubDir;
 
 // Initialize prosp directory.
 if (argv.i) {
-  console.log("Initializing prosp directory '" + prospDir + "'");
-  mkdirp.sync(prospDir);
-  process.exit(0);
+  if (!fs.existsSync(prospDir))
+  {
+    console.log("Initializing prosp directory '" + prospDir + "'");
+    mkdirp.sync(prospDir);
+    initScript = prospBaseDir + '/common/postInit.sh';
+
+    child = spawn(initScript, [targetDir, prospDir], { stdio: 'inherit' });
+    process.exit(0);
+  }
+  else
+  {
+    console.log('Directory to be initialized already exists:');
+    console.log(prospDir);
+    console.log('Aborting.');
+    process.exit(0);
+  }
 }
 
 // Ensure directory exists before continuing.
