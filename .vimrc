@@ -224,7 +224,7 @@ Bundle 'oinksoft/tcd.vim'
 Bundle 'bitc/vim-hdevtools'
 " Perform ack from within vim! Look into replacing with unit's proc grep.
 Bundle 'mileszs/ack.vim.git'
-" Parameter / Argument text objects.
+" Parameter / Argument text objects -- uses capitol 'P'.
 Bundle 'vim-scripts/Parameter-Text-Objects.git'
 " Slime
 Bundle 'jpalardy/vim-slime.git'
