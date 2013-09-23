@@ -43,3 +43,7 @@ ${HOME}/me/scripts/performSync
 # Run checkrepos from sci repository (which contains subrepos).
 ${HOME}/sci/scripts/checkrepos
 
+# Check timetrap (we need a more sophisticated check)
+echo "Timetrap:"
+t now
+
