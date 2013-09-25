@@ -93,6 +93,7 @@ brew install perceptualdiff  # For testing graphics algorithms.
 brew install valgrind
 brew install gperftools
 brew install autoconf
+brew install libuv
 
 ###############################################################################
 # Native Apps                                                                 #
