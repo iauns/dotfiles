@@ -26,6 +26,7 @@ UpdateRemotes ~/prosp "prosp"
 UpdateRemotes ~/backups "backups"
 UpdateRemotes ~/art "art"
 UpdateRemotes ~/me "me"
+UpdateRemotes ~/sci "sci"
 
 echo ""
 echo "Pulling ~/me remotes"
