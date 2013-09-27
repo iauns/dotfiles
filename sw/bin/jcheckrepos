@@ -28,16 +28,23 @@ CheckDir ~/prosp "prosp"
 CheckDir ~/sci "sci"
 CheckDir ~/me "me"
 CheckDir ~/backups "backups"
-#CheckDir ~/ion2 "ion2"
 CheckDir ~/orion "orion"
 CheckDir ~/media "media"
 CheckDir ~/art "art"
 
 # Run checkrepos from me repository (which contains subrepos)
 ${HOME}/me/scripts/checkrepos
+rc = $?
+if [[ $rc != 0 ]]; then
+  FAILED_ONE=true
+fi
 
 # Run checkrepos from sci repository (which contains subrepos).
 ${HOME}/sci/scripts/checkrepos
+rc = $?
+if [[ $rc != 0 ]]; then
+  FAILED_ONE=true
+fi
 
 if $FAILED_ONE; then
   exit 1
