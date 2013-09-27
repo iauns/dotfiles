@@ -1001,6 +1001,7 @@ let g:ycm_filetype_blacklist = {
 let g:ycm_min_num_of_chars_for_completion = 2
 
 nnoremap <silent><leader>e :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <silent><leader>yc :YcmCompleter ClearCompilationFlagCache<CR>
 
 " ----------------- UltiSnips ----------------
 so ~/.vim/UltiSnips/UltiSnipHelpers.vim
@@ -1211,7 +1212,7 @@ nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-inser
 nnoremap <silent> [unite]r :<C-u>UniteResume -no-split<CR>
 
 " Quick buffer and mru
-nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=buffers buffer file_mru<CR>
+nnoremap <silent> [unite]b :<C-u>Unite -no-split -buffer-name=buffers buffer file_mru<CR>
 
 " Quick yank history
 nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<CR>
