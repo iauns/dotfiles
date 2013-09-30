@@ -230,7 +230,9 @@ Bundle 'vim-scripts/Parameter-Text-Objects.git'
 Bundle 'jpalardy/vim-slime.git'
 " Clever-f - gets rid of ; and , when searching. Replaced by 'f' and 'F'.
 " Makes sense considering I never use multiple searches in a row.
-Bundle 'rhysd/clever-f.vim.git'
+" Removed because it was just getting in the way and jumping beyond the
+" current line.
+"Bundle 'rhysd/clever-f.vim.git'
 
 " I pulled most of the javascript plugins from:
 " https://github.com/joyent/node/wiki/Vim-Plugins
