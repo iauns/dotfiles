@@ -999,6 +999,7 @@ let g:ycm_filetype_blacklist = {
       \ 'text' : 1,
       \ 'unite' : 1,
       \}
+let g:ycm_complete_in_strings = 0
 
 let g:ycm_min_num_of_chars_for_completion = 2
 
