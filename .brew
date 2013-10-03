@@ -60,6 +60,10 @@ brew install pv           # Pipe viewer! View progress of tar! Try:
 brew install atool        # General tool used for extracting various types of
                           # compressed archives.
 brew install autojump --HEAD  # Great little tool for navigating directories.
+brew install cgdb         # Great debugger addon to GDB
+
+# Install the latest version of GDB. I do NOT use Mac's provided debugger.
+brew install https://raw.github.com/Homebrew/homebrew-dupes/master/gdb.rb
 
 
 # Task / time management
