@@ -1,0 +1,5 @@
+Subtrees:
+
+* git subtree add --prefix .gdb_printers/libcxx https://github.com/egmkang/pretty_printer_for_libcxx.git master --squash
+* git subtree pull --prefix .gdb_printers/libcxx https://github.com/egmkang/pretty_printer_for_libcxx.git master --squash
+
