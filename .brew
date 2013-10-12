@@ -98,6 +98,7 @@ brew install valgrind
 brew install gperftools
 brew install autoconf
 brew install libuv
+brew install gmp        # For idris.
 
 ###############################################################################
 # Native Apps                                                                 #
