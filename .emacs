@@ -94,6 +94,8 @@
 ;; (key-chord-mode t)
 ;; (key-chord-define evil-insert-state-map "jk" 'evil-normal-state)
 
+(define-key evil-normal-state-map (kbd "C-u") 'evil-scroll-up)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Filetype-style hooks.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
