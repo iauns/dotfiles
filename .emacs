@@ -1,8 +1,10 @@
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Version check.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (when (< emacs-major-version 24)
   (error "This setup requires Emacs v24, or higher. You have: v%d" emacs-major-version))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Packaging setup.
@@ -20,7 +22,6 @@
 		      key-chord
 		      recentf
 		      rainbow-delimiters highlight paredit smartparens
-		      clojure-mode clojure-test-mode clojure-cheatsheet
 		      nrepl nrepl-eval-sexp-fu ac-nrepl
 		      )
   "A list of packages to check for and install at launch.")
@@ -75,6 +76,50 @@
 
 (evil-ex-define-cmd "Exp[lore]" 'dired-jump)
 (evil-ex-define-cmd "color[scheme]" 'customize-themes)
+
+;; ACE jump 
+(global-set-key (kbd "SPC") 'ace-jump-char-mode)
+(global-set-key (kbd "C-SPC") 'ace-jump-line-mode)
+(global-set-key (kbd "M-SPC") 'ace-jump-word-mode)
+
+;; Ace jump
+(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Custom settings
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; Ensure we only have to specify y/n, not yes/no.
+(fset 'yes-or-no-p 'y-or-n-p)
+
+; Don't prompt about following symlinks.
+(setq vc-follow-symlinks t)
+
+; Show me the line and column number in the info bar.
+(line-number-mode t)
+(column-number-mode t)
+
+; Disable the 'bell'
+(setq ring-bell-function 'ignore)
+
+; Smooth scrolling. Scrolls only one line at a time.
+(setq scroll-margin 1
+      scroll-conservatively 0
+      scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01)
+    (setq-default scroll-up-aggressively 0.01
+      scroll-down-aggressively 0.01)
+
+; Indentation
+(setq standard-indent 2)              ; Indentation set to 2 space.
+(setq-default tab-width 2)
+(setq-default indent-tabs-mode nil)   ; Don't allow tabs, just spaces.
+
+; Emacs auto-indentation
+(define-key global-map (kbd "RET") 'newline-and-indent)
+
+; Disable the menu bars.
+(menu-bar-mode -1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Nice-to-haves...
@@ -137,3 +182,46 @@
   "\M-q" 'sp-indent-defun
   "gK" 'nrepl-src
   "K"  'ac-nrepl-popup-doc)
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; COQ setup
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Need to figure out how to use proof general.
+(setq auto-mode-alist (cons '("\\.v$" . coq-mode) auto-mode-alist))
+(autoload 'coq-mode "coq" "Major mode for editing Coq vernacular." t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Better defaults
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Better defaults: https://github.com/technomancy/better-defaults
+;;;###autoload
+(ido-mode t)
+(setq ido-enable-flex-matching t)
+
+(menu-bar-mode -1)
+(when (fboundp 'tool-bar-mode)
+  (tool-bar-mode -1))
+(when (fboundp 'scroll-bar-mode)
+  (scroll-bar-mode -1))
+
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
+(require 'saveplace)
+(setq-default save-place t)
+
+(global-set-key (kbd "M-/") 'hippie-expand)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
+(show-paren-mode 1)
+(setq-default indent-tabs-mode nil)
+(setq x-select-enable-clipboard t
+      x-select-enable-primary t
+      save-interprogram-paste-before-kill t
+      apropos-do-all t
+      mouse-yank-at-point t
+      save-place-file (concat user-emacs-directory "places")
+      backup-directory-alist `(("." . ,(concat user-emacs-directory
+                                               "backups"))))
+
