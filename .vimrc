@@ -26,10 +26,12 @@ endif
 "-------------------------------------------------------------------------------
 set nocompatible          " No compatibility with Vi.
 syntax enable             " Turn on color syntax highlighting.
-set background=dark       " Default background is dark.
-colorscheme xoria256      " Use two color schemes: xoria256 for dark.
-set background=dark       " The colorscheme above sets the background to light.
-                          " (only when in the terminal, curiously).
+"set background=dark       " Default background is dark.
+"colorscheme xoria256      " Use two color schemes: xoria256 for dark.
+"set background=dark       " The colorscheme above sets the background to light.
+"                          " (only when in the terminal, curiously).
+"colorscheme seoul256      " Unified color scheme.
+" NOTE: colorscheme needs to be set after bundleinstall
 set guioptions-=r         " Disable the right scrollbar.
 set guioptions-=L         " Disable the left scrollbar.
 set guioptions+=c         " Make gvim use text prompts, not gui popups.
@@ -247,6 +249,9 @@ Bundle "wavded/vim-stylus"
 " Full javascript completion engine that integrates with youcompleteme.
 " (omnicomplete)
 Bundle "marijnh/tern_for_vim"
+" Color schemes
+Bundle 'junegunn/seoul256.vim'
+Bundle 'baskerville/bubblegum'
 
 " Vim wiki. Replacing my personal wiki. While this isn't a semantic wiki,
 " there are better ways of tracking progress other than using a semantic wiki.
@@ -341,6 +346,26 @@ Bundle "vimwiki/vimwiki"
 " argtextobj - I couldn't get the text object to behave appropriately.
 "
 filetype plugin indent on
+
+
+"-------------------------------------------------------------------------------
+" Color scheme
+"-------------------------------------------------------------------------------
+"colorscheme seoul256      " Unified color scheme.
+
+function! GetColourSchemeName()
+  try
+    return g:colors_name
+  catch /^Vim:E121/
+    return "default
+  endtry
+endfunction
+
+set background=dark       " Default background is dark.
+"colorscheme xoria256      " Unified color scheme.
+colorscheme bubblegum
+set background=dark       " Default background is dark.
+
 "-------------------------------------------------------------------------------
 " Keyboard bindings
 "-------------------------------------------------------------------------------
@@ -352,7 +377,12 @@ function! JHBGSetup()
   if &background == "light"
     highlight ColorColumn ctermbg=253 guibg=White
   else
-    highlight ColorColumn ctermbg=235 guibg=gray15
+    " xoria
+    "highlight ColorColumn ctermbg=235 guibg=gray15
+    " Bubblegum
+    highlight ColorColumn ctermbg=237 guibg=gray15
+    " seoul256
+    "highlight ColorColumn ctermbg=238 guibg=gray31
   endif
 endfunction
 
@@ -360,12 +390,12 @@ endfunction
 function! LightDarkToggle()
   if (&background == "light")
     set background=dark
-    colorscheme xoria256
+    "colorscheme xoria256
     " xoria sets &background to light in the terminal!
     set background=dark
   else
     set background=light
-    colorscheme mayansmoke
+    "colorscheme mayansmoke
   endif
   call JHBGSetup()
 endfunc
