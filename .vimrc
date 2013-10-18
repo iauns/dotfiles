@@ -380,7 +380,7 @@ function! JHBGSetup()
     " xoria
     "highlight ColorColumn ctermbg=235 guibg=gray15
     " Bubblegum
-    highlight ColorColumn ctermbg=237 guibg=gray15
+    highlight ColorColumn ctermbg=237 guibg=gray21
     " seoul256
     "highlight ColorColumn ctermbg=238 guibg=gray31
   endif
