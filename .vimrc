@@ -362,8 +362,8 @@ function! GetColourSchemeName()
 endfunction
 
 set background=dark       " Default background is dark.
-"colorscheme xoria256      " Unified color scheme.
-colorscheme bubblegum
+colorscheme xoria256      " Unified color scheme.
+"colorscheme bubblegum
 set background=dark       " Default background is dark.
 
 "-------------------------------------------------------------------------------
@@ -378,9 +378,9 @@ function! JHBGSetup()
     highlight ColorColumn ctermbg=253 guibg=White
   else
     " xoria
-    "highlight ColorColumn ctermbg=235 guibg=gray15
+    highlight ColorColumn ctermbg=235 guibg=gray15
     " Bubblegum
-    highlight ColorColumn ctermbg=237 guibg=gray21
+    "highlight ColorColumn ctermbg=237 guibg=gray21
     " seoul256
     "highlight ColorColumn ctermbg=238 guibg=gray31
   endif
@@ -882,6 +882,7 @@ nmap <F1> [unite]h
 " ---------------- Vimwiki keys ------------------
 nnoremap <silent> <leader>wo :VimwikiGoto 
 nnoremap <silent> <leader>we :VimwikiSearch 
+nmap <silent> <leader>wx <Plug>VimwikiToggleListItem
 
 
 if has("gui_running")

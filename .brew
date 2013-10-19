@@ -78,6 +78,10 @@ brew install offlineimap                  # Storing imap messages offline.
 brew install notmuch                      # Indexing e-mails.
 brew install urlview                      # urlview for mutt.
 
+# Password manager
+brew install pass
+brew install gpg
+
 ###############################################################################
 # Development packages                                                        #
 ###############################################################################
