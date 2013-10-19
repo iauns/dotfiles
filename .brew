@@ -81,6 +81,8 @@ brew install urlview                      # urlview for mutt.
 # Password manager
 brew install pass
 brew install gpg
+brew install pinentry
+brew install gpg-agent
 
 ###############################################################################
 # Development packages                                                        #
