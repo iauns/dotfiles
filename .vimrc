@@ -1231,11 +1231,12 @@ nmap <leader>u [unite]
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 "nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 " Remember, order matters!
-nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_rec:! file_mru<CR>
+nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_rec file_mru<CR>
 " The exclamation after file_rec/async implies that vim should search for the
 " nearest directory containing a '.git', '.hg', etc... see
 " unite-source-file_rec.
-nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=files file_mru file_rec:!<CR>
+nnoremap <silent> [unite]u :<C-u>Unite -no-split -buffer-name=files file_rec:! file_mru<CR>
+"nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=files file_mru file_rec:!<CR>
 
 " Search current working directory
 nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-insert file<CR>
