@@ -253,6 +253,9 @@ Bundle "marijnh/tern_for_vim"
 Bundle 'junegunn/seoul256.vim'
 Bundle 'baskerville/bubblegum'
 
+" Sparkup
+Bundle 'rstacruz/sparkup', {'rtp' : 'vim/'}
+
 " Vim wiki. Replacing my personal wiki. While this isn't a semantic wiki,
 " there are better ways of tracking progress other than using a semantic wiki.
 " Additionally there were HTTPS concerns with the full-blown wiki approach.
@@ -1113,6 +1116,10 @@ let g:session_autosave = 'no'
 "let g:SeekKeys = '- _ 0 +'
 "let g:SeekKey = '-'
 "let g:SeekBackKey = '_'
+
+" ---------------- sparkup ------------------
+let g:sparkupExecuteMapping = '<c-a>'
+let g:sparkupNextMapping = '<c-n>'
 
 " ---------------- vim-wiki ------------------
 let g:vimwiki_list = [
