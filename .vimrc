@@ -230,6 +230,8 @@ Bundle 'mileszs/ack.vim.git'
 Bundle 'vim-scripts/Parameter-Text-Objects.git'
 " Slime
 Bundle 'jpalardy/vim-slime.git'
+" Alignment plugin
+Bundle 'junegunn/vim-easy-align'
 " Clever-f - gets rid of ; and , when searching. Replaced by 'f' and 'F'.
 " Makes sense considering I never use multiple searches in a row.
 " Removed because it was just getting in the way and jumping beyond the
@@ -881,6 +883,9 @@ nnoremap <silent> <leader>oh :Utl<CR>:redraw!<CR>
 " ---------------- Unite keys ------------------
 " <F1>: Help
 nmap <F1> [unite]h
+
+" ---------------- Vim-easy-align keys ------------------
+vnoremap <silent> <Enter> :EasyAlign<Enter>
 
 " ---------------- Vimwiki keys ------------------
 nnoremap <silent> <leader>wo :VimwikiGoto 
