@@ -263,6 +263,10 @@ Bundle 'rstacruz/sparkup', {'rtp' : 'vim/'}
 " Additionally there were HTTPS concerns with the full-blown wiki approach.
 Bundle "vimwiki/vimwiki"
 
+" Clang formatter for C++
+Bundle 'rhysd/vim-clang-format'
+Bundle 'kana/vim-operator-user'
+
 " Alternative to powerline and airline.
 "Bundle 'itchyny/lightline.vim'
 
@@ -1133,6 +1137,23 @@ let g:vimwiki_list = [
       \ 'template_default':  'default',
       \ 'template_ext':      '.html'}]
 let g:vimwiki_url_maxsave = 0
+
+
+" ---------------- clang_format ------------------
+
+let g:clang_format#code_style = 'llvm'
+
+let g:clang_format#style_options = {
+            \ "AllowShortIfStatementsOnASingleLine" : "true",
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "BreakBeforeBraces": "Stroustrup",
+            \ "Standard" : "C++11"}
+
+let g:clang_format#command = 'clang-format-3.4'
+
+" map to <Leader>cf in C++ code
+autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
 " ----------------- Utl ----------------
 if has("win32")
