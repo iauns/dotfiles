@@ -33,6 +33,7 @@ brew install lua
 brew install vim --with-lua
 brew install wget --enable-iri
 brew install ack
+brew install ag
 brew install git
 brew install imagemagick
 brew install tree
