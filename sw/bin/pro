@@ -10,7 +10,8 @@ var optimist = require('optimist')
     .boolean('i')
     .alias('i', 'init')
     .describe('i', 'Initialize current repository inside of prosp directory.')
-    .alias('n', 'no-git')
+    .boolean('f')
+    .alias('f', 'no-git')
     .describe('f', 'Will not check for a .git directory when initializing. Will use current directory.')
     .boolean('e')
     .alias('e','edit')
@@ -53,7 +54,7 @@ function getCorrespondingProspDir(ourDir)
   return prospBaseDir + prospSubDir;
 }
 
-if (argv.i && argv.n) {
+if (argv.i && argv.f) {
   targetDir = getCorrespondingProspDir(curDir);
   if (!fs.existsSync(targetDir)) {
     console.log("Initializing prosp directory *without* searching for parent .git.");

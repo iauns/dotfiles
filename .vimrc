@@ -517,6 +517,7 @@ endfunction
 
 " Returns the root directory for the current file based on the list of
 " known SCM directory names.
+" NOTE: We need to attempt to find current path in prosp as well.
 function! s:FindRootDirectory()
   let rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/']
   for pattern in rooter_patterns
