@@ -13,8 +13,9 @@ var optimist = require('optimist')
     .boolean('init-dir')
     .describe('init-dir', 'When initializing, places language specific files in working directory.')
     .alias('n', 'no-git')
+    .boolean('f')
+    .alias('f', 'no-git')
     .describe('f', 'Forces use of current directory over any parent .git dir.')
-    .alias('f', 'force')
     .boolean('e')
     .alias('e','edit')
     .describe('e', 'Edit a script instead of executing it.')
@@ -103,7 +104,7 @@ function initializeDirectory(prospDir)
   }
 }
 
-if (argv.i && argv.n)
+if (argv.i && argv.f)
 {
   var prospDir = getCorrespondingProspDir(curDir);
   initializeDirectory(prospDir);
