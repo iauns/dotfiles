@@ -12,6 +12,7 @@ var optimist = require('optimist')
     .describe('i', 'Initialize current repository inside of prosp directory.')
     .boolean('init-dir')
     .describe('init-dir', 'When initializing, places language specific files in working directory.')
+    .alias('t', 'init-dir')
     .alias('n', 'no-git')
     .boolean('f')
     .alias('f', 'no-git')
@@ -78,16 +79,13 @@ function initializeDirectory(prospDir)
       mkdirp.sync(prospDir);
 
     // Write prosp dot file and initialize the prosp directory.
-    fs.writeFile(prospDotFile, '# Prosp settings file.', function (err) {
-      if (err)
-        console.log(err);
-    });
+    fs.writeFileSync(prospDotFile, '# Prosp settings file.');
     prospInitScript = prospBaseDir + '/common/init/' + language + '/prospInit.sh';
     prospChild = spawn(prospInitScript, [targetDir, prospDir], { stdio: 'inherit' });
 
     // If requested, also initialize the directory the command was run from.
     // This will populate the directory with a common set of makefiles / whatnot.
-    if (argv.dir-init)
+    if (argv.t)
     {
       prospInitScript = prospBaseDir + '/common/init/' + language + '/dirInit.sh';
       prospChild = spawn(prospInitScript, [targetDir, prospDir], { stdio: 'inherit' });

@@ -506,7 +506,11 @@ function! s:HasProspDir(dir)
   let prospDir = g:prosp_directory . homeToRoot
 
   if isdirectory(prospDir)
-    return 1
+    if filereadable(prospDir . '/.prosp')
+      return 1
+    else
+      return 0
+    endif
   else
     return 0
   endif
