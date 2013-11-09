@@ -495,6 +495,43 @@ function! s:IsDirectory(pattern)
 endfunction
 " }}}
 
+function! s:HasProspDir(dir)
+  " Get the path from the parent root directory to the user's home
+  " directory.
+  " \V turns on very nomagic mode. Only special regex characters accepted
+  " must be escaped with \
+  let searchExpr = '\V'.escape($HOME.'', '\')
+  let homeToRoot = substitute(a:dir, searchExpr, '', '')
+
+  let prospDir = g:prosp_directory . homeToRoot
+
+  if isdirectory(prospDir)
+    return 1
+  else
+    return 0
+  endif
+endfunction
+
+function! s:SearchDownForProspDir(dir)
+  " fnamemodify with :h removes last path component, see
+  " http://stackoverflow.com/questions/16485748/vimscript-how-to-get-the-parent-directory-of-a-path-string
+  let curDir = a:dir
+  let homeDir = $HOME
+  if s:HasProspDir(curDir)
+    return curDir
+  else
+    if curDir ==# homeDir
+      return ''
+    else
+      if curDir ==# '/'
+        return ''
+      else
+        return s:SearchDownForProspDir(fnamemodify(curDir, ':h'))
+      endif
+    endif
+  endif
+endfunction
+
 " Taken from: https://github.com/airblade/vim-rooter
 " Great example of finding a parent directory containing a SCM dir.
 function! s:FindInCurrentPath(pattern)
@@ -515,18 +552,31 @@ function! s:FindInCurrentPath(pattern)
   endif
 endfunction
 
+
 " Returns the root directory for the current file based on the list of
 " known SCM directory names.
-" NOTE: We need to attempt to find current path in prosp as well.
 function! s:FindRootDirectory()
+
+  " First attempt to see if the prosp directory already exists.
+  let possibleRoot = expand('%:p:h')
+  let prospRoot = s:SearchDownForProspDir(possibleRoot)
+
+  " Now determine what it would be if we were to search based off of
+  " common SCMs.
   let rooter_patterns = ['.git', '.git/', '_darcs/', '.hg/', '.bzr/', '.svn/']
+  let result = ''
   for pattern in rooter_patterns
     let result = s:FindInCurrentPath(pattern)
     if !empty(result)
-      return result
+      break
     endif
   endfor
-  return ''
+
+  " Take whichever path is larger.
+  if strlen(prospRoot) > strlen(result)
+    return prospRoot
+  else
+    return result
 endfunction
 
 function! s:OpenFileInProjectSpecificContext(file)
