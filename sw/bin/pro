@@ -10,18 +10,26 @@ var optimist = require('optimist')
     .boolean('i')
     .alias('i', 'init')
     .describe('i', 'Initialize current repository inside of prosp directory.')
+    .boolean('init-dir')
+    .describe('init-dir', 'When initializing, places language specific files in working directory.')
     .alias('n', 'no-git')
-    .describe('f', 'Will not check for a .git directory when initializing. Will use current directory.')
+    .describe('f', 'Forces use of current directory over any parent .git dir.')
+    .alias('f', 'force')
     .boolean('e')
     .alias('e','edit')
     .describe('e', 'Edit a script instead of executing it.')
-    .boolean('l')
-    .alias('l', 'list')
-    .describe('l', 'List all possible executable scripts and their descriptions.')
+    .alias('l', 'lang')
+    .describe('l', 'Language to use for initialization (none, cpp, js, coffee).')
+    .default('l', 'none')
+    .boolean('d')
+    .alias('d', 'display-scripts')
+    .describe('d', 'Display all possible executable scripts and their descriptions.')
     .alias('h', 'help')
     .describe('h', 'Display this help.');
 
 var argv = optimist.argv;
+
+var language = argv.l;
 
 // Check to see if user wants to display the help.
 if (argv.h) {
@@ -53,27 +61,58 @@ function getCorrespondingProspDir(ourDir)
   return prospBaseDir + prospSubDir;
 }
 
-if (argv.i && argv.n) {
-  targetDir = getCorrespondingProspDir(curDir);
-  if (!fs.existsSync(targetDir)) {
-    console.log("Initializing prosp directory *without* searching for parent .git.");
-    console.log("Directory: '" + targetDir + "'");
-    mkdirp.sync(targetDir);
+function initializeDirectory(prospDir)
+{
+  // Check to see if a .prosp file is found in the directory, if it exists.
+  var dirExists = fs.existsSync(prospDir);
+  var fileExists = false;
+  var prospDotFile = prospDir + "/.prosp";
+  if (dirExists)
+    fileExists = fs.existsSync(prospDotFile);
 
-    initScript = prospBaseDir + '/common/postInit.sh';
-    child = spawn(initScript, [curDir, targetDir], { stdio: 'inherit'  });
+  if (!(dirExists && fileExists))
+  {
+    console.log("Initializing prosp directory '" + prospDir + "'");
+    if (!dirExists)
+      mkdirp.sync(prospDir);
+
+    // Write prosp dot file and initialize the prosp directory.
+    fs.writeFile(prospDotFile, '# Prosp settings file.', function (err) {
+      if (err)
+        console.log(err);
+    });
+    prospInitScript = prospBaseDir + '/common/init/' + language + '/prospInit.sh';
+    prospChild = spawn(prospInitScript, [targetDir, prospDir], { stdio: 'inherit' });
+
+    // If requested, also initialize the directory the command was run from.
+    // This will populate the directory with a common set of makefiles / whatnot.
+    if (argv.dir-init)
+    {
+      prospInitScript = prospBaseDir + '/common/init/' + language + '/dirInit.sh';
+      prospChild = spawn(prospInitScript, [targetDir, prospDir], { stdio: 'inherit' });
+    }
+
     process.exit(0);
-  } else {
-    console.log('Directory to be initialized already exists:');
-    console.log(targetDir);
+  }
+  else
+  {
+    console.log('Prosp dot file already exists:');
+    console.log(prospDir);
     console.log('Aborting.');
     process.exit(0);
   }
 }
 
+if (argv.i && argv.n)
+{
+  var prospDir = getCorrespondingProspDir(curDir);
+  initializeDirectory(prospDir);
+}
+
 // Determine subdirectory in prosp (basename of nearest dir containing .git)
 var targetDir = '';
-while (curDir != '/') {
+while (curDir != '/')
+{
   // Check to see if the current directory contains a .git directory.
   if (fs.existsSync(curDir + '/.git'))
   {
@@ -93,7 +132,8 @@ while (curDir != '/') {
 }
 
 // Warn the user if we didn't find a parent .git directory.
-if (targetDir.length === 0){
+if (targetDir.length === 0)
+{
   //console.warn("Warning: Did not find parent directory with .git, using current directory.");
   targetDir = path.resolve(process.cwd());
 }
@@ -102,27 +142,14 @@ var prospDir = getCorrespondingProspDir(targetDir);
 
 
 // Initialize prosp directory.
-if (argv.i) {
-  if (!fs.existsSync(prospDir))
-  {
-    console.log("Initializing prosp directory '" + prospDir + "'");
-    mkdirp.sync(prospDir);
-    initScript = prospBaseDir + '/common/postInit.sh';
-
-    child = spawn(initScript, [targetDir, prospDir], { stdio: 'inherit' });
-    process.exit(0);
-  }
-  else
-  {
-    console.log('Directory to be initialized already exists:');
-    console.log(prospDir);
-    console.log('Aborting.');
-    process.exit(0);
-  }
+if (argv.i)
+{
+  initializeDirectory(prospDir);
 }
 
 // Ensure directory exists before continuing.
-if (fs.existsSync(prospDir) === false) {
+if (fs.existsSync(prospDir) === false)
+{
   console.error("Error: Failed to find directory '" + prospDir + "'");
   console.error("Try initializing prosp directory with 'pro -i'");
   process.exit(1);
