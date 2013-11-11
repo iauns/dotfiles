@@ -155,7 +155,7 @@ if (fs.existsSync(prospDir) === false)
 }
 
 // Check to see if the use wants to list all of the possible programs to execute.
-if (argv.l) {
+if (argv.d) {
   console.log("Prosp directory: '" + prospDir + "'");
   // List all possible commands from the target directory.
   // Call each command to obtain their description.
