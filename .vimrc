@@ -979,6 +979,23 @@ if has("gui_running")
   nnoremap <C-b>8 8gt
   nnoremap <C-b>9 9gt
   nnoremap <C-b>0 0gt
+
+  " Rebinding of <C-b>m to open a new tab.
+  nnoremap <C-b>m :tabnew<CR>
+
+  function! RenameTab()
+    "let curline = getline('.')
+    "call inputsave()
+    let name = input('Enter name: ')
+
+    execute ':TName "' . name . '"'
+
+    "call inputrestore()
+    "call setline('.', curline . ' ' . name)
+  endfunction
+
+  " Rebinding of <C-b>, to rename tab
+  nnoremap <C-b>, :call RenameTab()<CR>
 else
   " ---------------- Tmux pane integration ---------------
   " Maps <C-h/j/k/l> to switch vim splits in the given direction. If there are
