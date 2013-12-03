@@ -11,7 +11,8 @@ npm -g install glog
 npm -g install marked
 npm -g install coffee-script
 npm -g install grunt-cli
-npm -g install testacular
+#npm -g install testacular
+npm -g install karma
 
 # Non-global modules that aren't used on the command line should be installed by
 # the packages that use the modules. This is because the packages then select
