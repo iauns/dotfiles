@@ -92,6 +92,11 @@ set noshowmatch           " Don't show matching brackets (%).
 
 set so=2                  " Lines of context at the bottom / top of document.
 
+" Speed up vim's syntax highlighting.
+set nocursorcolumn
+set nocursorline
+syntax sync minlines=256
+
 " Note: Not sure this is necessary with the easy-clip plugin installed.
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard.
