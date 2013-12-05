@@ -3,6 +3,11 @@ if not status --is-interactive
   exit # skips the rest of this file; does not actually exit the shell!
 end
 
+# Attach tmux.
+#if test -z $TMUX
+#  tmux att
+#end
+
 set BROWSER open
 
 # Configure autojump.
