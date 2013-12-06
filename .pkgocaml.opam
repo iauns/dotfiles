@@ -4,8 +4,8 @@ source .shutils
 #opam install otags  # Possibly superceded by merlin.
 
 # Install everything required by merlin.
-opam install yojson
-opam install menhir
+#opam install yojson
+#opam install menhir
 
-opam remote add kiwi http://kiwi.iuwt.fr/~asmanur/opam/.git
-opam install merlin
+#opam remote add kiwi http://kiwi.iuwt.fr/~asmanur/opam/.git
+#opam install merlin

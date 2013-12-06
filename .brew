@@ -95,8 +95,8 @@ brew install boost --with-c++11
 brew install devil      # Image library - required for ion2.
 brew install assimp     # Asset import library.
 brew install node
-brew install ocaml
-brew install opam       # Ocaml package manager.
+#brew install ocaml
+#brew install opam       # Ocaml package manager.
 brew install haskell-platform
 brew install gd         # For hosting a wiki site.
 brew install scons      # Build system.
