@@ -298,5 +298,9 @@ fi
 info "Running private OSX setup"
 ${HOME}/dotfiles/private/nolink/osx
 
+if [[ ! -d ~/.local/share/autojump ]]; then
+  mkdir -p ~/.local/share/autojump
+fi
+
 echo ''
 echo "Done. Note that some of these changes require a logout/restart to take effect."
