@@ -758,6 +758,10 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
+nnoremap m !
+" m will be remapped later on by easymotion.
+nnoremap m <nop>
+
 " We use the <C-h,j,k,l> keys for tmux. Instead, in vim, I switch windows with
 " <space>h, <space>j, etc... These overwrite the bindings supplied by Also use
 " <space>s and <space>- for splitting the windows.
@@ -1069,15 +1073,15 @@ highlight SignifySignChange cterm=bold ctermbg=237 ctermfg=227
 let g:signify_disable_by_default = 1
 
 " ---------------- EasyMotion ------------------
-let g:EasyMotion_leader_key = '<space>'
+let g:EasyMotion_leader_key = '<space><space>'
 let g:EasyMotion_keys       = 'htnsbcfgijklpzqrvmwaoeu'
+let g:EasyMotion_mapping_f  = 'm'
 
 call EasyMotion#InitOptions({
-      \   'leader_key'      : '<space><space>'
-      \ , 'keys'            : 'htnsbcfgijklpzqrvmwaoeu'
+      \   'keys'            : 'htnsbcfgijklpzqrvmwaoeu'
       \ , 'do_shade'        : 1
-      \ , 'do_mapping'      : 1
       \ , 'grouping'        : 1
+      \ , 'do_mapping'      : 1
       \
       \ , 'hl_group_target' : 'Question'
       \ , 'hl_group_shade'  : 'EasyMotionShade'
