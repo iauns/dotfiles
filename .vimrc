@@ -243,6 +243,8 @@ Bundle 'junegunn/vim-easy-align'
 " current line.
 "Bundle 'rhysd/clever-f.vim.git'
 
+Bundle 'tomtom/tcomment_vim.git'
+
 " I pulled most of the javascript plugins from:
 " https://github.com/joyent/node/wiki/Vim-Plugins
 "
