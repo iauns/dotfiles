@@ -129,6 +129,13 @@ installcask pc-keyboardhack
 installcask vagrant
 
 ###############################################################################
+# Vagrant plugins
+###############################################################################
+
+# Keep guest additions updated.
+vagrant plugin install vagrant-vbguest
+
+###############################################################################
 # Homebrew versions
 ###############################################################################
 brew tap homebrew/versions
