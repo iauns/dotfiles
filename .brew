@@ -134,6 +134,7 @@ installcask vagrant
 
 # Keep guest additions updated.
 vagrant plugin install vagrant-vbguest
+vagrant plugin install vagrant-list
 
 ###############################################################################
 # Homebrew versions
