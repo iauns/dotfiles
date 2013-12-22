@@ -130,7 +130,8 @@ function fish_prompt
   printf '%s' (prompt_pwd)
   set_color normal
 
-  printf '%s ' (__fish_git_prompt)
+  #printf '%s ' (__fish_git_prompt)
+  printf ' '
 
   printf '{'
   set_color 16759E
