@@ -274,6 +274,11 @@ Bundle "vimwiki/vimwiki"
 Bundle 'rhysd/vim-clang-format'
 Bundle 'kana/vim-operator-user'
 
+if has("gui_running")
+  " Asyncronous commands for building in VIM (AsyncMake)
+  Bundle "pydave/AsyncCommand"
+endif
+
 " Alternative to powerline and airline.
 "Bundle 'itchyny/lightline.vim'
 
