@@ -1319,9 +1319,17 @@ endif
 "===============================================================================
 
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#custom#source('file,file_rec', 'sorters', 'sorter_rank')
-call unite#custom#source('file,file/new,buffer,file_rec,file_rec/async,file_mru,outline',
-      \ 'matchers', 'matcher_fuzzy')
+"call unite#custom#source('file,file_rec', 'sorters', 'sorter_rank')
+""call unite#custom#source('file,file/new,buffer,file_rec,file_rec/async,file_mru,outline',
+""      \ 'matchers', 'matcher_fuzzy')
+"call unite#custom#source('file,file/new,buffer,file_rec,file_rec/async,file_mru,outline',
+"      \ 'matchers', 'matcher_glob')
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
+
+"call unite#filters#matcher_default#use(['matcher_regexp'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
 
 " Set up some custom ignores
 call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
