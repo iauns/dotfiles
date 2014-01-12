@@ -231,6 +231,8 @@ Bundle 'oinksoft/tcd.vim'
 Bundle 'bitc/vim-hdevtools'
 " Perform ack from within vim! Look into replacing with unit's proc grep.
 Bundle 'mileszs/ack.vim.git'
+" Ag within vim. Youtube video: http://www.youtube.com/watch?v=XzN4h4dj4cE
+Bundle 'rking/ag.vim'
 " Parameter / Argument text objects -- uses capitol 'P'.
 Bundle 'vim-scripts/Parameter-Text-Objects.git'
 " Slime
@@ -242,6 +244,13 @@ Bundle 'junegunn/vim-easy-align'
 " Removed because it was just getting in the way and jumping beyond the
 " current line.
 "Bundle 'rhysd/clever-f.vim.git'
+
+" Last two comments in video: https://www.youtube.com/watch?v=aHm36-na4-4
+"
+" Adds :B to visual mode. When used, only operates on a block.
+Bundle 'vim-scripts/vis.git'
+" Adds movable visual blocks to vim
+Bundle 'atweiden/vim-dragvisuals.git'
 
 Bundle 'tomtom/tcomment_vim.git'
 
