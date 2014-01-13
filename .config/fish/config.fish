@@ -24,6 +24,7 @@ set -x OCAML_TOPLEVEL_PATH $HOME/.opam/system/lib/toplevel
 set -x CAML_LD_LIBRARY_PATH $HOME/.opam/system/lib/stublibs \
       /usr/local/lib/ocaml/stublibs
 set -x TMUXIFIER_LAYOUT_PATH $HOME/.tmuxifier_layouts
+set -x CPM_CACHE_DIR $HOME/.cpm_cache
 set -x IGNOREOF 10
 set -o ignoreeof
 
