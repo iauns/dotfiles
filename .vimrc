@@ -142,8 +142,9 @@ autocmd BufReadPost *
       \ endif
 
 " Always show the gutter (sign column).
-autocmd BufEnter * sign define dummy
-autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
+" (started misbehaving).
+"autocmd BufEnter * sign define dummy
+"autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 
 "-------------------------------------------------------------------------------
 " VUNDLE
