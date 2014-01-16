@@ -31,6 +31,12 @@ if [ ! -d ~/.vim/bundle/vundle ]; then
   git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 fi
 
+# Ensure neobundle is available for vim (chose this over vundle do rebuilding
+# of projects and lazy loading -- need lazy loading for YCM).
+if [ ! -d ~/.vim/bundle/neobundle.vim ]; then
+  git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+fi
+
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################

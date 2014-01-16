@@ -24,7 +24,9 @@ endif
 "-------------------------------------------------------------------------------
 " General VIM settings
 "-------------------------------------------------------------------------------
-set nocompatible          " No compatibility with Vi.
+if has('vim_starting')
+  set nocompatible          " No compatibility with Vi.
+endif
 syntax enable             " Turn on color syntax highlighting.
 "set background=dark       " Default background is dark.
 "colorscheme xoria256      " Use two color schemes: xoria256 for dark.
@@ -147,99 +149,108 @@ autocmd BufReadPost *
 "autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
 
 "-------------------------------------------------------------------------------
-" VUNDLE
+" Neobundle
 "-------------------------------------------------------------------------------
-"
-" NOTE: May want to switch te Neobundle. It allows you to place compiler
-" directives along with the bundle. This would be helpful for vimproc and
-" youcompleteme. Below is the build directives for vimproc:
-"
-" NeoBundle 'Shougo/vimproc', { 'build': {
-"      \ 'windows': 'make -f make_mingw32.mak',
-"      \ 'cygwin': 'make -f make_cygwin.mak',
-"      \ 'mac': 'make -f make_mac.mak',
-"      \ 'unix': 'make -f make_unix.mak',
-"      \ } }
-"
-" NeoBundle was inspired by Vundle, so it looks extremelly similar.
-" The only downside is the documentation.
-"
-" Filetype needs to be off with vundle,
-" See: https://github.com/gmarik/vundle/issues/16
-" And: https://bugs.launchpad.net/ultisnips/+bug/1067416
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-" let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+call neobundle#rc(expand('~/.vim/bundle/'))
 
-" build vimproc : % cd dot.vim/bundle/vimproc/ && make -f make_mac.mak
-Bundle 'Shougo/vimproc'
+ " Let NeoBundle manage NeoBundle
+ NeoBundleFetch 'Shougo/neobundle.vim'
+
+ " Recommended to install
+ NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+  \     'windows' : 'make -f make_mingw32.mak',
+  \     'cygwin' : 'make -f make_cygwin.mak',
+  \     'mac' : 'make -f make_mac.mak',
+  \     'unix' : 'make -f make_unix.mak',
+  \    },
+  \ }
+
+ " My Bundles here:
+ " Refer to |:NeoBundle-examples|.
+ "
+ " Note: You don't set neobundle setting in .gvimrc!
+
+ " ...
+
+"###############################################################################
 
 " Rest of Shougo's stuff.
 " Look at the following when digging back into unite:
 " https://github.com/terryma/dotfiles/blob/master/.vimrc
-Bundle 'Shougo/unite.vim'
-Bundle 'Shougo/unite-outline'
-Bundle 'Shougo/unite-help'
-Bundle 'Shougo/unite-session'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/unite-outline'
+"NeoBundle 'Shougo/unite-help'
+"NeoBundle 'Shougo/unite-session'
 
 " Bundles
-Bundle 'Valloric/YouCompleteMe.git'
-Bundle 'godlygeek/tabular.git'
-Bundle 'tpope/vim-markdown.git'
-Bundle 'paradigm/SkyBison.git'
-Bundle 'vim-scripts/Cpp11-Syntax-Support.git'
-Bundle 'derekwyatt/vim-protodef.git'
+NeoBundleLazy 'Valloric/YouCompleteMe', {'augroup': 'youcompletemeStart', 
+  \ 'build': {
+    \ 'mac': './install.sh --clang-completer',
+    \ 'unix': './install.sh --clang-completer',
+    \ 'cygwin': './install.sh --clang-completer',
+    \ },
+    \ 'autoload' : {
+    \   'filetypes' : ['c', 'cpp'],
+    \ },
+  \ }
+
+NeoBundle 'tpope/vim-markdown.git'
+NeoBundle 'vim-scripts/Cpp11-Syntax-Support.git'
+NeoBundleLazy 'godlygeek/tabular.git'
+"NeoBundle 'paradigm/SkyBison.git'
+NeoBundle 'derekwyatt/vim-protodef.git'
 " New motion objects. This introduces the comma ','.
 " Use it to perform an action on a word in camel case. Like ci,w
-Bundle 'bkad/CamelCaseMotion.git'
+"NeoBundle 'bkad/CamelCaseMotion.git'
 " Text object based on indentation level. Adds 'i' and 'I' as text objects.
-Bundle 'michaeljsmith/vim-indent-object.git'
-Bundle 'suan/vim-instant-markdown'
-Bundle 'dhruvasagar/vim-table-mode'
+NeoBundleLazy 'michaeljsmith/vim-indent-object.git'
+NeoBundleLazy 'suan/vim-instant-markdown'
+NeoBundleLazy 'dhruvasagar/vim-table-mode'
 " Unimpaired plugin (bindings to left and right braces) -- Unimpaired must
 " come before svermeulen's branch of easymotion. Otherwise 'yp' won't be bound
 " correctly.
-Bundle 'tpope/vim-unimpaired.git'
+NeoBundle 'tpope/vim-unimpaired.git'
 " Easy motion (moved to Bundle from VAM). Using alternative which uses two chars.
-Bundle 'iauns/vim-easymotion.git'
-Bundle 'iauns/vim-subbed'
+NeoBundle 'iauns/vim-easymotion.git'
+NeoBundle 'iauns/vim-subbed'
 "Bundle 'svermeulen/vim-easymotion'
-Bundle 'tpope/vim-repeat.git'
-Bundle 'tpope/vim-speeddating.git'
+NeoBundle 'tpope/vim-repeat.git'
+"NeoBundle 'tpope/vim-speeddating.git'
 " Narrow region. Lets you edit the selection in a separate buffer.
 " The shortcut is <leader>nr.
-Bundle 'chrisbra/NrrwRgn.git'
-Bundle 'vim-scripts/utl.vim.git'
-Bundle 'tpope/vim-surround.git'
-Bundle 'SirVer/ultisnips.git'
-Bundle 'vim-scripts/mayansmoke.git'
-Bundle 'derekwyatt/vim-fswitch.git'
-Bundle 'tpope/vim-fugitive.git'
-Bundle 'scrooloose/nerdtree.git'
-Bundle 'scrooloose/syntastic.git'
-Bundle 'AndrewRadev/simple_bookmarks.vim.git'
-Bundle 'guns/xterm-color-table.vim.git'
-Bundle 'mattn/zencoding-vim.git'
-Bundle 'Raimondi/delimitMate'
-Bundle 'tikhomirov/vim-glsl'
-Bundle 'mhinz/vim-signify'
-Bundle 'vim-scripts/Tab-Name'
-Bundle 'oinksoft/tcd.vim'
+"NeoBundle 'chrisbra/NrrwRgn.git'
+" Should be associated with opening up websites (see neobundles docs -- may
+" have a better way).
+NeoBundleLazy 'vim-scripts/utl.vim.git'
+NeoBundle 'tpope/vim-surround.git'
+NeoBundle 'SirVer/ultisnips.git'
+NeoBundle 'derekwyatt/vim-fswitch.git'
+NeoBundle 'tpope/vim-fugitive.git'
+NeoBundle 'scrooloose/nerdtree.git'
+NeoBundle 'scrooloose/syntastic.git'
+"NeoBundleLazy 'AndrewRadev/simple_bookmarks.vim.git'
+"NeoBundleLazy 'guns/xterm-color-table.vim.git'
+NeoBundleLazy 'mattn/zencoding-vim.git'
+NeoBundle 'Raimondi/delimitMate'
+NeoBundle 'tikhomirov/vim-glsl'
+NeoBundleLazy 'mhinz/vim-signify'
+NeoBundle 'vim-scripts/Tab-Name'
+NeoBundle 'oinksoft/tcd.vim'
 " Haskell dev plugins (for syntastic and definition of types)
-Bundle 'bitc/vim-hdevtools'
+"NeoBundleLazy 'bitc/vim-hdevtools'
 " Perform ack from within vim! Look into replacing with unit's proc grep.
-Bundle 'mileszs/ack.vim.git'
+NeoBundle 'mileszs/ack.vim.git'
 " Ag within vim. Youtube video: http://www.youtube.com/watch?v=XzN4h4dj4cE
-Bundle 'rking/ag.vim'
-" Parameter / Argument text objects -- uses capitol 'P'.
-Bundle 'vim-scripts/Parameter-Text-Objects.git'
+NeoBundle 'rking/ag.vim'
 " Slime
-Bundle 'jpalardy/vim-slime.git'
+NeoBundleLazy 'jpalardy/vim-slime.git'
 " Alignment plugin
-Bundle 'junegunn/vim-easy-align'
+NeoBundleLazy 'junegunn/vim-easy-align'
 " Clever-f - gets rid of ; and , when searching. Replaced by 'f' and 'F'.
 " Makes sense considering I never use multiple searches in a row.
 " Removed because it was just getting in the way and jumping beyond the
@@ -249,89 +260,90 @@ Bundle 'junegunn/vim-easy-align'
 " Last two comments in video: https://www.youtube.com/watch?v=aHm36-na4-4
 "
 " Adds :B to visual mode. When used, only operates on a block.
-Bundle 'vim-scripts/vis.git'
+NeoBundle 'vim-scripts/vis.git'
 " Adds movable visual blocks to vim
-Bundle 'atweiden/vim-dragvisuals.git'
+NeoBundle 'atweiden/vim-dragvisuals.git'
 
-Bundle 'tomtom/tcomment_vim.git'
+NeoBundle 'tomtom/tcomment_vim.git'
 
 " I pulled most of the javascript plugins from:
 " https://github.com/joyent/node/wiki/Vim-Plugins
 "
 " Coffeescript support for vim. This is a more active fork of the original repo.
-Bundle "kchmck/vim-coffee-script"
+NeoBundle "kchmck/vim-coffee-script"
 " Better syntax highlighting for javascript in VIM
-Bundle "jelera/vim-javascript-syntax"
+NeoBundle "jelera/vim-javascript-syntax"
 " Syntax highlighting for stylus (less verbose CSS language, much like
 " Coffeescript is for javascript).
-Bundle "wavded/vim-stylus"
+NeoBundle "wavded/vim-stylus"
 " Full javascript completion engine that integrates with youcompleteme.
 " (omnicomplete)
-Bundle "marijnh/tern_for_vim"
+NeoBundleLazy "marijnh/tern_for_vim"
 " Color schemes
-Bundle 'junegunn/seoul256.vim'
-Bundle 'baskerville/bubblegum'
+NeoBundleLazy 'junegunn/seoul256.vim'
+NeoBundleLazy 'baskerville/bubblegum'
+NeoBundleLazy 'vim-scripts/mayansmoke.git'
 
 " Sparkup
-Bundle 'rstacruz/sparkup', {'rtp' : 'vim/'}
+"NeoBundleLazy 'rstacruz/sparkup', {'rtp' : 'vim/'}
 
 " Vim wiki. Replacing my personal wiki. While this isn't a semantic wiki,
 " there are better ways of tracking progress other than using a semantic wiki.
 " Additionally there were HTTPS concerns with the full-blown wiki approach.
-Bundle "vimwiki/vimwiki"
+NeoBundle "vimwiki/vimwiki"
 
 " Clang formatter for C++
-Bundle 'rhysd/vim-clang-format'
-Bundle 'kana/vim-operator-user'
+"NeoBundle 'rhysd/vim-clang-format'
+"NeoBundle 'kana/vim-operator-user'
 
 if has("gui_running")
   " Asyncronous commands for building in VIM (AsyncMake)
-  Bundle "pydave/AsyncCommand"
+  NeoBundle "pydave/AsyncCommand"
 endif
 
 " Alternative to powerline and airline.
-"Bundle 'itchyny/lightline.vim'
+"NeoBundle 'itchyny/lightline.vim'
 
 " CtrlP was replaced by unite.
-"Bundle 'kien/ctrlp.vim.git'
+"NeoBundle 'kien/ctrlp.vim.git'
 
 " Extended session tools
-"Bundle 'xolox/vim-misc.git'
-"Bundle 'xolox/vim-session.git'
+"NeoBundle 'xolox/vim-misc.git'
+"NeoBundle 'xolox/vim-session.git'
 
 " Plugins that I've tried but are currently disabled.
-"Bundle 'majutsushi/tagbar.git'
-"Bundle 'mattn/webapi-vim'
-"Bundle 'mattn/gist-vim'
-"Bundle 'def-lkb/merlin', {'rtp' : 'vim/'}
+"NeoBundle 'majutsushi/tagbar.git'
+"NeoBundle 'mattn/webapi-vim'
+"NeoBundle 'mattn/gist-vim'
+"NeoBundle 'def-lkb/merlin', {'rtp' : 'vim/'}
 
 " Multiedit (haven't experimented with this)
-"Bundle 'https://github.com/hlissner/vim-multiedit.git'
+"NeoBundle 'https://github.com/hlissner/vim-multiedit.git'
 " Visual increment - unsure about carrying around this plugin. I never use it.
-"Bundle 'vim-scripts/VisIncr.git'
+"NeoBundle 'vim-scripts/VisIncr.git'
 " Powerline -- this is the new powerline
-"Bundle 'Lokaltog/powerline.git'
+"NeoBundle 'Lokaltog/powerline.git'
 " lldb debugger for vim. Official lldb repo.
 " Using slime instead.
-"Bundle 'http://llvm.org/git/lldb', {'rtp' : 'utils/vim-lldb/'}
+"NeoBundle 'http://llvm.org/git/lldb', {'rtp' : 'utils/vim-lldb/'}
 "" Merlin for OCaml completion
-"Bundle 'def-lkb/merlin', {'rtp' : 'vim/'}
+"NeoBundle 'def-lkb/merlin', {'rtp' : 'vim/'}
 " Railcasts colorscheme
-"Bundle 'dhruvasagar/vim-railscasts-theme'
+"NeoBundle 'dhruvasagar/vim-railscasts-theme'
 "" ZoomWin.git - replaces <C-w>o with zoom-in / zoom-out.
-"Bundle 'vim-scripts/ZoomWin.git'
+"NeoBundle 'vim-scripts/ZoomWin.git'
 "" Gundo
-"Bundle 'sjl/gundo.vim.git'
+"NeoBundle 'sjl/gundo.vim.git'
 "" Plugin to automatically update tags when a file is modified.
-"Bundle 'vim-scripts/AutoTag.git'
+"NeoBundle 'vim-scripts/AutoTag.git'
 "" Switch.vim - use regular expressions to switch between vim elements.
-"Bundle 'AndrewRadev/switch.vim'
+"NeoBundle 'AndrewRadev/switch.vim'
 " Latex box
-"Bundle 'LaTeX-Box-Team/LaTeX-Box'
+"NeoBundle 'LaTeX-Box-Team/LaTeX-Box'
 " Vim-seek. We use the '-' for seeking. '0', '-', and '\' are the only keys
 " that are really available. May want to consider seek as 's' instead of
 " leader.
-"Bundle 'goldfeld/vim-seek.git'
+"NeoBundle 'goldfeld/vim-seek.git'
 
 " Plugins to think about installing:
 " Indent_Guides
@@ -371,13 +383,23 @@ endif
 " https://github.com/ptrin/JumpToCSS
 " https://github.com/spiiph/vim-space
 " RepeatLast - I like the idea, but it needs a little bit more work.
-"Bundle 'vim-scripts/RepeatLast.vim'
+"NeoBundle 'vim-scripts/RepeatLast.vim'
 "
 " Rejected plugins:
 " argtextobj - I couldn't get the text object to behave appropriately.
 "
-filetype plugin indent on
 
+"###############################################################################
+
+filetype plugin indent on     " Required!
+"
+" Brief help
+" :NeoBundleList          - list configured bundles
+" :NeoBundleInstall(!)    - install(update) bundles
+" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+
+" Installation check.
+NeoBundleCheck
 
 "-------------------------------------------------------------------------------
 " Color scheme
@@ -1237,21 +1259,21 @@ let g:vimwiki_list = [
 let g:vimwiki_url_maxsave = 0
 
 
-" ---------------- clang_format ------------------
-
-let g:clang_format#code_style = 'llvm'
-
-let g:clang_format#style_options = {
-            \ "AllowShortIfStatementsOnASingleLine" : "true",
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "BreakBeforeBraces": "Linux",
-            \ "Standard" : "C++11"}
-
-let g:clang_format#command = 'clang-format-3.4'
-
-" map to <Leader>cf in C++ code
-autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
-autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+"" ---------------- clang_format ------------------
+"
+"let g:clang_format#code_style = 'llvm'
+"
+"let g:clang_format#style_options = {
+"            \ "AllowShortIfStatementsOnASingleLine" : "true",
+"            \ "AlwaysBreakTemplateDeclarations" : "true",
+"            \ "BreakBeforeBraces": "Linux",
+"            \ "Standard" : "C++11"}
+"
+"let g:clang_format#command = 'clang-format-3.4'
+"
+"" map to <Leader>cf in C++ code
+"autocmd FileType c,cpp,objc nnoremap <buffer><Leader>cf :<C-u>ClangFormat<CR>
+"autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
 
 " ----------------- Utl ----------------
 if has("win32")
@@ -1591,14 +1613,6 @@ augroup jh_markdown
         \ | set textwidth=78
   au BufLeave *.md,*.mkd set formatoptions=ql
         \ | set textwidth=0
-augroup END
-
-"-----------------------------------------------------------------------------
-" OCaml
-"-----------------------------------------------------------------------------
-augroup jh_ocaml
-  au!
-  au BufNewFile,BufRead *.eliom set filetype=ocaml
 augroup END
 
 "-----------------------------------------------------------------------------
