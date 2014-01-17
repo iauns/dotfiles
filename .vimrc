@@ -92,7 +92,7 @@ set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set sessionoptions-=options  " Don't save options in sessions. 
 set noshowmatch           " Don't show matching brackets (%).
 
-set so=2                  " Lines of context at the bottom / top of document.
+set so=0                  " Lines of context at the bottom / top of document.
 
 " Speed up vim's syntax highlighting.
 set nocursorcolumn
@@ -216,7 +216,9 @@ NeoBundleLazy 'dhruvasagar/vim-table-mode'
 " correctly.
 NeoBundle 'tpope/vim-unimpaired.git'
 " Easy motion (moved to Bundle from VAM). Using alternative which uses two chars.
-NeoBundle 'iauns/vim-easymotion.git'
+NeoBundle 'haya14busa/vim-easymotion'
+" vim-sneak as an alternative to vim-easymotion
+NeoBundle 'justinmk/vim-sneak'
 NeoBundle 'iauns/vim-subbed'
 "Bundle 'svermeulen/vim-easymotion'
 NeoBundle 'tpope/vim-repeat.git'
@@ -772,6 +774,7 @@ nnoremap U <c-r>
 
 " H: Go to beginning of line. Repeated invocation goes to previous line
 noremap <expr> H getpos('.')[2] == 1 ? 'k' : '^'
+nnoremap ^ H
 
 " L: Go to end of line. Repeated invocation goes to next line
 " This doesn't actually work -- probably something to do with my virtual space
@@ -790,12 +793,16 @@ endfunction
 nnoremap + <c-a>
 nnoremap _ <c-x>
 
-" Remap semicolon to colon and colon to semicolon. I don't use repeat last
-" 'f' command very often.
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
+" The following mapping was useful, but I found myself entering command mode
+" only to enter wqa. Just use ZZ instead. Plus ZZ only closes the current
+" window, not the entire editor. Much safer. With vim-sneak, ; becomes more
+" important.
+"" Remap semicolon to colon and colon to semicolon. I don't use repeat last
+"" 'f' command very often.
+"nnoremap ; :
+"nnoremap : ;
+"vnoremap ; :
+"vnoremap : ;
 
 nnoremap m !
 " m will be remapped later on by easymotion.
@@ -1111,20 +1118,16 @@ highlight SignifySignChange cterm=bold ctermbg=237 ctermfg=227
 " Toggle with :SignifyToggle (mapped to <leader>gt above)
 let g:signify_disable_by_default = 1
 
-" ---------------- EasyMotion ------------------
-let g:EasyMotion_leader_key = '<space><space>'
-let g:EasyMotion_keys       = 'htnsbcfgijklpzqrvmwaoeu'
-let g:EasyMotion_mapping_f  = 'm'
+" ---------------- Vim-Sneak ------------------
+"let g:sneak#streak = 1
 
-call EasyMotion#InitOptions({
-      \   'keys'            : 'htnsbcfgijklpzqrvmwaoeu'
-      \ , 'do_shade'        : 1
-      \ , 'grouping'        : 1
-      \ , 'do_mapping'      : 1
-      \
-      \ , 'hl_group_target' : 'Question'
-      \ , 'hl_group_shade'  : 'EasyMotionShade'
-      \ })
+nmap f       <Plug>SneakForward
+xmap f       <Plug>VSneakForward
+nmap F       <Plug>SneakBackward
+xmap F       <Plug>VSneakBackward
+
+"" ---------------- EasyMotion ------------------
+map m <Plug>(easymotion-s)
 
 " ---------------- Syntastic ---------------- 
 let g:syntastic_error_symbol='✗'
@@ -1176,6 +1179,7 @@ so ~/.vim/UltiSnips/UltiSnipHelpers.vim
 let g:UltiSnipsExpandTrigger="<C-e>"
 let g:UltiSnipsJumpForwardTrigger="<C-e>"
 let g:UltiSnipsJumpBackwardTrigger="<C-i>"
+  
 
 " ----------------- CommandT -----------------
 " We place the match window at the top of the screen because of laptop use.
