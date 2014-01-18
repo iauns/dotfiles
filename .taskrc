@@ -28,3 +28,4 @@ data.location=~/.task
 color=on
 journal.time=on
 dateformat.annotation=Y/m/d H:N
+default.command=list pro.not:cal
