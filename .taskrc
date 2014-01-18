@@ -29,3 +29,5 @@ color=on
 journal.time=on
 dateformat.annotation=Y/m/d H:N
 default.command=list pro.not:cal
+alias.n=next pro.not:cal
+alias.cn=list pro:cal due.before:2d
