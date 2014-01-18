@@ -69,11 +69,8 @@ brew install git-encrypt  # Utility for encrypting git repos on the remote serve
 brew install https://raw.github.com/Homebrew/homebrew-dupes/master/gdb.rb
 
 
-# Task / time management
+# Task / time management -- task warrior
 brew install task
-brew install reminder
-brew install wyrd
-#calcurse instead of reminder and wryd?
 
 # Mutt related packages.
 brew install mutt --with-sidebar-patch    # See Steve Losh's tutorial on mutt.
