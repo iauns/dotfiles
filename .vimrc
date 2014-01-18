@@ -1121,10 +1121,10 @@ let g:signify_disable_by_default = 1
 " ---------------- Vim-Sneak ------------------
 "let g:sneak#streak = 1
 
-nmap f       <Plug>SneakForward
-xmap f       <Plug>VSneakForward
-nmap F       <Plug>SneakBackward
-xmap F       <Plug>VSneakBackward
+"nmap f       <Plug>SneakForward
+"xmap f       <Plug>VSneakForward
+"nmap F       <Plug>SneakBackward
+"xmap F       <Plug>VSneakBackward
 
 "" ---------------- EasyMotion ------------------
 map m <Plug>(easymotion-s)
