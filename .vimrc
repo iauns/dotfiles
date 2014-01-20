@@ -253,7 +253,7 @@ NeoBundle 'rking/ag.vim'
 " Slime
 NeoBundleLazy 'jpalardy/vim-slime.git'
 " Alignment plugin
-NeoBundleLazy 'junegunn/vim-easy-align'
+NeoBundle 'junegunn/vim-easy-align'
 " Clever-f - gets rid of ; and , when searching. Replaced by 'f' and 'F'.
 " Makes sense considering I never use multiple searches in a row.
 " Removed because it was just getting in the way and jumping beyond the
