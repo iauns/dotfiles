@@ -66,7 +66,9 @@ brew install git-encrypt  # Utility for encrypting git repos on the remote serve
                           # Useful if the remote server is untrusted.
 
 # Install the latest version of GDB. I do NOT use Mac's provided debugger.
-brew install https://raw.github.com/Homebrew/homebrew-dupes/master/gdb.rb
+brew tap homebrew/dupes
+brew install gdb
+#brew install https://raw.github.com/Homebrew/homebrew-dupes/master/gdb.rb
 
 
 # Task / time management -- task warrior
