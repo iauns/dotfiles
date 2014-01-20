@@ -199,6 +199,7 @@ NeoBundleLazy 'Valloric/YouCompleteMe', {'augroup': 'youcompletemeStart',
     \ },
   \ }
 
+NeoBundle 'teranex/jk-jumps.vim.git'
 NeoBundle 'tpope/vim-markdown.git'
 NeoBundle 'vim-scripts/Cpp11-Syntax-Support.git'
 NeoBundleLazy 'godlygeek/tabular.git'
@@ -1117,6 +1118,9 @@ highlight SignifySignChange cterm=bold ctermbg=237 ctermfg=227
 " Must manually toggle signify (if you want navigation).
 " Toggle with :SignifyToggle (mapped to <leader>gt above)
 let g:signify_disable_by_default = 1
+
+" ---------------- jk-jumps ------------------
+let g:jk_jumps_minimum_lines = 2
 
 " ---------------- Vim-Sneak ------------------
 "let g:sneak#streak = 1
