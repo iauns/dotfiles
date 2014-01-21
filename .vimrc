@@ -237,7 +237,7 @@ NeoBundle 'tpope/vim-fugitive.git'
 NeoBundle 'scrooloose/nerdtree.git'
 NeoBundle 'scrooloose/syntastic.git'
 "NeoBundleLazy 'AndrewRadev/simple_bookmarks.vim.git'
-"NeoBundleLazy 'guns/xterm-color-table.vim.git'
+NeoBundle 'guns/xterm-color-table.vim.git'
 NeoBundleLazy 'mattn/zencoding-vim.git'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tikhomirov/vim-glsl'
@@ -1132,6 +1132,17 @@ let g:jk_jumps_minimum_lines = 2
 
 "" ---------------- EasyMotion ------------------
 map m <Plug>(easymotion-s)
+
+" Change coloring
+let easy_motion_default = {
+    \   'gui'     : ['NONE', '#87df00' , 'bold']
+    \ , 'cterm256': ['NONE', '112'     , 'bold']
+    \ , 'cterm'   : ['NONE', 'red'     , 'bold']
+    \ }
+
+let g:EasyMotion_hl_group_target         = get(g:,
+    \ 'EasyMotion_hl_group_target', 'EasyMotionTarget')
+call EasyMotion#init#InitHL(g:EasyMotion_hl_group_target, easy_motion_default)
 
 " ---------------- Syntastic ---------------- 
 let g:syntastic_error_symbol='✗'
