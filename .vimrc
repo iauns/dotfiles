@@ -190,7 +190,7 @@ NeoBundle 'Shougo/unite-outline'
 " Bundles
 NeoBundleLazy 'Valloric/YouCompleteMe', {'augroup': 'youcompletemeStart', 
   \ 'build': {
-    \ 'mac': './install.sh --clang-completer',
+    \ 'mac': './install.sh --clang-completer --system-libclang',
     \ 'unix': './install.sh --clang-completer',
     \ 'cygwin': './install.sh --clang-completer',
     \ },
