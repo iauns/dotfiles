@@ -824,6 +824,7 @@ nnoremap <C-W><C-W> :wincmd p<CR>
 " Mapping to run make command, but silent! Only pops open quick fix
 " if there were errors. Still need to fix linker error recognition.
 "noremap <leader>m :make \| :redraw! \| :botright :cw<cr>
+noremap <leader>mm :AsyncMake<CR>
 
 " Color scheme extensions
 noremap <silent> <leader>ow :call LightDarkToggle()<CR>
@@ -901,9 +902,9 @@ nnoremap <leader>nl :lnext<CR>
 " ---------------- Maximal ------------------
 
 " Location list
-nnoremap <leader>ml :llast<CR>
-nnoremap <leader>mL :lfirst<CR>
-nnoremap <leader>ML :lfirst<CR>
+nnoremap <leader>mL :llast<CR>
+nnoremap <leader>ml :lfirst<CR>
+nnoremap <leader>Ml :lfirst<CR>
 
 " ---------------- Run semantic ------------------
 " Run ctangs
