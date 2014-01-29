@@ -882,8 +882,8 @@ noremap <silent> <leader>cb :Kwbd<CR>
 " Open todolist (if part of an applicable project).
 " Open general todolist.
 " Open nerdtree
-noremap <silent> <leader>oQ :copen<CR>
-noremap <silent> <leader>oq :cclose<CR>
+noremap <silent> <leader>Q :copen<CR>
+noremap <silent> <leader>q :cclose<CR>
 noremap <silent> <leader>ov :call JH_OpenVimRC()<CR>
 noremap <silent> <leader>x :call JH_OpenContextTodo()<CR>
 noremap <silent> <leader>l :call JH_OpenContextDebug()<CR>
