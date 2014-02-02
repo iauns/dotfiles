@@ -1184,6 +1184,7 @@ let g:ycm_filetype_blacklist = {
 let g:ycm_complete_in_strings = 0
 
 let g:ycm_min_num_of_chars_for_completion = 2
+let g:ycm_key_list_select_completion = ['<Enter>', '<Down>']
 
 nnoremap <silent><leader>e :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <silent><leader>yc :YcmCompleter ClearCompilationFlagCache<CR>
@@ -1194,7 +1195,7 @@ so ~/.vim/UltiSnips/UltiSnipHelpers.vim
 " same value.
 let g:UltiSnipsExpandTrigger="<C-e>"
 let g:UltiSnipsJumpForwardTrigger="<C-e>"
-let g:UltiSnipsJumpBackwardTrigger="<C-i>"
+"let g:UltiSnipsJumpBackwardTrigger="<C-i>"
   
 
 " ----------------- CommandT -----------------
