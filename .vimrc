@@ -217,7 +217,7 @@ NeoBundleLazy 'dhruvasagar/vim-table-mode'
 " correctly.
 NeoBundle 'tpope/vim-unimpaired.git'
 " Easy motion (moved to Bundle from VAM). Using alternative which uses two chars.
-NeoBundle 'haya14busa/vim-easymotion'
+NeoBundle 'Lokaltog/vim-easymotion'
 " vim-sneak as an alternative to vim-easymotion
 NeoBundle 'justinmk/vim-sneak'
 NeoBundle 'iauns/vim-subbed'
