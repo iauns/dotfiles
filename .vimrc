@@ -805,6 +805,28 @@ nnoremap _ <c-x>
 "vnoremap ; :
 "vnoremap : ;
 
+" search within visual block
+xnoremap / <esc>/\%V
+
+" select last inserted text
+nnoremap gV `[v`]
+
+" replay macro for each line of a visual selection
+xnoremap @q :normal @q<CR>
+xnoremap @@ :normal @@<CR>
+" repeat last command for each line of a visual selection
+xnoremap . :normal .<CR>
+
+" disable Ex mode key and map it to something awesome.
+nnoremap Q @@
+xnoremap Q @@
+
+" I want to be warned about quiting (I usually use ZZ to close a window).
+"nnoremap ZZ :wqa<cr>
+nnoremap ZQ :qa<cr>
+nnoremap Z! :qa!<cr>
+
+" Hardly ever use m for mark. ! feels more appropriate.
 nnoremap m !
 " m will be remapped later on by easymotion.
 nnoremap m <nop>
