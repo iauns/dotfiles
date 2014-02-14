@@ -1156,16 +1156,22 @@ let g:jk_jumps_minimum_lines = 2
 "" ---------------- EasyMotion ------------------
 map m <Plug>(easymotion-s)
 
-" Change coloring
-let easy_motion_default = {
-    \   'gui'     : ['NONE', '#87df00' , 'bold']
-    \ , 'cterm256': ['NONE', '112'     , 'bold']
-    \ , 'cterm'   : ['NONE', 'red'     , 'bold']
-    \ }
+"" Change coloring
+"let easy_motion_default = {
+"    \   'gui'     : ['NONE', '#87df00' , 'bold']
+"    \ , 'cterm256': ['NONE', '112'     , 'bold']
+"    \ , 'cterm'   : ['NONE', 'red'     , 'bold']
+"    \ }
+"
+"let g:EasyMotion_hl_group_target         = get(g:,
+"    \ 'EasyMotion_hl_group_target', 'EasyMotionTarget')
+"call EasyMotion#highlight#InitHL(g:EasyMotion_hl_group_target, easy_motion_default)
 
-let g:EasyMotion_hl_group_target         = get(g:,
-    \ 'EasyMotion_hl_group_target', 'EasyMotionTarget')
-call EasyMotion#init#InitHL(g:EasyMotion_hl_group_target, easy_motion_default)
+hi EasyMotionTarget ctermbg=none ctermfg=green
+hi EasyMotionShade  ctermbg=none ctermfg=blue
+
+hi EasyMotionTarget2First ctermbg=none ctermfg=red
+hi EasyMotionTarget2Second ctermbg=none ctermfg=lightred
 
 " ---------------- Syntastic ---------------- 
 let g:syntastic_error_symbol='✗'
