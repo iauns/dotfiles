@@ -1165,13 +1165,13 @@ map m <Plug>(easymotion-s)
 "
 "let g:EasyMotion_hl_group_target         = get(g:,
 "    \ 'EasyMotion_hl_group_target', 'EasyMotionTarget')
-"call EasyMotion#highlight#InitHL(g:EasyMotion_hl_group_target, easy_motion_default)
+"call EasyMotion#highlight#InitHL(g:Easyotion_hl_group_target, easy_motion_default)
 
-hi EasyMotionTarget ctermbg=none ctermfg=green
-hi EasyMotionShade  ctermbg=none ctermfg=blue
-
-hi EasyMotionTarget2First ctermbg=none ctermfg=red
-hi EasyMotionTarget2Second ctermbg=none ctermfg=lightred
+hi EasyMotionTarget guifg=lightgreen ctermbg=none ctermfg=green
+"hi EasyMotionShade  ctermbg=none ctermfg=blue
+"
+"hi EasyMotionTarget2First guifg=red ctermbg=none ctermfg=red
+"hi EasyMotionTarget2Second guifg=lightred ctermbg=none ctermfg=lightred
 
 " ---------------- Syntastic ---------------- 
 let g:syntastic_error_symbol='✗'
