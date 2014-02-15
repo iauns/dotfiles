@@ -1218,6 +1218,13 @@ let g:ycm_key_list_select_completion = ['<Down>']
 nnoremap <silent><leader>e :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <silent><leader>yc :YcmCompleter ClearCompilationFlagCache<CR>
 
+let g:ycm_allow_changing_updatetime = 1
+
+" Options for disabling YCM:
+
+" Disable completion:
+" let g:ycm_min_num_of_chars_for_completion = 99
+
 " ----------------- UltiSnips ----------------
 so ~/.vim/UltiSnips/UltiSnipHelpers.vim
 " It is legal to set the expand trigger and the jump forward trigger to the
