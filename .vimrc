@@ -848,6 +848,8 @@ nnoremap <C-W><C-W> :wincmd p<CR>
 "noremap <leader>m :make \| :redraw! \| :botright :cw<cr>
 noremap <leader>mm :AsyncMake<CR>
 
+noremap <silent> <leader>cp :let @+=expand("%:p")<CR>
+
 " Color scheme extensions
 noremap <silent> <leader>ow :call LightDarkToggle()<CR>
 
