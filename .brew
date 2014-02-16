@@ -64,6 +64,7 @@ brew install autojump     # Great little tool for navigating directories.
 brew install cgdb         # Great debugger addon to GDB
 brew install git-encrypt  # Utility for encrypting git repos on the remote server.
                           # Useful if the remote server is untrusted.
+brew install gnuplot      # Use in conjunction with eplot and ceplot.
 
 # Install the latest version of GDB. I do NOT use Mac's provided debugger.
 brew tap homebrew/dupes
