@@ -184,6 +184,7 @@ call neobundle#rc(expand('~/.vim/bundle/'))
 " https://github.com/terryma/dotfiles/blob/master/.vimrc
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/unite-outline'
+NeoBundle 'Shougo/neomru.vim'
 "NeoBundle 'Shougo/unite-help'
 "NeoBundle 'Shougo/unite-session'
 
