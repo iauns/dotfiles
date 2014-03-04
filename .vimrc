@@ -143,7 +143,7 @@ autocmd BufReadPost *
       \   exe "normal! g`\"" |
       \ endif
 
-" Always show the gutter (sign column).
+" Always show the gutter (sign column) -- haven't tried with gitgutter.
 " (started misbehaving).
 "autocmd BufEnter * sign define dummy
 "autocmd BufEnter * execute 'sign place 9999 line=1 name=dummy buffer=' . bufnr('')
@@ -260,6 +260,8 @@ NeoBundle 'junegunn/vim-easy-align'
 " Removed because it was just getting in the way and jumping beyond the
 " current line.
 "Bundle 'rhysd/clever-f.vim.git'
+" Shows hunks in the vim gutter.
+NeoBundle "airblade/vim-gitgutter"
 
 " Last two comments in video: https://www.youtube.com/watch?v=aHm36-na4-4
 "
@@ -887,10 +889,10 @@ nnoremap ! m
 
 " ---------------- Text transformations ------------------
 " Convert inner word to upper case.
-nnoremap <leader>tu g~iw
+"nnoremap <leader>tu g~iw
 
 " Swap two characters
-nnoremap <leader>tw "zylx"zp
+"nnoremap <leader>tw "zylx"zp
 
 " ---------------- Open/close semantic ------------------
 " Close the current window.
@@ -907,15 +909,46 @@ noremap <silent> <leader>cb :Kwbd<CR>
 " Open todolist (if part of an applicable project).
 " Open general todolist.
 " Open nerdtree
-noremap <silent> <leader>Q :copen<CR>
-noremap <silent> <leader>q :cclose<CR>
+"noremap <silent> <leader>Q :copen<CR>
+"noremap <silent> <leader>q :cclose<CR>
 noremap <silent> <leader>ov :call JH_OpenVimRC()<CR>
 noremap <silent> <leader>x :call JH_OpenContextTodo()<CR>
-noremap <silent> <leader>l :call JH_OpenContextDebug()<CR>
+"noremap <silent> <leader>l :call JH_OpenContextDebug()<CR>
 noremap <silent> <leader>ob :TagbarToggle<CR>
 noremap <silent> <leader>ou :GundoToggle<CR>
-noremap <silent> <leader>ol :lopen<cr>
-noremap <silent> <leader>oL :lclose<cr>
+"noremap <silent> <leader>t :lopen<cr>
+"noremap <silent> <leader>T :lclose<cr>
+
+" Toggling of quick fix and location list.
+function! GetBufferList()
+  redir =>buflist
+  silent! ls
+  redir END
+  return buflist
+endfunction
+
+function! ToggleList(bufname, pfx)
+  let buflist = GetBufferList()
+  for bufnum in map(filter(split(buflist, '\n'), 'v:val =~ "'.a:bufname.'"'), 'str2nr(matchstr(v:val, "\\d\\+"))')
+    if bufwinnr(bufnum) != -1
+      exec(a:pfx.'close')
+      return
+    endif
+  endfor
+  if a:pfx == 'l' && len(getloclist(0)) == 0
+      echohl ErrorMsg
+      echo "Location List is Empty."
+      return
+  endif
+  let winnr = winnr()
+  exec(a:pfx.'open')
+  if winnr() != winnr
+    wincmd p
+  endif
+endfunction
+
+nmap <silent> <leader>t :call ToggleList("Location List", 'l')<CR>
+nmap <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 
 " ---------------- Previous / Next ------------------
 
@@ -1123,6 +1156,11 @@ end
 " Addon settings
 "-------------------------------------------------------------------------------
 
+" ---------------- gitgutter ------------------
+
+" Always show the sign column.
+let g:gitgutter_sign_column_always = 1
+
 " ---------------- Signify ------------------
 let g:signify_vcs_lst = [ 'git', 'svn' ]
 
@@ -1222,6 +1260,10 @@ nnoremap <silent><leader>e :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <silent><leader>yc :YcmCompleter ClearCompilationFlagCache<CR>
 
 let g:ycm_allow_changing_updatetime = 1
+
+" Disable ycm diagnostic signs. Open the location list in order to see errors
+" in the file as ycm has detected them.
+let g:ycm_enable_diagnostic_signs = 0
 
 " Options for disabling YCM:
 
