@@ -1160,6 +1160,7 @@ end
 
 " Always show the sign column.
 let g:gitgutter_sign_column_always = 1
+let g:gitgutter_map_keys = 0
 
 " ---------------- Signify ------------------
 let g:signify_vcs_lst = [ 'git', 'svn' ]
