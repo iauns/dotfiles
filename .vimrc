@@ -398,11 +398,6 @@ endif
 "###############################################################################
 
 filetype plugin indent on     " Required!
-"
-" Brief help
-" :NeoBundleList          - list configured bundles
-" :NeoBundleInstall(!)    - install(update) bundles
-" :NeoBundleClean(!)      - confirm(or auto-approve) removal of unused bundles
 
 " Installation check.
 NeoBundleCheck
