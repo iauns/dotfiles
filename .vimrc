@@ -426,6 +426,17 @@ colorscheme xoria256      " Unified color scheme.
 set background=dark       " Default background is dark.
 
 "-------------------------------------------------------------------------------
+" Filetype settings
+"-------------------------------------------------------------------------------
+augroup ctswitch_fts
+  au!
+  au BufEnter *.vs let b:ctswitchdst = 'fs' 
+        \ | set syntax=glsl
+  au BufEnter *.fs let b:ctswitchdst = 'vs' 
+        \ | set syntax=glsl
+augroup END
+
+"-------------------------------------------------------------------------------
 " Keyboard bindings
 "-------------------------------------------------------------------------------
 
