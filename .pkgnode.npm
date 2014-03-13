@@ -11,6 +11,7 @@ npm -g install glog
 npm -g install marked
 npm -g install coffee-script
 npm -g install grunt-cli
+npm -g install node-inspector
 #npm -g install testacular
 npm -g install karma
 
