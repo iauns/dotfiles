@@ -827,8 +827,8 @@ xnoremap Q @@
 
 " I want to be warned about quiting (I usually use ZZ to close a window).
 "nnoremap ZZ :wqa<cr>
-nnoremap ZQ :qa<cr>
-nnoremap Z! :qa!<cr>
+" nnoremap ZQ :qa<cr>
+" nnoremap Z! :qa!<cr>
 
 " Hardly ever use m for mark. ! feels more appropriate.
 nnoremap m !
