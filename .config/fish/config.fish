@@ -67,6 +67,10 @@ function p
   pro $argv
 end
 
+function t
+  task $argv
+end
+
 function vi
   vim $argv
 end
