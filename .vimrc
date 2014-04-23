@@ -1508,8 +1508,8 @@ nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_rec/async<
 nnoremap <silent> [unite]u :<C-u>Unite -no-split -buffer-name=files file_rec:! file_mru<CR>
 "nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=files file_mru file_rec:!<CR>
 
-" Search current working directory
-nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-insert file<CR>
+" Search current working directory or create files if path is not recognized.
+nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-insert file file/new<CR>
 
 " Quick registers
 "nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
