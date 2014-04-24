@@ -1500,7 +1500,13 @@ nmap <leader>u [unite]
 "nnoremap <silent> [unite]<space> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 "nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 " Remember, order matters!
+
 nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_rec/async file/new<CR>
+
+" Quickly search from buffer directory.
+nnoremap <silent> [unite]d  :<C-u>UniteWithBufferDir
+      \ -buffer-name=files -prompt=%\  -no-split buffer file file/new<CR>
+
 "nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_rec file_mru<CR>
 " The exclamation after file_rec/async implies that vim should search for the
 " nearest directory containing a '.git', '.hg', etc... see
@@ -1567,10 +1573,6 @@ nnoremap <silent> [unite]j :<C-u>Unite -buffer-name=jumps jump<CR>
 
 " Quick bookmarks
 "nnoremap <silent> [unite]b :<C-u>Unite -buffer-name=bookmarks bookmark<CR>
-
-" Quickly search from buffer directory.
-nnoremap <silent> [unite]d  :<C-u>UniteWithBufferDir
-      \ -buffer-name=files -prompt=%\  buffer file_mru bookmark file<CR>
 
 " Fuzzy search from current buffer
 " nnoremap <silent> [unite]b :<C-u>UniteWithBufferDir
@@ -1657,14 +1659,14 @@ let g:unite_source_file_mru_filename_format = ''
 "let g:unite_source_file_mru_filename_format = ':~:.'
 let g:unite_source_file_mru_time_format = ''
 
-" I tend to have relative line numbering turned on, so it's quicker to just
-" type (apstrophe)-relative line number. That's the way this table is setup.
-let g:unite_quick_match_table =
-      \ get(g:, 'unite_quick_match_table', {
-      \     '1' : 0, '2' : 1, '3' : 2, '4' : 3, '5' : 4, '6' : 5, '7' : 6, '8' : 7, '9' : 8, 'a' : 9,
-      \     'o' : 10, 'e' : 11, 'u' : 12, 'h' : 13, 't' : 14, 'n' : 15, 's' : 16, 'p' : 17, 'g' : 18, 'c' : 19,
-      \     'r' : 20, 'l' : 21, 'q' : 22, 'j' : 23, 'k' : 24, 'b' : 25, 'm' : 26, 'w' : 27, 'v' : 28, 'z' : 29,
-      \ })
+" " I tend to have relative line numbering turned on, so it's quicker to just
+" " type (apstrophe)-relative line number. That's the way this table is setup.
+" let g:unite_quick_match_table =
+"       \ get(g:, 'unite_quick_match_table', {
+"       \     '1' : 0, '2' : 1, '3' : 2, '4' : 3, '5' : 4, '6' : 5, '7' : 6, '8' : 7, '9' : 8, 'a' : 9,
+"       \     'o' : 10, 'e' : 11, 'u' : 12, 'h' : 13, 't' : 14, 'n' : 15, 's' : 16, 'p' : 17, 'g' : 18, 'c' : 19,
+"       \     'r' : 20, 'l' : 21, 'q' : 22, 'j' : 23, 'k' : 24, 'b' : 25, 'm' : 26, 'w' : 27, 'v' : 28, 'z' : 29,
+"       \ })
 
 " For ack.
 if executable('ack-grep')
