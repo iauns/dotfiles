@@ -1462,7 +1462,7 @@ endif
 "      \ 'matchers', 'matcher_glob')
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#filters#sorter_default#use(['sorter_rank'])
 
 "call unite#filters#matcher_default#use(['matcher_regexp'])
 "call unite#filters#sorter_default#use(['sorter_rank'])
@@ -1523,7 +1523,7 @@ nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-inser
 nnoremap <silent> [unite]r :<C-u>UniteResume -no-split<CR>
 
 " Quick buffer and mru
-nnoremap <silent> [unite]b :<C-u>Unite -no-split -buffer-name=buffers buffer file_mru<CR>
+nnoremap <silent> [unite]b :<C-u>Unite -no-split -buffer-name=buffers buffer file_mru bookmarks<CR>
 
 " Quick yank history
 nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<CR>
