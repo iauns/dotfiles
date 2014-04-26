@@ -67,6 +67,7 @@ brew install git-encrypt  # Utility for encrypting git repos on the remote serve
 brew install gnuplot      # Use in conjunction with eplot and ceplot.
 brew install coreutils    # For grealpath
 brew install p7zip        # Command line utility for 7 zip.
+brew install orpie        # Great RPN calculator. Easily replaces bc.
 
 # Install the latest version of GDB. I do NOT use Mac's provided debugger.
 brew tap homebrew/dupes
