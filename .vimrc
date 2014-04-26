@@ -1454,6 +1454,12 @@ endif
 " Unite
 "===============================================================================
 
+" No maximum number of files for max_cache. May want to toggle this on a per
+" project basis.
+"let g:unite_source_file_rec_max_cache_files = 0
+"call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
+"            \ 'max_candidates', 0)
+
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
 "call unite#custom#source('file,file_rec', 'sorters', 'sorter_rank')
 ""call unite#custom#source('file,file/new,buffer,file_rec,file_rec/async,file_mru,outline',
@@ -1462,13 +1468,13 @@ endif
 "      \ 'matchers', 'matcher_glob')
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
+"call unite#filters#sorter_default#use(['sorter_rank'])
 
 "call unite#filters#matcher_default#use(['matcher_regexp'])
 "call unite#filters#sorter_default#use(['sorter_rank'])
 
 " Set up some custom ignores
-call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
       \ 'ignore_pattern', join([
       \ '\.git/',
       \ 'git5/.*/review/',
@@ -1523,7 +1529,7 @@ nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-inser
 nnoremap <silent> [unite]r :<C-u>UniteResume -no-split<CR>
 
 " Quick buffer and mru
-nnoremap <silent> [unite]b :<C-u>Unite -no-split -buffer-name=buffers buffer file_mru bookmarks<CR>
+nnoremap <silent> [unite]b :<C-u>Unite -no-split -buffer-name=buffers buffer file_mru bookmark<CR>
 
 " Quick yank history
 nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<CR>
