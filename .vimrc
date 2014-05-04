@@ -406,6 +406,7 @@ endfunction
 
 set background=light
 colorscheme solarized
+set background=light
 
 "-------------------------------------------------------------------------------
 " Filetype settings
@@ -425,7 +426,7 @@ augroup END
 " ---------------- Auxiliary functions ------------------
 function! JHBGSetup()
   " I determined the XTerm(cterm) colors by using :Xtermcolortable
-  " Use this to reset the color column.
+  " Use this to reset the cowor column.
   if &background == "light"
     "highlight ColorColumn ctermbg=253 guibg=White
   else
@@ -1171,51 +1172,16 @@ let g:signify_disable_by_default = 1
 " ---------------- jk-jumps ------------------
 let g:jk_jumps_minimum_lines = 2
 
-" ---------------- Vim-Sneak ------------------
-"let g:sneak#streak = 1
-
-"nmap f       <Plug>SneakForward
-"xmap f       <Plug>VSneakForward
-"nmap F       <Plug>SneakBackward
-"xmap F       <Plug>VSneakBackward
-
-"" ---------------- EasyMotion ------------------
+" ---------------- EasyMotion ------------------
 map m <Plug>(easymotion-s)
-
-"" Change coloring
-"let easy_motion_default = {
-"    \   'gui'     : ['NONE', '#87df00' , 'bold']
-"    \ , 'cterm256': ['NONE', '112'     , 'bold']
-"    \ , 'cterm'   : ['NONE', 'red'     , 'bold']
-"    \ }
-"
-"let g:EasyMotion_hl_group_target         = get(g:,
-"    \ 'EasyMotion_hl_group_target', 'EasyMotionTarget')
-"call EasyMotion#highlight#InitHL(g:Easyotion_hl_group_target, easy_motion_default)
-
-hi EasyMotionTarget guifg=lightgreen ctermbg=none ctermfg=green
-"hi EasyMotionShade  ctermbg=none ctermfg=blue
-"
-"hi EasyMotionTarget2First guifg=red ctermbg=none ctermfg=red
-"hi EasyMotionTarget2Second guifg=lightred ctermbg=none ctermfg=lightred
+"let g:EasyMotion_keys = 'asdghklqwertyuiopzxcvbnmfj;'
+let g:EasyMotion_keys = 'aoeidtn,.pyfgcrl;qjkxbmuhs'
 
 " ---------------- Syntastic ---------------- 
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_enable_highlighting = 0
-
-
-" ---------------- CtrlP ---------------- 
-" Set control-p up to search for the root directory of the current file.
-" The root directory has a .git, .hg, .svn, .bzr, or _darcs in it.
-let g:ctrlp_working_path_mode = 'rwa'
-let g:ctrlp_match_window_bottom = 0     " Place match window at the top.
-let g:ctrlp_match_window_reversed = 0   " Same as default Command-T listing.
-let g:ctrlp_switch_buffer = 0           " Always open window, even if open.
-let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript',
-      \ 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
-let g:ctrlp_max_height = 30
 
 " ---------------- YouCompleteMe ---------------- 
 "let g:ycm_add_preview_to_completeopt = 1
@@ -1713,11 +1679,6 @@ augroup END
 "-----------------------------------------------------------------------------
 " Color schemes / general aesthetics
 "-----------------------------------------------------------------------------
-
-" ---------------- Mayan smoke color setup ------------------
-let g:mayansmoke_search_visibility = 2
-let g:mayansmoke_cursor_line_visibility = 2
-let g:mayansmoke_special_key_visibility = 2
 
 " ---------------- Color column ------------------
 set colorcolumn=81
