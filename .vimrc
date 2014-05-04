@@ -19,7 +19,7 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-" TODO: Look at colorscheme 'jellybeans'
+" NOTE: colorscheme needs to be set after bundleinstall
 
 "-------------------------------------------------------------------------------
 " General VIM settings
@@ -28,12 +28,6 @@ if has('vim_starting')
   set nocompatible          " No compatibility with Vi.
 endif
 syntax enable             " Turn on color syntax highlighting.
-"set background=dark       " Default background is dark.
-"colorscheme xoria256      " Use two color schemes: xoria256 for dark.
-"set background=dark       " The colorscheme above sets the background to light.
-"                          " (only when in the terminal, curiously).
-"colorscheme seoul256      " Unified color scheme.
-" NOTE: colorscheme needs to be set after bundleinstall
 set guioptions-=r         " Disable the right scrollbar.
 set guioptions-=L         " Disable the left scrollbar.
 set guioptions+=c         " Make gvim use text prompts, not gui popups.
@@ -284,6 +278,7 @@ NeoBundleLazy "marijnh/tern_for_vim"
 NeoBundleLazy 'junegunn/seoul256.vim'
 NeoBundleLazy 'baskerville/bubblegum'
 NeoBundleLazy 'vim-scripts/mayansmoke.git'
+NeoBundle 'altercation/vim-colors-solarized.git'
 
 " Sparkup
 "NeoBundleLazy 'rstacruz/sparkup', {'rtp' : 'vim/'}
@@ -400,7 +395,6 @@ NeoBundleCheck
 "-------------------------------------------------------------------------------
 " Color scheme
 "-------------------------------------------------------------------------------
-"colorscheme seoul256      " Unified color scheme.
 
 function! GetColourSchemeName()
   try
@@ -410,10 +404,8 @@ function! GetColourSchemeName()
   endtry
 endfunction
 
-set background=dark       " Default background is dark.
-colorscheme xoria256      " Unified color scheme.
-"colorscheme bubblegum
-set background=dark       " Default background is dark.
+set background=light
+colorscheme solarized
 
 "-------------------------------------------------------------------------------
 " Filetype settings
@@ -432,17 +424,12 @@ augroup END
 
 " ---------------- Auxiliary functions ------------------
 function! JHBGSetup()
-  " I determined the XTerm(cterm) colors by using:
-  " :Xtermcolortable
+  " I determined the XTerm(cterm) colors by using :Xtermcolortable
+  " Use this to reset the color column.
   if &background == "light"
-    highlight ColorColumn ctermbg=253 guibg=White
+    "highlight ColorColumn ctermbg=253 guibg=White
   else
-    " xoria
-    highlight ColorColumn ctermbg=235 guibg=gray15
-    " Bubblegum
-    "highlight ColorColumn ctermbg=237 guibg=gray21
-    " seoul256
-    "highlight ColorColumn ctermbg=238 guibg=gray31
+    "highlight ColorColumn ctermbg=235 guibg=gray15
   endif
 endfunction
 
@@ -450,12 +437,8 @@ endfunction
 function! LightDarkToggle()
   if (&background == "light")
     set background=dark
-    "colorscheme xoria256
-    " xoria sets &background to light in the terminal!
-    set background=dark
   else
     set background=light
-    "colorscheme mayansmoke
   endif
   call JHBGSetup()
 endfunc
