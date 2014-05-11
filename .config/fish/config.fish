@@ -92,7 +92,7 @@ function gs
 end
 
 function gc
-  git commit $argv
+  gcalcli $argv
 end
 
 function lh
