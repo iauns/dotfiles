@@ -55,12 +55,16 @@ function g
   git $argv
 end
 
+function gs
+  git status $argv
+end
+
 function v
   vim $argv
 end
 
-function q
-  exit
+function vi
+  vim $argv
 end
 
 function p
@@ -71,8 +75,8 @@ function t
   task $argv
 end
 
-function vi
-  vim $argv
+function tt
+  timetrap $argv
 end
 
 function nu
@@ -85,10 +89,6 @@ end
 
 function blog
   cd ~/web/blog/posts
-end
-
-function gs
-  git status $argv
 end
 
 function gc
@@ -114,7 +114,6 @@ function l
   ls
 end
 
-# Letters getting dropped so much by iTerm that this is very useful binding.
 function s
   ls
 end

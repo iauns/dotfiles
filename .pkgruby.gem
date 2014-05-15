@@ -11,7 +11,7 @@ function install_gem() {
 echo "  You might want to open the 'notifications' app and set the terminal-notifier alert style to alert."
 echo "  terminal-notifier source code is located at: https://github.com/alloy/terminal-notifier"
 install_gem terminal-notifier
-#install_gem timetrap
+install_gem timetrap
 install_gem redcarpet
 install_gem pygments.rb
 install_gem wirble
