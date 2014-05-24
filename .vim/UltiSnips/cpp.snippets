@@ -1,4 +1,21 @@
-snippet w_h "Work - Header File" b
+# Casts
+snippet scast "Static Cast"
+static_cast<${1}>(${2})${3}
+endsnippet
+
+snippet rcast "Reinterpret Cast"
+reinterpret_cast<${1}>(${2})${3}
+endsnippet
+
+snippet dcast "Dynamic Cast"
+dynamic_cast<${1}>(${2})${3}
+endsnippet
+
+snippet ccast "Const Cast"
+const_cast<${1}>(${2})${3}
+endsnippet
+
+snippet sci_h "Work - Header File" b
 /*
    For more information, please see: http://software.sci.utah.edu
 
@@ -50,7 +67,7 @@ public:
 #endif 
 endsnippet
 
-snippet w_imp "Work - Implementation File" b
+snippet sci_imp "Work - Implementation File" b
 /*
    For more information, please see: http://software.sci.utah.edu
 
