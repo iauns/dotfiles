@@ -1193,7 +1193,7 @@ let g:syntastic_enable_highlighting = 0
 "      \}
 let g:ycm_key_invoke_completion = '<C-a>'
 " White list everythin in sci and sand.
-let g:ycm_extra_conf_globlist = ['~/sci/*', '~/sand/*']
+let g:ycm_extra_conf_globlist = ['~/sci/*', '~/me/*']
 " Definitely do NOT want youcompleteme active in unite.
 let g:ycm_filetype_blacklist = {
       \ 'notes' : 1,
@@ -1496,7 +1496,7 @@ nnoremap <silent> [unite]p :<C-u>Unite -buffer-name=sessions session<CR>
 nnoremap <silent> [unite]a :<C-u>Unite -buffer-name=sources source<CR>
 
 " Quick snippet
-nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=snippets snippet<CR>
+nnoremap <silent> [unite]s :<C-u>Unite -buffer-name=snippets ultisnips<CR>
 
 " Quickly switch lcd
 "nnoremap <silent> [unite]d
