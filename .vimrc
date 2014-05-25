@@ -1227,6 +1227,7 @@ so ~/.vim/UltiSnips/UltiSnipHelpers.vim
 " same value.
 let g:UltiSnipsExpandTrigger="<C-e>"
 let g:UltiSnipsJumpForwardTrigger="<C-e>"
+let g:UltiSnipsJumpBackwardTrigger="<C-u>"
 "let g:UltiSnipsJumpBackwardTrigger="<C-i>"
   
 
