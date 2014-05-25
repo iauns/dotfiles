@@ -816,8 +816,10 @@ xnoremap Q @@
 
 " Hardly ever use m for mark. ! feels more appropriate.
 nnoremap m !
-" m will be remapped later on by easymotion.
+" m and M will be remapped later on by vim-sneak.
+" <space> will be remapped by easymotion.
 nnoremap m <nop>
+nnoremap M <nop>
 
 " We use the <C-h,j,k,l> keys for tmux. Instead, in vim, I switch windows with
 " <space>h, <space>j, etc... These overwrite the bindings supplied by Also use
@@ -1173,7 +1175,7 @@ let g:signify_disable_by_default = 1
 let g:jk_jumps_minimum_lines = 2
 
 " ---------------- EasyMotion ------------------
-map m <Plug>(easymotion-s)
+map <space> <Plug>(easymotion-s)
 "let g:EasyMotion_keys = 'asdghklqwertyuiopzxcvbnmfj;'
 let g:EasyMotion_keys = 'aoeidtn,.pyfgcrl;qjkxbmuhs'
 
@@ -1299,6 +1301,14 @@ let g:session_autosave = 'no'
 "let g:SeekKeys = '- _ 0 +'
 "let g:SeekKey = '-'
 "let g:SeekBackKey = '_'
+
+" ---------------- vim-sneak ------------------
+nmap m <Plug>Sneak_s
+nmap M <Plug>Sneak_S
+xmap m <Plug>Sneak_s
+xmap M <Plug>Sneak_S
+omap m <Plug>Sneak_s
+omap M <Plug>Sneak_S
 
 " ---------------- sparkup ------------------
 let g:sparkupExecuteMapping = '<c-a>'
