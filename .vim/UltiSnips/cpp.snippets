@@ -15,7 +15,99 @@ snippet ccast "Const Cast"
 const_cast<${1}>(${2})${3}
 endsnippet
 
-snippet sci_h "Work - Header File" b
+snippet mfun "Member function implementations"
+${4:void} ${1:`!v Filename('$1', 'ClassName')`}::${2:memberFunction}(${3})
+{
+  ${5:return};
+}
+endsnippet
+
+snippet fori "For loop with iterators"
+for (auto it = $1.begin(); it != $1.end(); ++it)
+{
+  $0
+}
+endsnippet
+
+snippet //- "Beginning of an 80 character hyphen separator"
+//------------------------------------------------------------------------------
+endsnippet
+
+snippet test "A simple unit test."
+//------------------------------------------------------------------------------
+TEST($1, $2)
+{
+
+}
+endsnippet
+
+snippet testfixture "Unit test fixture."
+//------------------------------------------------------------------------------
+class $1 : public testing::Test
+{
+protected:
+  $1()
+  {}
+
+  virtual void SetUp()    {}
+  virtual void TearDown() {}
+};
+
+TEST_F($2, $3)
+{
+  
+}
+endsnippet
+
+
+snippet tryc "Try catch block"
+try {
+  $0
+} catch (std::exception& e) {
+  
+}
+endsnippet
+
+
+snippet head "Standard Header File"
+#ifndef `!v g:Ulti_GetNamespaceFilenameDefine()`
+#define `!v g:Ulti_GetNamespaceFilenameDefine()`
+
+namespace $1 {
+
+/// $2
+class `!v "".expand("%:p:t:r")`
+{
+public:
+  `!v "".expand("%:p:t:r")`();
+  virtual ~`!v "".expand("%:p:t:r")`();
+  
+};
+
+} // namespace $1
+
+#endif
+endsnippet
+
+
+snippet imp "Standard Implementation File"
+#include "`!v g:Ulti_GetHeaderForCurrentSourceFile()`"
+
+namespace $1 {
+
+`!v g:Ulti_ReturnSkeletonsFromPrototypes()`
+
+} // namespace $1
+endsnippet
+
+
+
+
+
+
+## Old Work Snippets
+
+snippet sci_h "Work - Header File"
 /*
    For more information, please see: http://software.sci.utah.edu
 
@@ -67,7 +159,7 @@ public:
 #endif 
 endsnippet
 
-snippet sci_imp "Work - Implementation File" b
+snippet sci_imp "Work - Implementation File"
 /*
    For more information, please see: http://software.sci.utah.edu
 
@@ -106,54 +198,5 @@ snippet sci_imp "Work - Implementation File" b
 `!v g:Ulti_ReturnSkeletonsFromPrototypes()`
 
 `!v g:Ulti_InsertNamespaceEnd()`
-endsnippet
-
-snippet fori "For loop with iterators" b
-for (auto it = $1.begin(); it != $1.end(); ++it)
-{
-  $0
-}
-endsnippet
-
-snippet //- "Beginning of an 80 character hyphen separator"
-//------------------------------------------------------------------------------
-endsnippet
-
-snippet test "A simple unit test."
-//------------------------------------------------------------------------------
-TEST($1, $2)
-{
-
-}
-endsnippet
-
-snippet testfixture "Unit test fixture."
-//------------------------------------------------------------------------------
-class $1 : public testing::Test
-{
-protected:
-  $1()
-  {}
-
-  virtual void SetUp()    {}
-  virtual void TearDown() {}
-};
-
-TEST_F($2, $3)
-{
-  
-}
-endsnippet
-
-
-snippet trycatch "Try catch block"
-try
-{
-  $0
-}
-catch (std::exception& e)
-{
-  
-}
 endsnippet
 
