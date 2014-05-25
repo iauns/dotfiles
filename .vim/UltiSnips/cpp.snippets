@@ -15,6 +15,10 @@ snippet ccast "Const Cast"
 const_cast<${1}>(${VISUAL})${2}
 endsnippet
 
+snippet cout "cout"
+${2:std::}cout << ${1} << $2endl;
+endsnippet
+
 snippet mfun "Member function implementations"
 ${4:void} ${1:`!v Filename('$1', 'ClassName')`}::${2:memberFunction}(${3})
 {
