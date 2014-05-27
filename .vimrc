@@ -881,6 +881,9 @@ nnoremap ! m
 " Swap two characters
 "nnoremap <leader>tw "zylx"zp
 
+" Vim wiki toggle list item.
+nmap <silent> <leader>t <Plug>VimwikiToggleListItem
+
 " ---------------- Open/close semantic ------------------
 " Close the current window.
 " Close 'highlighting'.
@@ -934,7 +937,7 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 
-nmap <silent> <leader>t :call ToggleList("Location List", 'l')<CR>
+nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
 nmap <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 
 " ---------------- Previous / Next ------------------
