@@ -1453,8 +1453,7 @@ call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
       \ ], '\|'))
 
 " Ensure we ignore appropriate files.
-let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
-
+"let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
 
 " Map '-' to the prefix for Unite. Makes sense on dvorak keyboards (next to
 " semicolon).
