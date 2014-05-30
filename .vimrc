@@ -821,12 +821,6 @@ nnoremap m !
 nnoremap m <nop>
 nnoremap M <nop>
 
-" We use the <C-h,j,k,l> keys for tmux. Instead, in vim, I switch windows with
-" <space>h, <space>j, etc... These overwrite the bindings supplied by Also use
-" <space>s and <space>- for splitting the windows.
-nnoremap <silent> <space>- :vsplit<CR>
-nnoremap <silent> <space>s :split<CR>
-
 " Exits visual mode and initiates a search within the last visual selection.
 vnoremap \ <Esc>/\%V
 
@@ -1313,6 +1307,10 @@ xmap M <Plug>Sneak_S
 omap m <Plug>Sneak_s
 omap M <Plug>Sneak_S
 
+" ---------------- tcomment ------------------
+
+let g:tcommentMapLeader1 = '<c-=>'
+
 " ---------------- sparkup ------------------
 let g:sparkupExecuteMapping = '<c-a>'
 let g:sparkupNextMapping = '<c-n>'
@@ -1595,11 +1593,6 @@ function! s:unite_my_settings()
   " Using Ctrl-\ to trigger outline, so close it using the same keystroke
   if unite.buffer_name =~# '^outline'
     imap <buffer> <C-\> <Plug>(unite_exit)
-  endif
-
-  " Using Ctrl-/ to trigger line, close it using same keystroke
-  if unite.buffer_name =~# '^search_file'
-    imap <buffer> <C-_> <Plug>(unite_exit)
   endif
 
 	nnoremap <buffer><expr> S      unite#mappings#set_current_filters(
