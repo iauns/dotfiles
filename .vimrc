@@ -809,11 +809,6 @@ xnoremap . :normal .<CR>
 nnoremap Q @@
 xnoremap Q @@
 
-" I want to be warned about quiting (I usually use ZZ to close a window).
-"nnoremap ZZ :wqa<cr>
-" nnoremap ZQ :qa<cr>
-" nnoremap Z! :qa!<cr>
-
 " Hardly ever use m for mark. ! feels more appropriate.
 nnoremap m !
 " m and M will be remapped later on by vim-sneak.
