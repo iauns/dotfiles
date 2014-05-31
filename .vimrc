@@ -825,7 +825,7 @@ nnoremap <C-W><C-W> :wincmd p<CR>
 " Mapping to run make command, but silent! Only pops open quick fix
 " if there were errors. Still need to fix linker error recognition.
 "noremap <leader>m :make \| :redraw! \| :botright :cw<cr>
-noremap <leader>mm :AsyncMake<CR>
+noremap <leader>m :AsyncMake<CR>
 
 noremap <silent> <leader>cp :let @+=expand("%:p")<CR>
 
@@ -938,10 +938,10 @@ nnoremap <leader>nl :lnext<CR>
 
 " ---------------- Maximal ------------------
 
-" Location list
-nnoremap <leader>mL :llast<CR>
-nnoremap <leader>ml :lfirst<CR>
-nnoremap <leader>Ml :lfirst<CR>
+" " Location list
+" nnoremap <leader>mL :llast<CR>
+" nnoremap <leader>ml :lfirst<CR>
+" nnoremap <leader>Ml :lfirst<CR>
 
 " ---------------- Run semantic ------------------
 " Run ctangs
