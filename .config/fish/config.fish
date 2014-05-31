@@ -76,7 +76,12 @@ function t
 end
 
 function tt
-  timetrap $argv
+  set my_count (count $argv)
+  if test $my_count -gt 0
+    timetrap $argv
+  else
+    timetrap now
+  end
 end
 
 function nu
