@@ -80,7 +80,7 @@ function tt
   if test $my_count -gt 0
     timetrap $argv
   else
-    timetrap now
+    timetrap today all
   end
 end
 
