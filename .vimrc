@@ -1167,7 +1167,7 @@ let g:signify_disable_by_default = 1
 let g:jk_jumps_minimum_lines = 2
 
 " ---------------- EasyMotion ------------------
-map <space> <Plug>(easymotion-s)
+map <space> <Plug>(easymotion-s2)
 "let g:EasyMotion_keys = 'asdghklqwertyuiopzxcvbnmfj;'
 let g:EasyMotion_keys = 'aoeidtn,.pyfgcrl;qjkxbmuhs'
 
