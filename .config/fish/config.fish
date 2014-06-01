@@ -78,7 +78,16 @@ end
 function tt
   set my_count (count $argv)
   if test $my_count -gt 0
-    timetrap $argv
+    if test "$argv" = "out"
+      # Always sync when we indicate we are checking out. This can happen
+      # even after jout if it is the only thing left.
+      timetrap out
+      echo 'Syncing checkout...'
+      eval '~/me/scripts/performSync'
+      echo 'Done'
+    else
+      timetrap $argv
+    end
   else
     timetrap today all
   end
