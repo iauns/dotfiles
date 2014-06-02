@@ -1412,9 +1412,8 @@ endif
 
 " No maximum number of files for max_cache. May want to toggle this on a per
 " project basis.
-"let g:unite_source_file_rec_max_cache_files = 0
-"call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate',
-"            \ 'max_candidates', 0)
+let g:unite_source_file_rec_max_cache_files = 0
+call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate', 'max_candidates', 0)
 
 "call unite#filters#matcher_default#use(['matcher_fuzzy'])
 "call unite#custom#source('file,file_rec', 'sorters', 'sorter_rank')
@@ -1427,7 +1426,7 @@ call unite#filters#matcher_default#use(['matcher_fuzzy'])
 "call unite#filters#sorter_default#use(['sorter_rank'])
 
 "call unite#filters#matcher_default#use(['matcher_regexp'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#filters#sorter_default#use(['sorter_selecta'])
 
 " Set up some custom ignores
 call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
@@ -1462,7 +1461,7 @@ nmap <leader>u [unite]
 "nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 " Remember, order matters!
 
-nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_rec/async file/new<CR>
+nnoremap <silent> <C-p> :<C-u>Unite -no-split -sync -buffer-name=files file_rec/async file/new<CR>
 
 " Quickly search from buffer directory.
 nnoremap <silent> [unite]d  :<C-u>UniteWithBufferDir
