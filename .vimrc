@@ -279,6 +279,7 @@ NeoBundleLazy 'junegunn/seoul256.vim'
 NeoBundleLazy 'baskerville/bubblegum'
 NeoBundleLazy 'vim-scripts/mayansmoke.git'
 NeoBundle 'altercation/vim-colors-solarized.git'
+NeoBundle 'wellle/targets.vim'
 
 " Sparkup
 "NeoBundleLazy 'rstacruz/sparkup', {'rtp' : 'vim/'}
