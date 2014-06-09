@@ -68,6 +68,9 @@ brew install gnuplot      # Use in conjunction with eplot and ceplot.
 brew install coreutils    # For grealpath
 brew install p7zip        # Command line utility for 7 zip.
 brew install orpie        # Great RPN calculator. Easily replaces bc.
+brew install mobile-shell # Alternative to SSH. Communicates via SSH.
+                          # Has to be installed on host and client.
+                          # See: http://mosh.mit.edu/#getting
 
 # Install the latest version of GDB. I do NOT use Mac's provided debugger.
 brew tap homebrew/dupes
