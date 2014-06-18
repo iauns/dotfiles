@@ -114,12 +114,73 @@ function lh
 end
 
 # fish vi-mode
-. $HOME/.config/fish/vi-mode.fish
+#. $HOME/.config/fish/vi-mode.fish
 . $HOME/.config/fish/functions/fzf_key_bindings.fish
 
+function fish_vi_cursor
+    # switch $fish_bind_mode
+    #     case insert
+    #         printf '\e]50;CursorShape=1\x7'
+    #     case default
+    #         printf '\e]50;CursorShape=0\x7'
+    #     case "*"
+    #         printf '\e]50;CursorShape=0\x7'
+    # end
+
+  set -l uses_echo
+
+  set fcn
+  set fcn __fish_cursor_konsole
+  set uses_echo 1
+
+  set -l tmux_prefix
+  set -l tmux_postfix
+  if begin; set -q TMUX; and set -q uses_echo[1]; end
+    set tmux_prefix echo -ne "'\ePtmux;\e'"
+    set tmux_postfix echo -ne "'\e\\\\'"
+  end
+
+  set -q fish_cursor_unknown
+  or set -g fish_cursor_unknown block blink
+
+  echo "
+  function fish_vi_cursor_handle --on-variable fish_bind_mode
+    set -l varname fish_cursor_\$fish_bind_mode
+    if not set -q \$varname
+      set varname fish_cursor_unknown
+    end
+    #echo \$varname \$\$varname
+    $tmux_prefix
+    $fcn \$\$varname
+    $tmux_postfix
+  end
+  " | source
+end
+
+set fish_cursor_default block
+set fish_cursor_insert line
+set fish_cursor_visual underscore
+
+fish_vi_cursor
+
 function fish_user_key_bindings
-  vi_mode_insert
+  fish_vi_key_bindings
+  #fish_vi_cursor
+
   fzf_key_bindings
+
+  #-------------------------
+  # Insert mode keybindings
+  #-------------------------
+  bind \cw -M insert backward-kill-word
+  bind \cc -M insert 'echo; commandline ""'
+
+  # Something to remember:
+  # -M is the mode in which the keybinding applies (default is normal).
+  # -m is the mode in which we are left after the keybinding
+  #    is executed. If no -m is specified, then it is assumed
+  #    to be the same as -M.
+  bind \cc -M default -m insert 'echo; commandline ""'
 end
 
 function mutty
@@ -159,7 +220,8 @@ function fish_prompt
   set_color normal
   printf '} '
 
-  printf '[%s] ' $vi_mode
+  #$vi_mode
+  #printf '[%s] ' $fish_bind_mode
 
   set_color normal
 end
