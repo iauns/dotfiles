@@ -20,3 +20,9 @@ install_gem travis
 
 # Github CLI issues interface.
 install_gem ghi
+
+# Install fzf command line tool if it is not already installed.
+if ! [ -e ~/.fzf ]; then
+  git clone https://github.com/junegunn/fzf.git ~/.fzf
+  ~/.fzf/install
+fi

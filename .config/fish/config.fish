@@ -115,9 +115,11 @@ end
 
 # fish vi-mode
 . $HOME/.config/fish/vi-mode.fish
+. $HOME/.config/fish/functions/fzf_key_bindings.fish
 
 function fish_user_key_bindings
   vi_mode_insert
+  fzf_key_bindings
 end
 
 function mutty
