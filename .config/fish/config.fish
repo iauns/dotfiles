@@ -157,9 +157,9 @@ function fish_vi_cursor
   " | source
 end
 
-set fish_cursor_default block
-set fish_cursor_insert line
-set fish_cursor_visual underscore
+set fish_cursor_default underscore
+set fish_cursor_insert block
+set fish_cursor_visual line
 
 fish_vi_cursor
 
