@@ -113,10 +113,6 @@ function lh
   open http://localhost:8080/
 end
 
-# fish vi-mode
-#. $HOME/.config/fish/vi-mode.fish
-. $HOME/.config/fish/functions/fzf_key_bindings.fish
-
 function fish_vi_cursor
     # switch $fish_bind_mode
     #     case insert
@@ -163,11 +159,22 @@ set fish_cursor_visual line
 
 fish_vi_cursor
 
-function fish_user_key_bindings
-  fish_vi_key_bindings
-  #fish_vi_cursor
+# Source fzf key bindings.
+. $HOME/.config/fish/functions/fzf_key_bindings.fish
 
+function fish_user_key_bindings
+
+  fish_vi_key_bindings
+
+  # Note, this call to fzf_key_bindings should come after fish_vi_key_bindings.
+  # I've had to modify this function slightly so that it indicates -M insert
+  # mode as its primary mode hook.
   fzf_key_bindings
+
+  # Rebind fzf keys to appropriate functions.
+  bind \ct -M insert '__fzf_ctrl_t'
+  bind \cr -M insert '__fzf_ctrl_r'
+  bind \ec -M insert '__fzf_alt_c'
 
   #-------------------------
   # Insert mode keybindings
