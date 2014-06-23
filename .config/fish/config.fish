@@ -28,6 +28,10 @@ set -x CPM_CACHE_DIR $HOME/.cpm_cache
 set -x IGNOREOF 10
 set -o ignoreeof
 
+# Set ag as the default source for fzf
+set -x FZF_DEFAULT_COMMAND 'ag -l -g ""'
+set -x FZF_DEFAULT_OPTS '--sort 10000'
+
 # Completions from current directory ONLY
 set CDPATH .
 
