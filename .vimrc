@@ -405,9 +405,9 @@ function! GetColourSchemeName()
   endtry
 endfunction
 
-set background=light
+set background=dark
 colorscheme solarized
-set background=light
+set background=dark
 
 "-------------------------------------------------------------------------------
 " Filetype settings
@@ -1048,6 +1048,15 @@ nmap <silent> <leader>wx <Plug>VimwikiToggleListItem
 
 
 if has("gui_running")
+
+  if has("gui_gtk2")
+    set guifont=Inconsolata\ 12
+  elseif has("gui_macvim")
+    set guifont=Menlo\ Regular:h14
+  elseif has("gui_win32")
+    set guifont=Consolas:h11:cANSI
+  endif
+
   map <C-h> <C-w>h
   map <C-j> <C-w>j
   map <C-k> <C-w>k

@@ -3,28 +3,26 @@
 # See: http://www.in-ulm.de/~mascheck/X11/xmodmap.html
 # See: http://cs.gmu.edu/~sean/stuff/n800/keyboard/old.html
 
-if test $(hostname) = "q430"; then
-  # Clear caps lock then re-assign it to escape.
-  xmodmap -e "clear Lock"
-  xmodmap -e "keycode 66 = Escape"
+# Clear caps lock then re-assign it to escape.
+xmodmap -e "clear Lock"
+xmodmap -e "keycode 66 = Escape"
 
-  # Change right alt into control.
-  xmodmap -e "remove mod1 = Alt_R"
-  xmodmap -e "add control = Alt_R"
+# Change right alt into control.
+xmodmap -e "remove mod1 = Alt_R"
+xmodmap -e "add control = Alt_R"
 
-  # Now remap Left Alt to Mode_switch.
-  # We use Mode_switch as a general key to modify basic interaction.
-  xmodmap -e "keycode 0x40 = Mode_switch"
+# Now remap Left Alt to Mode_switch.
+# We use Mode_switch as a general key to modify basic interaction.
+xmodmap -e "keycode 0x40 = Mode_switch"
 
-  # Remap Right alt to Control
-  xmodmap -e "keycode 0x71 = Control_R"
+# Remap Right alt to Control
+xmodmap -e "keycode 0x71 = Control_R"
 
-  # Make Mode_switch-T issue an 'enter'
-  xmodmap -e "keycode 45 = t T Return Return"
+# Make Mode_switch-T issue an 'enter'
+xmodmap -e "keycode 45 = t T Return Return"
 
-  # Keys for up and down.
-  xmodmap -e "keycode 27 = p P Up Up"
-  xmodmap -e "keycode 41 = u U Down Down"
-  xmodmap -e "keycode 25 = comma less Left Left"
-  xmodmap -e "keycode 26 = period greater Right Right"
-fi
+# Keys for up and down.
+xmodmap -e "keycode 27 = p P Up Up"
+xmodmap -e "keycode 41 = u U Down Down"
+xmodmap -e "keycode 25 = comma less Left Left"
+xmodmap -e "keycode 26 = period greater Right Right"
