@@ -233,7 +233,7 @@ NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tikhomirov/vim-glsl'
 NeoBundleLazy 'mhinz/vim-signify'
 NeoBundle 'vim-scripts/Tab-Name'
-NeoBundle 'oinksoft/tcd.vim'
+"NeoBundle 'oinksoft/tcd.vim'
 " Haskell dev plugins (for syntastic and definition of types)
 "NeoBundleLazy 'bitc/vim-hdevtools'
 " Perform ack from within vim! Look into replacing with unit's proc grep.
