@@ -23,7 +23,7 @@ fi
 # CLI packages                                                                #
 ###############################################################################
 
-brew install fish         # Fish shell.
+#brew install fish         # Fish shell.
 
 # Use --with-ruby if you want to enable Command-T in vim.
 # We use --with-lua since it helps make the unite plugin go a tad bit faster.
