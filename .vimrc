@@ -299,7 +299,7 @@ if has("gui_running")
 endif
 
 " Alternative to powerline and airline.
-"NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'itchyny/lightline.vim'
 
 " CtrlP was replaced by unite.
 "NeoBundle 'kien/ctrlp.vim.git'
