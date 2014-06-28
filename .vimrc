@@ -1715,3 +1715,5 @@ runtime macros/matchit.vim
 " Comments will only be continued when in insert mode.
 autocmd FileType * setlocal formatoptions-=o
 
+set fillchars+=vert:\│
+hi clear VertSplit
