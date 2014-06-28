@@ -25,7 +25,6 @@ CheckDir ~/dotfiles "dotfiles"
 CheckDir ~/dotfiles/private "dotfiles/private"
 CheckDir ~/dotfiles/nolink/dotfiles-slim "dotfiles-slim"
 CheckDir ~/prosp "prosp"
-CheckDir ~/sci "sci"
 CheckDir ~/me "me"
 CheckDir ~/backups "backups"
 CheckDir ~/orion "orion"
@@ -34,13 +33,6 @@ CheckDir ~/art "art"
 
 # Run checkrepos from me repository (which contains subrepos)
 ${HOME}/me/scripts/checkrepos
-rc=$?
-if [[ $rc != 0 ]]; then
-  FAILED_ONE=true
-fi
-
-# Run checkrepos from sci repository (which contains subrepos).
-${HOME}/sci/scripts/checkrepos
 rc=$?
 if [[ $rc != 0 ]]; then
   FAILED_ONE=true
