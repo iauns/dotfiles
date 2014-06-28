@@ -35,8 +35,8 @@ set guioptions-=m         " I don't want the menu. Frees up the alt button.
 set guioptions-=e         " Make mac vim use ASCII tabs (like terminal).
                           " This to get similar color coding as the rest of vim.
 set incsearch             " Enable incremental search.
-set rnu                   " Set relative line numbers. Can easily navigate with #j/k.
-set nu                    " Show absolute line number on current line (works in vim 7.4).
+#set rnu                   " Set relative line numbers. Can easily navigate with #j/k.
+#set nu                    " Show absolute line number on current line (works in vim 7.4).
 let mapleader="s"         " Set mapleader to 's'. I do not use the substitute 
                           " command all that often (c-<motion>). BUT: this does
                           " mess up nerdtree's vertical split 's' key.
@@ -848,8 +848,8 @@ cnoremap w!! %!sudo tee > /dev/null %
 nnoremap gb :ls<CR>:b
 
 " move the current line up and down
-nnoremap <leader>k      :m-2<CR>==
-nnoremap <leader>j      :m+<CR>==
+"nnoremap <leader>k      :m-2<CR>==
+"nnoremap <leader>j      :m+<CR>==
 
 nnoremap <silent><leader>d "_d
 
@@ -1184,6 +1184,10 @@ let g:jk_jumps_minimum_lines = 2
 map <space> <Plug>(easymotion-s2)
 "let g:EasyMotion_keys = 'asdghklqwertyuiopzxcvbnmfj;'
 let g:EasyMotion_keys = 'aoeidtn,.pyfgcrl;qjkxbmuhs'
+let g:EasyMotion_smartcase = 1
+
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
 
 " ---------------- Syntastic ---------------- 
 let g:syntastic_error_symbol='✗'
