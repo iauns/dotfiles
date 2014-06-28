@@ -26,7 +26,6 @@ UpdateRemotes ~/prosp "prosp"
 UpdateRemotes ~/backups "backups"
 UpdateRemotes ~/art "art"
 UpdateRemotes ~/me "me"
-UpdateRemotes ~/sci "sci"
 
 echo ""
 echo "Pulling ~/me remotes"
@@ -37,7 +36,3 @@ echo "rsyncing ~/me/sync"
 echo ""
 ${HOME}/me/scripts/performSync
 
-echo ""
-echo "Pulling ~/sci remotes"
-echo ""
-${HOME}/sci/scripts/pullpersonal
