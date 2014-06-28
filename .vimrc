@@ -927,8 +927,8 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 
-nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
-nmap <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
+"nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
+"nmap <silent> <leader>a :call ToggleList("Quickfix List", 'c')<CR>
 
 " ---------------- Previous / Next ------------------
 
@@ -969,9 +969,9 @@ noremap <leader>sh z=
 
 " ---------------- Tabularize ------------------
 " Align on commas, leaving the commas in-place
-noremap <leader>a= :Tabularize /=<CR>
-noremap <leader>a, :Tabularize /,\zs/l1<CR>
-noremap <leader>a: :Tabularize /:\zs<CR>
+"noremap <leader>a= :Tabularize /=<CR>
+"noremap <leader>a, :Tabularize /,\zs/l1<CR>
+"noremap <leader>a: :Tabularize /:\zs<CR>
 
 " ---------------- Fugitive keys ------------------
 " http://vimcasts.org/episodes/fugitive-vim-working-with-the-git-index/
@@ -1101,6 +1101,10 @@ else
   " no more windows in that direction, forwards the operation to tmux.
   " Additionally, <C-\> toggles between last active vim splits/tmux panes.
   " See: https://gist.github.com/mislav/5189704
+
+  noremap <leader>; :vsplit<CR>
+  noremap <leader>a :split<CR>
+
   if exists('$TMUX')
 
     let s:tmux_is_last_pane = 0
