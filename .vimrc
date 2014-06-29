@@ -409,10 +409,13 @@ endfunction
 if has("gui_running")
   set background=dark
   colorscheme seoul256
+  "colorscheme xoria256
   set background=dark
 else
+  let g:seoul256_background = 234
   set background=dark
   "colorscheme solarized
+  "colorscheme xoria256
   colorscheme seoul256
   set background=dark
 endif
