@@ -412,7 +412,8 @@ if has("gui_running")
   set background=dark
 else
   set background=dark
-  colorscheme solarized
+  "colorscheme solarized
+  colorscheme seoul256
   set background=dark
 endif
 
