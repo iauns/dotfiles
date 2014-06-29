@@ -275,9 +275,9 @@ NeoBundle "wavded/vim-stylus"
 " (omnicomplete)
 NeoBundleLazy "marijnh/tern_for_vim"
 " Color schemes
-NeoBundleLazy 'junegunn/seoul256.vim'
+NeoBundle 'junegunn/seoul256.vim'
 NeoBundleLazy 'baskerville/bubblegum'
-NeoBundleLazy 'vim-scripts/mayansmoke.git'
+NeoBundle 'vim-scripts/mayansmoke.git'
 NeoBundle 'altercation/vim-colors-solarized.git'
 NeoBundle 'wellle/targets.vim'
 
@@ -405,9 +405,16 @@ function! GetColourSchemeName()
   endtry
 endfunction
 
-set background=dark
-colorscheme solarized
-set background=dark
+
+if has("gui_running")
+  set background=dark
+  colorscheme seoul256
+  set background=dark
+else
+  set background=dark
+  colorscheme solarized
+  set background=dark
+endif
 
 "-------------------------------------------------------------------------------
 " Filetype settings
@@ -1046,6 +1053,8 @@ nnoremap <silent> <leader>wo :VimwikiGoto
 nnoremap <silent> <leader>we :VimwikiSearch 
 nmap <silent> <leader>wx <Plug>VimwikiToggleListItem
 
+noremap <leader>; :vsplit<CR>
+noremap <leader>a :split<CR>
 
 if has("gui_running")
 
@@ -1101,9 +1110,6 @@ else
   " no more windows in that direction, forwards the operation to tmux.
   " Additionally, <C-\> toggles between last active vim splits/tmux panes.
   " See: https://gist.github.com/mislav/5189704
-
-  noremap <leader>; :vsplit<CR>
-  noremap <leader>a :split<CR>
 
   if exists('$TMUX')
 
