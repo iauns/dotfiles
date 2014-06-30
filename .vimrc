@@ -280,6 +280,7 @@ NeoBundleLazy 'baskerville/bubblegum'
 NeoBundle 'vim-scripts/mayansmoke.git'
 NeoBundle 'altercation/vim-colors-solarized.git'
 NeoBundle 'wellle/targets.vim'
+NeoBundle 'tpope/vim-dispatch'
 
 " Sparkup
 "NeoBundleLazy 'rstacruz/sparkup', {'rtp' : 'vim/'}
@@ -292,11 +293,6 @@ NeoBundle "vimwiki/vimwiki"
 " Clang formatter for C++
 "NeoBundle 'rhysd/vim-clang-format'
 "NeoBundle 'kana/vim-operator-user'
-
-if has("gui_running")
-  " Asyncronous commands for building in VIM (AsyncMake)
-  NeoBundle "pydave/AsyncCommand"
-endif
 
 " Alternative to powerline and airline.
 NeoBundle 'itchyny/lightline.vim'
