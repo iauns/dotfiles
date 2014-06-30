@@ -403,6 +403,9 @@ endfunction
 
 
 if has("gui_running")
+  " We should AsyncMake here instead of dispatch. Dispatch is only for
+  " tmux and will start a new iterm window if used from the GUI.
+  let g:seoul256_background = 234
   set background=dark
   colorscheme seoul256
   "colorscheme xoria256
@@ -830,10 +833,7 @@ vnoremap \ <Esc>/\%V
 " Remap <C-W><C-W> to move to previously active buffer.
 nnoremap <C-W><C-W> :wincmd p<CR>
 
-" Mapping to run make command, but silent! Only pops open quick fix
-" if there were errors. Still need to fix linker error recognition.
-"noremap <leader>m :make \| :redraw! \| :botright :cw<cr>
-noremap <leader>m :AsyncMake<CR>
+noremap <leader>m :Make<CR>
 
 noremap <silent> <leader>cp :let @+=expand("%:p")<CR>
 
@@ -891,20 +891,15 @@ noremap <silent> <leader>h :noh<CR>
 noremap <silent> <leader>cb :Kwbd<CR>
 " Consider the following binding to turn highlighting off:
 
-" Open quick fix window.
 " Open vimrc.
 " Open todolist (if part of an applicable project).
 " Open general todolist.
 " Open nerdtree
-"noremap <silent> <leader>Q :copen<CR>
-"noremap <silent> <leader>q :cclose<CR>
 noremap <silent> <leader>ov :call JH_OpenVimRC()<CR>
 noremap <silent> <leader>x :call JH_OpenContextTodo()<CR>
 "noremap <silent> <leader>l :call JH_OpenContextDebug()<CR>
 noremap <silent> <leader>ob :TagbarToggle<CR>
 noremap <silent> <leader>ou :GundoToggle<CR>
-"noremap <silent> <leader>t :lopen<cr>
-"noremap <silent> <leader>T :lclose<cr>
 
 " Toggling of quick fix and location list.
 function! GetBufferList()
@@ -934,8 +929,8 @@ function! ToggleList(bufname, pfx)
   endif
 endfunction
 
-"nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
-"nmap <silent> <leader>a :call ToggleList("Quickfix List", 'c')<CR>
+nmap <silent> <leader>l :call ToggleList("Location List", 'l')<CR>
+nmap <silent> <leader>q :call ToggleList("Quickfix List", 'c')<CR>
 
 " ---------------- Previous / Next ------------------
 
@@ -943,6 +938,11 @@ endfunction
 nnoremap <leader>nL :lprevious<CR>
 nnoremap <leader>NL :lprevious<CR>
 nnoremap <leader>nl :lnext<CR>
+
+" quick fix
+nnoremap <leader>, :cn<CR>
+nnoremap <leader>' :cp<CR>
+nnoremap <leader>. :cc<CR>
 
 " ---------------- Maximal ------------------
 
