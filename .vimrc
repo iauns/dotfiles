@@ -1187,7 +1187,7 @@ let g:signify_disable_by_default = 1
 let g:jk_jumps_minimum_lines = 2
 
 " ---------------- EasyMotion ------------------
-map <space> <Plug>(easymotion-s2)
+map m <Plug>(easymotion-s2)
 "let g:EasyMotion_keys = 'asdghklqwertyuiopzxcvbnmfj;'
 let g:EasyMotion_keys = 'aoeidtn,.pyfgcrl;qjkxbmuhs'
 let g:EasyMotion_smartcase = 1
@@ -1320,13 +1320,13 @@ let g:session_autosave = 'no'
 "let g:SeekKey = '-'
 "let g:SeekBackKey = '_'
 
-" ---------------- vim-sneak ------------------
-nmap m <Plug>Sneak_s
-nmap M <Plug>Sneak_S
-xmap m <Plug>Sneak_s
-xmap M <Plug>Sneak_S
-omap m <Plug>Sneak_s
-omap M <Plug>Sneak_S
+" " ---------------- vim-sneak ------------------
+" nmap m <Plug>Sneak_s
+" nmap M <Plug>Sneak_S
+" xmap m <Plug>Sneak_s
+" xmap M <Plug>Sneak_S
+" omap m <Plug>Sneak_s
+" omap M <Plug>Sneak_S
 
 " ---------------- tcomment ------------------
 
