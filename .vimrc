@@ -49,10 +49,11 @@ set completeopt=longest   " Do not automatically suggest the first element
 set completeopt+=menuone  " Use popup menu also when there is only one match.
 set virtualedit=onemore   " Add one extra 'virtual' space at end of each line.
                           " Also could use: set virtualedit=all
-set tabstop=2             " Number of spaces that a <Tab> counts for.
-set softtabstop=2         " Num spaces that a <Tab> is converted into.
-set shiftwidth=2          " # of spaces to use for each step of autoindent.
-set expandtab             " Tell vim to insert spaces instead of tabs.
+set tabstop=4             " Number of spaces that a <Tab> counts for.
+set softtabstop=4         " Num spaces that a <Tab> is converted into.
+set shiftwidth=4          " # of spaces to use for each step of autoindent.
+"set expandtab             " Tell vim to insert spaces instead of tabs.
+set noexpandtab
 set laststatus=2          " tell VIM to always put a status line in.
 set encoding=utf-8        " Show unicode glyphs.
 set tags=./tags;/         " Set ctags to recurse upwards.
