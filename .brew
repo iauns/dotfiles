@@ -71,6 +71,8 @@ brew install orpie        # Great RPN calculator. Easily replaces bc.
 brew install mobile-shell # Alternative to SSH. Communicates via SSH.
                           # Has to be installed on host and client.
                           # See: http://mosh.mit.edu/#getting
+brew install sox
+brew install rename
 
 # Install the latest version of GDB. I do NOT use Mac's provided debugger.
 brew tap homebrew/dupes
