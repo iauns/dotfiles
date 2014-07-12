@@ -92,6 +92,27 @@ set nocursorcolumn
 set nocursorline
 syntax sync minlines=256
 
+" " Get autoread functioning correctly.
+" au FocusGained,BufEnter * :silent! !
+"
+" " Save buffers on focus lost.
+" au FocusLost,WinLeave * :silent! w
+"
+augroup checktime
+    au!
+    if !has("gui_running")
+        "silent! necessary otherwise throws errors when using command
+        "line window.
+        autocmd FocusGained     * silent! checktime
+        autocmd BufEnter        * silent! checktime
+        autocmd CursorHold      * silent! checktime
+        autocmd CursorHoldI     * silent! checktime
+        "these two _may_ slow things down. Remove if they do.
+        autocmd CursorMoved     * silent! checktime
+        autocmd CursorMovedI    * silent! checktime
+    endif
+augroup END
+
 " Note: Not sure this is necessary with the easy-clip plugin installed.
 " Writes to the unnamed register also writes to the * and + registers. This
 " makes it easy to interact with the system clipboard.
@@ -1235,6 +1256,8 @@ let g:ycm_allow_changing_updatetime = 1
 let g:ycm_enable_diagnostic_signs = 0
 
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
+"let g:ycm_server_use_vim_stdout = 1
 
 " Options for disabling YCM:
 
