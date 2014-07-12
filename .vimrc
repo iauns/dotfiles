@@ -1231,8 +1231,8 @@ let g:syntastic_enable_highlighting = 0
 "      \ 'cpp':0
 "      \}
 let g:ycm_key_invoke_completion = '<C-a>'
-" White list everythin in sci and sand.
-let g:ycm_extra_conf_globlist = ['~/sci/*', '~/me/*']
+" Whitelist everything in sci and me.
+let g:ycm_extra_conf_globlist = ['~/oculus/*', '~/me/*']
 " Definitely do NOT want youcompleteme active in unite.
 let g:ycm_filetype_blacklist = {
       \ 'notes' : 1,
