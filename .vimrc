@@ -1459,43 +1459,37 @@ endif
 " Unite
 "===============================================================================
 
+"call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', '\.meta$\|\.png$\|\.h$')
+"call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', '\.h$')
+"call unite#custom#source('file_rec,file_rec/async,file/new', 'ignore_pattern', '3rdParty\|\.h$')
+
+let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
+
 " No maximum number of files for max_cache. May want to toggle this on a per
 " project basis.
 let g:unite_source_file_rec_max_cache_files = 0
 call unite#custom#source('file_mru,file_rec,file_rec/async,grepocate', 'max_candidates', 0)
 
-"call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#custom#source('file,file_rec', 'sorters', 'sorter_rank')
-""call unite#custom#source('file,file/new,buffer,file_rec,file_rec/async,file_mru,outline',
-""      \ 'matchers', 'matcher_fuzzy')
-"call unite#custom#source('file,file/new,buffer,file_rec,file_rec/async,file_mru,outline',
-"      \ 'matchers', 'matcher_glob')
-
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-"call unite#filters#sorter_default#use(['sorter_rank'])
-
-"call unite#filters#matcher_default#use(['matcher_regexp'])
 call unite#filters#sorter_default#use(['sorter_selecta'])
 
 " Set up some custom ignores
-call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-      \ 'ignore_pattern', join([
-      \ '\.git/',
-      \ 'git5/.*/review/',
-      \ 'google/obj/',
-      \ 'bin/',
-      \ '3rdParty/',
-      \ '.*\.png',
-      \ 'node_modules/',
-      \ '\.gitignore',
-      \ 'Externals/',
-      \ 'externals/',
-      \ '\.svn/'
-      \ ], '\|'))
-
-" Ensure we ignore appropriate files.
-"let g:unite_source_rec_async_command='ag --nocolor --nogroup --ignore ".hg" --ignore ".svn" --ignore ".git" --ignore ".bzr" --hidden -g ""'
-
+" call unite#custom#source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+"       \ 'ignore_pattern', join([
+"       \ '\.git/',
+"       \ 'git5/.*/review/',
+"       \ 'google/obj/',
+"       \ 'bin/',
+"       \ '3rdParty/',
+"       \ '.*\.png',
+"       \ 'node_modules/',
+"       \ '\.gitignore',
+"       \ 'Externals/',
+"       \ 'externals/',
+"       \ '\.svn/',
+"       \ '3rdParty'
+"       \ ], '\|'))
+      
 " Map '-' to the prefix for Unite. Makes sense on dvorak keyboards (next to
 " semicolon).
 nnoremap [unite] <Nop>
