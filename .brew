@@ -81,6 +81,7 @@ brew install gdb
 
 
 # Task / time management -- task warrior
+brew install gnutls   # Dependency for task sync.
 brew install task
 
 # Mutt related packages.
