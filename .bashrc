@@ -19,8 +19,6 @@ shopt -s histappend
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-export TERM=screen-256color
-
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 #shopt -s checkwinsize
@@ -41,8 +39,6 @@ export TERM=screen-256color
 case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
-
-export PATH=$PATH:$HOME/sw/bin
 
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
