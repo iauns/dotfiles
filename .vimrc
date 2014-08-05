@@ -64,6 +64,7 @@ set ignorecase            " Case of normal letters is ignored.
 set smartcase             " Used to ignore case if no capitals are used.
 set backspace=indent,eol,start " Allow backspacing over autoindent, line breaks,
                           " and start of insert action.
+set showbreak=↪           " Show line breaks.
 set autoindent            " Keep same indent as line you are currently on
                           " (while minding file-type based autoindent).
 set nostartofline         " Cursor on same column and first non-blank on line.
