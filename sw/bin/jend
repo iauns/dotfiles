@@ -9,3 +9,6 @@ fi
 # Stop current timetrap task.
 timetrap out
 timetrap display
+
+echo "Syncing timetrap"
+${HOME}/me/scripts/performSync
