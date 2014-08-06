@@ -231,7 +231,7 @@ NeoBundle 'tpope/vim-unimpaired.git'
 " Easy motion (moved to Bundle from VAM). Using alternative which uses two chars.
 NeoBundle 'Lokaltog/vim-easymotion'
 " vim-sneak as an alternative to vim-easymotion
-NeoBundle 'justinmk/vim-sneak'
+"NeoBundle 'justinmk/vim-sneak'
 NeoBundle 'iauns/vim-subbed'
 "Bundle 'svermeulen/vim-easymotion'
 NeoBundle 'tpope/vim-repeat.git'
@@ -854,6 +854,9 @@ xnoremap @@ :normal @@<CR>
 " repeat last command for each line of a visual selection
 xnoremap . :normal .<CR>
 
+" Uppercase in insert mode
+inoremap <C-u> <esc>gUiwea
+
 " disable Ex mode key and map it to something awesome.
 nnoremap Q @@
 xnoremap Q @@
@@ -864,6 +867,9 @@ nnoremap m !
 " <space> will be remapped by easymotion.
 nnoremap m <nop>
 nnoremap M <nop>
+
+" Split line command (like join line)
+nnoremap S i<CR><ESC><right>
 
 " Exits visual mode and initiates a search within the last visual selection.
 vnoremap \ <Esc>/\%V

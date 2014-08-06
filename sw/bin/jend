@@ -7,5 +7,5 @@ if [ -e "/tmp/lastJat" ]; then
 fi
 
 # Stop current timetrap task.
-t out
-
+timetrap out
+timetrap display
