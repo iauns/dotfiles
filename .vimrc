@@ -833,7 +833,7 @@ xnoremap / <esc>/\%V
 nnoremap gV `[v`]
 
 " Tab to match (easier than percent)
-nnoremap <tab> %
+"nnoremap <tab> %
 
 " Always center screen when moving to next search occurance.
 nnoremap n nzzzv
