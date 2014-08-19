@@ -742,6 +742,10 @@ elseif has("win32unix")
   call LightDarkToggle()
 endif
 
+" Changed from <D-'>. That was not a portable binding. This is also nice
+" because 'n' is on homerow in dvorak and I use this mapping frequently.
+nnoremap <silent> <C-n> :FSHere<CR>
+
 " ---------------- General VIM usability enhancements ------------------
 " Think about organizing this section much like:
 " https://github.com/terryma/dotfiles/blob/master/.vimrc
