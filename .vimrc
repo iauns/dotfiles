@@ -33,8 +33,9 @@ set guioptions-=m         " I don't want the menu. Frees up the alt button.
 set guioptions-=e         " Make mac vim use ASCII tabs (like terminal).
                           " This to get similar color coding as the rest of vim.
 set incsearch             " Enable incremental search.
-"set rnu                   " Set relative line numbers. Can easily navigate with #j/k.
-"set nu                    " Show absolute line number on current line (works in vim 7.4).
+set rnu                   " Set relative line numbers. Can easily navigate with #j/k.
+"set nu                    " Show absolute line number on current line (works in vim 7.4). Disabled because it was causing the number column size to increase.
+set numberwidth=3         " Width of the column used for numbering.
 let mapleader="s"         " Set mapleader to 's'. I do not use the substitute 
                           " command all that often (c-<motion>). BUT: this does
                           " mess up nerdtree's vertical split 's' key.
@@ -253,7 +254,7 @@ NeoBundle 'guns/xterm-color-table.vim.git'
 NeoBundleLazy 'mattn/zencoding-vim.git'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tikhomirov/vim-glsl'
-NeoBundleLazy 'mhinz/vim-signify'
+"NeoBundleLazy 'mhinz/vim-signify'
 NeoBundle 'vim-scripts/Tab-Name'
 "NeoBundle 'oinksoft/tcd.vim'
 " Haskell dev plugins (for syntastic and definition of types)
@@ -272,7 +273,7 @@ NeoBundle 'junegunn/vim-easy-align'
 " current line.
 "Bundle 'rhysd/clever-f.vim.git'
 " Shows hunks in the vim gutter.
-NeoBundle "airblade/vim-gitgutter"
+"NeoBundle "airblade/vim-gitgutter"
 
 " Last two comments in video: https://www.youtube.com/watch?v=aHm36-na4-4
 "
@@ -840,8 +841,8 @@ nnoremap gV `[v`]
 "nnoremap <tab> %
 
 " Always center screen when moving to next search occurance.
-nnoremap n nzzzv
-nnoremap N Nzzzv
+"nnoremap n nzzzv
+"nnoremap N Nzzzv
 
 " Don't move on star
 nnoremap * *<C-O>
