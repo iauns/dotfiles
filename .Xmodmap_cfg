@@ -34,6 +34,9 @@ xmodmap -e "keycode 0x71 = Control_R"
 # Make Mode_switch-T issue an 'enter'
 xmodmap -e "keycode 45 = t T Return Return"
 
+# Make Mode_switch-H issue a 'BackSpace'
+xmodmap -e "keycode 44 = h H BackSpace BackSpace"
+
 # Keys for up and down.
 xmodmap -e "keycode 27 = p P Up Up"
 xmodmap -e "keycode 41 = u U Down Down"
