@@ -3,9 +3,9 @@
 # Only remove notifyBuffer if we have issued a jend? That way we can
 # reuse the last settings we entered?
 rm /tmp/notifyBuffer.txt &> /dev/null
-echo "now + 15 minutes" > /tmp/notifyBuffer.txt
+echo "now + 480 minutes" > /tmp/notifyBuffer.txt
 echo "Title: (title here)" >> /tmp/notifyBuffer.txt
-echo "Task: me" >> /tmp/notifyBuffer.txt
+echo "Task: ovr" >> /tmp/notifyBuffer.txt
 echo "Final Action: End task" >> /tmp/notifyBuffer.txt
 echo "" >> /tmp/notifyBuffer.txt
 vim /tmp/notifyBuffer.txt

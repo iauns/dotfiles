@@ -32,47 +32,47 @@ fi
 brew install lua 
 brew install vim --with-lua
 brew install wget --enable-iri
-brew install ack
+#brew install ack
 brew install ag
 brew install git
 brew install imagemagick
-brew install tree
-brew install macvim --with-lua
+#brew install tree
+#brew install macvim --with-lua
 brew install watch
 brew install tmux
-brew install hg
+#brew install hg
 brew install ctags       # Superceded, but still needed for outlining.
 brew install reattach-to-user-namespace # Copy and paste goodness + tmux.
 brew install bcrypt
-brew install ifstat
-brew install ncftp
-brew install subversion
-brew install ffmpeg
-brew install tcptrack
-brew install nmap
+#brew install ifstat
+#brew install ncftp
+#brew install subversion
+#brew install ffmpeg
+#brew install tcptrack
+#brew install nmap
 #brew install python       # Careful with this one. It really messes up lldb.
 brew install moreutils    # For sponge
-brew install iftop        # Monitor data usage over an interface.
-brew install ranger       # Awesome file manager.
-brew install htop
-brew install pidof        # Grab pid of process
+#brew install iftop        # Monitor data usage over an interface.
+#brew install ranger       # Awesome file manager.
+#brew install htop
+#brew install pidof        # Grab pid of process
 brew install pv           # Pipe viewer! View progress of tar! Try:
                           # dd if=/dev/urandom | pv -petra | dd of=/dev/null 
-brew install atool        # General tool used for extracting various types of
-                          # compressed archives.
+#brew install atool        # General tool used for extracting various types of
+#                          # compressed archives.
 brew install autojump --HEAD # Great little tool for navigating directories.
 brew install cgdb         # Great debugger addon to GDB
-brew install git-encrypt  # Utility for encrypting git repos on the remote server.
-                          # Useful if the remote server is untrusted.
-brew install gnuplot      # Use in conjunction with eplot and ceplot.
+#brew install git-encrypt  # Utility for encrypting git repos on the remote server.
+#                          # Useful if the remote server is untrusted.
+#brew install gnuplot      # Use in conjunction with eplot and ceplot.
 brew install coreutils    # For grealpath
-brew install p7zip        # Command line utility for 7 zip.
+#brew install p7zip        # Command line utility for 7 zip.
 brew install orpie        # Great RPN calculator. Easily replaces bc.
 brew install mobile-shell # Alternative to SSH. Communicates via SSH.
                           # Has to be installed on host and client.
                           # See: http://mosh.mit.edu/#getting
-brew install sox
-brew install rename
+#brew install sox
+#brew install rename
 
 # Install the latest version of GDB. I do NOT use Mac's provided debugger.
 brew tap homebrew/dupes
@@ -85,11 +85,11 @@ brew install gnutls   # Dependency for task sync.
 brew install task
 
 # Mutt related packages.
-brew install mutt --with-sidebar-patch    # See Steve Losh's tutorial on mutt.
-brew install msmtp --with-macosx-keyring  # Sending e-mail from mutt
-brew install offlineimap                  # Storing imap messages offline.
-brew install notmuch                      # Indexing e-mails.
-brew install urlview                      # urlview for mutt.
+#brew install mutt                         # See Steve Losh's tutorial on mutt.
+#brew install msmtp --with-macosx-keyring  # Sending e-mail from mutt
+#brew install offlineimap                  # Storing imap messages offline.
+#brew install notmuch                      # Indexing e-mails.
+#brew install urlview                      # urlview for mutt.
 
 # Password manager
 brew install pass
@@ -104,20 +104,20 @@ brew install gpg-agent
 # Install boost with C++11 support... We may need to avoid this and build our own boost.
 # Primarily due to system incompatibilities (mac's g++ and clang standard libraries).
 brew install boost --with-c++11
-brew install devil      # Image library - required for ion2.
-brew install assimp     # Asset import library.
-brew install node
+#brew install devil      # Image library - required for ion2.
+#brew install assimp     # Asset import library.
+#brew install node
 #brew install ocaml
 #brew install opam       # Ocaml package manager.
-brew install haskell-platform
-brew install gd         # For hosting a wiki site.
-brew install scons      # Build system.
+#brew install haskell-platform
+#brew install gd         # For hosting a wiki site.
+#brew install scons      # Build system.
 brew install perceptualdiff  # For testing graphics algorithms.
-brew install valgrind
+#brew install valgrind
 brew install gperftools
 brew install autoconf
-brew install libuv
-brew install gmp        # For idris.
+#brew install libuv
+#brew install gmp        # For idris.
 brew install dos2unix
 
 ###############################################################################
@@ -135,8 +135,8 @@ function installcask() {
 }
 
 installcask iterm2
-installcask keyremap4macbook
-installcask pc-keyboardhack
+installcask karabiner
+installcask seil
 installcask vagrant
 
 ###############################################################################
