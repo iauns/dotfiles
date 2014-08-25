@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+sudo apt-get install build-essential
+sudo apt-get install autojump
+sudo apt-get install ack-grep
+
+if [[ ! -e ${HOME}/.fzf ]]; then
+  echo "Installing fzf"
+  git clone https://github.com/junegunn/fzf.git ${HOME}/.fzf
+  ${HOME}/.fzf/install
+fi
+
