@@ -294,7 +294,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   ${HOME}/.pkgnode.npm
 
   info "Installing from haskell's cabal."
-  ${HOME}/.pkghaskell.cabal
+  ${HOME}/.pkghaskell
 
   info "Installing custom packages."
   ${HOME}/.pkgcustom

@@ -274,6 +274,8 @@ NeoBundle 'junegunn/vim-easy-align'
 "Bundle 'rhysd/clever-f.vim.git'
 " Shows hunks in the vim gutter.
 "NeoBundle "airblade/vim-gitgutter"
+NeoBundle 'eagletmt/ghcmod-vim.git',
+		   \ {'name' : 'v1.2.0'}
 
 " Last two comments in video: https://www.youtube.com/watch?v=aHm36-na4-4
 "
