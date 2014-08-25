@@ -277,6 +277,8 @@ NeoBundle 'junegunn/vim-easy-align'
 NeoBundle 'eagletmt/ghcmod-vim.git',
 		   \ {'name' : 'v1.2.0'}
 
+NeoBundle 'eagletmt/neco-ghc.git'
+
 " Last two comments in video: https://www.youtube.com/watch?v=aHm36-na4-4
 "
 " Adds :B to visual mode. When used, only operates on a block.
@@ -1286,6 +1288,8 @@ let g:ycm_allow_changing_updatetime = 1
 let g:ycm_enable_diagnostic_signs = 0
 
 let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
 
 "let g:ycm_server_use_vim_stdout = 1
 
