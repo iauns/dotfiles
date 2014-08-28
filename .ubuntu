@@ -7,9 +7,10 @@ sudo apt-get install autojump
 sudo apt-get install bcrypt
 sudo apt-get install ack-grep
 sudo apt-get install vim
+sudo apt-get install curl
 
 # Install neobundle for vim
-curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh
+curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 
 if [[ ! -e ${HOME}/.fzf ]]; then
   echo "Installing fzf"
