@@ -26,6 +26,7 @@ fi
 # TODO: Check with the user to see if we should manually reinstall git from source.
 
 sudo apt-get install asciidoc # For building git docs (heavy -- latex)
+sudo apt-get install libcurl4-openssl-dev # For https functionality (probably just need openssl dev).
 
 mkdir -p ${HOME}/tmp
 
@@ -40,4 +41,7 @@ pushd ${HOME}/tmp/git > /dev/null
 popd > /dev/null
 
 rm -rf ${HOME}/tmp/git
+
+echo "Remember to install p4. Copy the command line utility into ~/sw/bin"
+echo "Check the p4 executables with file to ensure they are 64 bit."
 
