@@ -6,6 +6,10 @@ sudo apt-get install mesa-utils
 sudo apt-get install autojump
 sudo apt-get install bcrypt
 sudo apt-get install ack-grep
+sudo apt-get install vim
+
+# Install neobundle for vim
+curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh
 
 if [[ ! -e ${HOME}/.fzf ]]; then
   echo "Installing fzf"
