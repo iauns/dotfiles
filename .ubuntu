@@ -11,7 +11,6 @@ sudo apt-get install ack-grep
 sudo apt-get install vim
 sudo apt-get install tmux
 sudo apt-get install zlib1g-dev # For building git
-sudo apt-get install asciidoc # For building git docs
 sudo apt-get install curl # For installing neobundle
 sudo apt-get install ruby # For installing fzf
 
@@ -24,12 +23,13 @@ if [[ ! -e ${HOME}/.fzf ]]; then
   ${HOME}/.fzf/install
 fi
 
-echo "Next steps:"
-echo "  * Manually uninstall git and reinstall it from source."
+# TODO: Check with the user to see if we should manually reinstall git from source.
+
+sudo apt-get install asciidoc # For building git docs (heavy -- latex)
+
 mkdir -p ${HOME}/tmp
 
 sudo apt-get uninstall git
-
 git clone https://github.com/git/git ${HOME}/tmp/git
 
 pushd ${HOME}/tmp/git > /dev/null
@@ -37,7 +37,7 @@ pushd ${HOME}/tmp/git > /dev/null
   ./configure --prefix=/usr
   make all doc
   sudo make install install-doc install-html
-popd
+popd > /dev/null
 
 rm -rf ${HOME}/tmp/git
 
