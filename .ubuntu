@@ -11,6 +11,7 @@ sudo apt-get install ack-grep
 sudo apt-get install vim
 sudo apt-get install tmux
 sudo apt-get install zlib1g-dev # For building git
+sudo apt-get install asciidoc # For building git docs
 sudo apt-get install curl # For installing neobundle
 sudo apt-get install ruby # For installing fzf
 
