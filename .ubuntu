@@ -10,6 +10,9 @@ sudo apt-get install bcrypt
 sudo apt-get install ack-grep
 sudo apt-get install vim
 sudo apt-get install tmux
+sudo apt-get install libxrandr-dev    # For building SDK
+sudo apt-get install libudev-dev      # For building SDK
+sudo apt-get install libgl1-mesa-dev  # For building SDK
 sudo apt-get install zlib1g-dev # For building git
 sudo apt-get install curl # For installing neobundle
 sudo apt-get install ruby # For installing fzf
