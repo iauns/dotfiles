@@ -4,7 +4,6 @@
 export TERM=screen-256color
 export PATH=$PATH:$HOME/sw/bin
 alias g='git'
-alias j='autojump'
 
 if [[ -e /usr/share/autojump ]]; then
   . /usr/share/autojump/autojump.bash

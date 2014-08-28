@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+sudo apt-get install git
 sudo apt-get install build-essential
+sudo apt-get install mesa-utils
 sudo apt-get install autojump
+sudo apt-get install bcrypt
 sudo apt-get install ack-grep
 
 if [[ ! -e ${HOME}/.fzf ]]; then
