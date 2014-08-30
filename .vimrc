@@ -1724,22 +1724,13 @@ augroup END
 " Custom au c/cpp
 "-----------------------------------------------------------------------------
 
-" Derek Wyatt's bindings in protodey needed to be nnoremap instead of nmap
-" (probably something funky to do with my vim rc or extensions)..
-function! JHMakeMapping()
-  if !exists('g:disable_protodef_mapping')
-    nnoremap <buffer> <silent> <leader>PP :set paste<cr>i<c-r>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({})<cr><esc>='[:set nopaste<cr>
-    nnoremap <buffer> <silent> <leader>PN :set paste<cr>i<c-r>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({'includeNS' : 0})<cr><esc>='[:set nopaste<cr>
-  endif
-endfunction
-
 augroup jh_ccpp
   au!
   " Pretty sure that setting the foldmethod=syntax slowed VIM down GREATLY
   " when I was using youcompleteme and easymotion in CPP files.
   "au BufAdd *.c,*.cpp,*.cc,*.cxx,*.h,*.hpp set foldmethod=syntax
   "      \ | set foldlevel=9999
-  au BufEnter *.cpp,*.C,*.cxx,*.cc,*.CC call JHMakeMapping()
+  " au BufEnter *.cpp,*.C,*.cxx,*.cc,*.CC call JHMakeMapping()
 augroup END
 
 "-----------------------------------------------------------------------------
