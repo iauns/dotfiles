@@ -501,7 +501,7 @@ endfunc
 "endfunc
 
 function! JH_OpenVimRC()
-  exe 'e '.$HOME.'/.vimrc'
+  exe 'e '.$HOME.'/dotfiles/.vimrc'
   exe 'let b:ctrlp_working_path_mode="wr"'
 endfunc
 
