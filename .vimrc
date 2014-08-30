@@ -33,7 +33,7 @@ set guioptions-=m         " I don't want the menu. Frees up the alt button.
 set guioptions-=e         " Make mac vim use ASCII tabs (like terminal).
                           " This to get similar color coding as the rest of vim.
 set incsearch             " Enable incremental search.
-set rnu                   " Set relative line numbers. Can easily navigate with #j/k.
+"set rnu                   " Set relative line numbers. Can easily navigate with #j/k.
 "set nu                    " Show absolute line number on current line (works in vim 7.4). Disabled because it was causing the number column size to increase.
 set numberwidth=3         " Width of the column used for numbering.
 let mapleader="s"         " Set mapleader to 's'. I do not use the substitute 
@@ -217,7 +217,6 @@ NeoBundle 'tpope/vim-markdown.git'
 NeoBundle 'vim-scripts/Cpp11-Syntax-Support.git'
 NeoBundleLazy 'godlygeek/tabular.git'
 "NeoBundle 'paradigm/SkyBison.git'
-NeoBundle 'derekwyatt/vim-protodef.git'
 " New motion objects. This introduces the comma ','.
 " Use it to perform an action on a word in camel case. Like ci,w
 "NeoBundle 'bkad/CamelCaseMotion.git'
@@ -254,7 +253,9 @@ NeoBundleLazy 'mattn/zencoding-vim.git'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tikhomirov/vim-glsl'
 "NeoBundleLazy 'mhinz/vim-signify'
-NeoBundle 'vim-scripts/Tab-Name'
+NeoBundle 'gcmt/taboo.vim'
+NeoBundle 'kana/vim-submode'
+" Instead of TCD, use :lcd instead
 "NeoBundle 'oinksoft/tcd.vim'
 " Haskell dev plugins (for syntastic and definition of types)
 "NeoBundleLazy 'bitc/vim-hdevtools'
@@ -272,7 +273,7 @@ NeoBundle 'junegunn/vim-easy-align'
 " current line.
 "Bundle 'rhysd/clever-f.vim.git'
 " Shows hunks in the vim gutter.
-"NeoBundle "airblade/vim-gitgutter"
+NeoBundle "airblade/vim-gitgutter"
 NeoBundle 'eagletmt/ghcmod-vim.git',
 		   \ {'name' : 'v1.2.0'}
 
@@ -446,17 +447,6 @@ else
 endif
 
 "-------------------------------------------------------------------------------
-" Filetype settings
-"-------------------------------------------------------------------------------
-augroup ctswitch_fts
-  au!
-  au BufEnter *.vs let b:ctswitchdst = 'fs' 
-        \ | set syntax=glsl
-  au BufEnter *.fs let b:ctswitchdst = 'vs' 
-        \ | set syntax=glsl
-augroup END
-
-"-------------------------------------------------------------------------------
 " Keyboard bindings
 "-------------------------------------------------------------------------------
 
@@ -500,7 +490,7 @@ endfunc
 "endfunc
 
 function! JH_OpenVimRC()
-  exe 'e '.$HOME.'/.vimrc'
+  exe 'e '.$HOME.'/dotfiles/.vimrc'
   exe 'let b:ctrlp_working_path_mode="wr"'
 endfunc
 
@@ -1053,9 +1043,6 @@ noremap <silent> <leader>gw :Gwrite<CR>
 noremap <silent> <leader>gr :Gread<CR>
 noremap <silent> <leader>gl :Glog<CR>
 
-" ---------------- CTSwitch keys ------------------
-nnoremap <silent> <leader>oc :CTSHere<CR>
-
 " ---------------- SkyBison keys ------------------
 nnoremap <leader>b :<c-u>call SkyBison("")<cr>
 
@@ -1213,27 +1200,39 @@ end
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_map_keys = 0
 
-" ---------------- Signify ------------------
-let g:signify_vcs_lst = [ 'git', 'svn' ]
+" Patch next / patch previous
+" nmap <leader>pn <Plug>GitGutterNextHunk
+" nmap <leader>pN <Plug>GitGutterPrevHunk
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
 
-let g:signify_mapping_next_hunk = '<leader>gj'
-let g:signify_mapping_prev_hunk = '<leader>gk'
+" Patch add
+nmap <Leader>pa <Plug>GitGutterStageHunk
+nmap <Leader>pu <Plug>GitGutterRevertHunk
 
-let g:signify_mapping_toggle_highlight = '<leader>gh'
-let g:signify_mapping_toggle           = '<leader>gt'
+" Preview the patch
+nmap <Leader>pv <Plug>GitGutterPreviewHunk
 
-let g:signify_sign_overwrite = 0
+" ---------------- submode ------------------
 
-let g:signify_cursorhold_normal = 0
-let g:signify_cursorhold_insert = 0
+if neobundle#is_installed( 'vim-submode' )
+  call submode#enter_with( 'GitPatch', 'n', '', '<leader>pn', ':GitGutterNextHunk<CR>'  )
+  call submode#enter_with( 'GitPatch', 'n', '', '<leader>pN', ':GitGutterPrevHunk<CR>'  )
+  call submode#map( 'GitPatch', 'n', '', 'n', ':GitGutterNextHunk<CR>'  )
+  call submode#map( 'GitPatch', 'n', '', 'N', ':GitGutterPrevHunk<CR>'  )
 
-highlight SignifySignAdd cterm=bold ctermbg=237 ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=237 ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=237 ctermfg=227
+  call submode#enter_with( 'WinResizeH', 'n', '', '<C-W><', '<C-W><'  )
+  call submode#enter_with( 'WinResizeH', 'n', '', '<C-W>>', '<C-W>>'  )
+  call submode#map( 'WinResizeH', 'n', '', '>', '<C-W>>'  )
+  call submode#map( 'WinResizeH', 'n', '', '=', '<C-W>='  )
+  call submode#map( 'WinResizeH', 'n', '', '<', '<C-W><'  )
 
-" Must manually toggle signify (if you want navigation).
-" Toggle with :SignifyToggle (mapped to <leader>gt above)
-let g:signify_disable_by_default = 1
+  call submode#enter_with( 'WinResizeV', 'n', '', '<C-W>+', '<C-W>+'  )
+  call submode#enter_with( 'WinResizeV', 'n', '', '<C-W>-', '<C-W>-'  )
+  call submode#map( 'WinResizeV', 'n', '', '+', '<C-W>+'  )
+  call submode#map( 'WinResizeV', 'n', '', '=', '<C-W>='  )
+  call submode#map( 'WinResizeV', 'n', '', '-', '<C-W>-'  )
+endif
 
 " ---------------- jk-jumps ------------------
 let g:jk_jumps_minimum_lines = 2
@@ -1324,22 +1323,6 @@ let g:tagbar_autofocus=1
 set guifont=Menlo:h14
 " Another useful way of changing the font in macvim is :set gfn=*
 " This will open up a font dialog where you can choose your font.
-
-" ----------------- Protodef ----------------
-let g:protodefprotogetter='$HOME/.vim/bundle/vim-protodef/pullproto.pl'
-let g:protodefctagsexe='/usr/local/bin/ctags'
-
-" ----------------- CTSwitch ----------------
-" CTSwitch switches between test code and the current code.
-augroup ctswitch
-  au!
-  au BufEnter *.h,*.hpp,*.c,*.cpp,*.cxx let b:ctswitchdst = 'cc' 
-        \ | let b:ctswitchlocs = '../Tests,./Tests'
-        \ | let b:ctswitchprefixes = 'Test,UTest'
-  au BufEnter *.cc let b:ctswitchdst = 'h,hpp,cpp,cxx,c' 
-        \ | let b:ctswitchlocs = '..'
-        \ | let b:ctswitchprefixes = 'Test,UTest'
-augroup END
 
 " ----------------- FSwitch ----------------
 " FSwitch auto execute mappings.
@@ -1496,6 +1479,8 @@ endif
 "call unite#custom#source('file_rec,file_rec/async', 'ignore_pattern', '\.h$')
 "call unite#custom#source('file_rec,file_rec/async,file/new', 'ignore_pattern', '3rdParty\|\.h$')
 
+"call unite#custom#profile('default', 'context', {'no_split':1, 'resize':0})
+
 let g:unite_source_rec_async_command= 'ag --nocolor --nogroup --hidden -g ""'
 
 " No maximum number of files for max_cache. May want to toggle this on a per
@@ -1537,11 +1522,11 @@ nmap <leader>u [unite]
 "nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_mru file_rec/async:!<CR>
 " Remember, order matters!
 
-nnoremap <silent> <C-p> :<C-u>Unite -no-split -sync -buffer-name=files file_rec/async file/new<CR>
+nnoremap <silent> <C-p> :<C-u>Unite -no-split -wipe -sync -buffer-name=files file_rec/async file/new<CR>
 
 " Quickly search from buffer directory.
 nnoremap <silent> [unite]d  :<C-u>UniteWithBufferDir
-      \ -buffer-name=files -prompt=%\  -no-split buffer file file/new<CR>
+      \ -buffer-name=files -prompt=%\  -no-split -wipe buffer file file/new<CR>
 
 "nnoremap <silent> <C-p> :<C-u>Unite -no-split -buffer-name=files file_rec file_mru<CR>
 " The exclamation after file_rec/async implies that vim should search for the
@@ -1551,21 +1536,21 @@ nnoremap <silent> [unite]u :<C-u>UniteWithBufferDir -no-split -buffer-name=files
 "nnoremap <silent> [unite]u :<C-u>Unite -buffer-name=files file_mru file_rec:!<CR>
 
 " Search current working directory or create files if path is not recognized.
-nnoremap <silent> [unite]f :<C-u>Unite -no-split -buffer-name=files -start-insert file file/new<CR>
+nnoremap <silent> [unite]f :<C-u>Unite -no-split -wipe -buffer-name=files -start-insert file file/new<CR>
 
 " Quick registers
 "nnoremap <silent> [unite]r :<C-u>Unite -buffer-name=register register<CR>
 " Unite resume
-nnoremap <silent> [unite]r :<C-u>UniteResume -no-split<CR>
+nnoremap <silent> [unite]r :<C-u>UniteResume<CR>
 
 " Quick buffer and mru
-nnoremap <silent> [unite]b :<C-u>Unite -no-split -buffer-name=buffers buffer file_mru bookmark<CR>
+nnoremap <silent> [unite]b :<C-u>Unite -no-split -wipe -buffer-name=buffers buffer file_mru bookmark<CR>
 
 " Quick yank history
 nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<CR>
 
 " Quick outline
-nnoremap <silent> [unite]o :<C-u>Unite -no-split -buffer-name=outline -vertical outline<CR>
+nnoremap <silent> [unite]o :<C-u>Unite -no-split -wipe -buffer-name=outline -vertical outline<CR>
 
 " Quick tags
 nnoremap <silent> [unite]t :<C-u>Unite -buffer-name=tags -vertical tag<CR>
@@ -1712,25 +1697,20 @@ elseif executable('ack')
 endif
 
 " Ability to use -no-split. Affects resume.
-augroup unite
-  au!
-  "au BufLeave \[unite\]* if "nofile" ==# &buftype | setlocal bufhidden=wipe | endif
-  autocmd BufLeave \*unite\** if "nofile" ==# &buftype | setlocal bufhidden=wipe | endif
-  autocmd BufLeave \[unite\]* if "nofile" ==# &buftype | setlocal bufhidden=wipe | endif
-augroup END
+" augroup unite_wipe_nosplit
+"   autocmd!
+"   autocmd BufLeave *
+"   \ if empty(&bufhidden)
+"   \ && &buftype  ==# 'nofile'
+"   \ && &filetype ==# 'unite'
+"   \ && !unite#get_current_unite().context.split |
+"   \   setlocal bufhidden=wipe |
+"   \ endif
+" augroup END
 
 "-----------------------------------------------------------------------------
 " Custom au c/cpp
 "-----------------------------------------------------------------------------
-
-" Derek Wyatt's bindings in protodey needed to be nnoremap instead of nmap
-" (probably something funky to do with my vim rc or extensions)..
-function! JHMakeMapping()
-  if !exists('g:disable_protodef_mapping')
-    nnoremap <buffer> <silent> <leader>PP :set paste<cr>i<c-r>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({})<cr><esc>='[:set nopaste<cr>
-    nnoremap <buffer> <silent> <leader>PN :set paste<cr>i<c-r>=protodef#ReturnSkeletonsFromPrototypesForCurrentBuffer({'includeNS' : 0})<cr><esc>='[:set nopaste<cr>
-  endif
-endfunction
 
 augroup jh_ccpp
   au!
@@ -1738,7 +1718,7 @@ augroup jh_ccpp
   " when I was using youcompleteme and easymotion in CPP files.
   "au BufAdd *.c,*.cpp,*.cc,*.cxx,*.h,*.hpp set foldmethod=syntax
   "      \ | set foldlevel=9999
-  au BufEnter *.cpp,*.C,*.cxx,*.cc,*.CC call JHMakeMapping()
+  " au BufEnter *.cpp,*.C,*.cxx,*.cc,*.CC call JHMakeMapping()
 augroup END
 
 "-----------------------------------------------------------------------------
