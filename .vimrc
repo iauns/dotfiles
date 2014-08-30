@@ -33,7 +33,7 @@ set guioptions-=m         " I don't want the menu. Frees up the alt button.
 set guioptions-=e         " Make mac vim use ASCII tabs (like terminal).
                           " This to get similar color coding as the rest of vim.
 set incsearch             " Enable incremental search.
-set rnu                   " Set relative line numbers. Can easily navigate with #j/k.
+"set rnu                   " Set relative line numbers. Can easily navigate with #j/k.
 "set nu                    " Show absolute line number on current line (works in vim 7.4). Disabled because it was causing the number column size to increase.
 set numberwidth=3         " Width of the column used for numbering.
 let mapleader="s"         " Set mapleader to 's'. I do not use the substitute 
@@ -273,7 +273,7 @@ NeoBundle 'junegunn/vim-easy-align'
 " current line.
 "Bundle 'rhysd/clever-f.vim.git'
 " Shows hunks in the vim gutter.
-"NeoBundle "airblade/vim-gitgutter"
+NeoBundle "airblade/vim-gitgutter"
 NeoBundle 'eagletmt/ghcmod-vim.git',
 		   \ {'name' : 'v1.2.0'}
 
@@ -1214,27 +1214,18 @@ end
 let g:gitgutter_sign_column_always = 1
 let g:gitgutter_map_keys = 0
 
-" ---------------- Signify ------------------
-let g:signify_vcs_lst = [ 'git', 'svn' ]
+" Patch next / patch previous
+nmap <leader>pn <Plug>GitGutterNextHunk
+nmap <leader>pN <Plug>GitGutterPrevHunk
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
 
-let g:signify_mapping_next_hunk = '<leader>gj'
-let g:signify_mapping_prev_hunk = '<leader>gk'
+" Patch add
+nmap <Leader>pa <Plug>GitGutterStageHunk
+nmap <Leader>pu <Plug>GitGutterRevertHunk
 
-let g:signify_mapping_toggle_highlight = '<leader>gh'
-let g:signify_mapping_toggle           = '<leader>gt'
-
-let g:signify_sign_overwrite = 0
-
-let g:signify_cursorhold_normal = 0
-let g:signify_cursorhold_insert = 0
-
-highlight SignifySignAdd cterm=bold ctermbg=237 ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=237 ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=237 ctermfg=227
-
-" Must manually toggle signify (if you want navigation).
-" Toggle with :SignifyToggle (mapped to <leader>gt above)
-let g:signify_disable_by_default = 1
+" Preview the patch
+nmap <Leader>pv <Plug>GitGutterPreviewHunk
 
 " ---------------- jk-jumps ------------------
 let g:jk_jumps_minimum_lines = 2
