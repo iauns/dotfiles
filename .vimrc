@@ -255,7 +255,8 @@ NeoBundleLazy 'mattn/zencoding-vim.git'
 NeoBundle 'Raimondi/delimitMate'
 NeoBundle 'tikhomirov/vim-glsl'
 "NeoBundleLazy 'mhinz/vim-signify'
-NeoBundle 'vim-scripts/Tab-Name'
+NeoBundle 'gcmt/taboo.vim'
+" Instead of TCD, use :lcd instead
 "NeoBundle 'oinksoft/tcd.vim'
 " Haskell dev plugins (for syntastic and definition of types)
 "NeoBundleLazy 'bitc/vim-hdevtools'
