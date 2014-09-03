@@ -1216,10 +1216,10 @@ nmap <Leader>pv <Plug>GitGutterPreviewHunk
 " ---------------- submode ------------------
 
 if neobundle#is_installed( 'vim-submode' )
-  call submode#enter_with( 'GitPatch', 'n', '', '<leader>pn', ':GitGutterNextHunk<CR>'  )
-  call submode#enter_with( 'GitPatch', 'n', '', '<leader>pN', ':GitGutterPrevHunk<CR>'  )
-  call submode#map( 'GitPatch', 'n', '', 'n', ':GitGutterNextHunk<CR>'  )
-  call submode#map( 'GitPatch', 'n', '', 'N', ':GitGutterPrevHunk<CR>'  )
+  call submode#enter_with( 'GitPatch', 'n', '', '<leader>pn', ':GitGutterNextHunk<CR>zzzv'  )
+  call submode#enter_with( 'GitPatch', 'n', '', '<leader>pN', ':GitGutterPrevHunk<CR>zzzv'  )
+  call submode#map( 'GitPatch', 'n', '', 'n', ':GitGutterNextHunk<CR>zzzv'  )
+  call submode#map( 'GitPatch', 'n', '', 'N', ':GitGutterPrevHunk<CR>zzzv'  )
 
   call submode#enter_with( 'WinResizeH', 'n', '', '<C-W><', '<C-W><'  )
   call submode#enter_with( 'WinResizeH', 'n', '', '<C-W>>', '<C-W>>'  )
