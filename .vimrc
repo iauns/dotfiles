@@ -76,7 +76,7 @@ set t_vb=                 " Disable the visual bell (reset terminal code).
 "set mouse=a               " Use mouse for all modes (consider removing).
 set cmdheight=2           " Set command winow height to 2 (avoiding cases of 
                           " 'press return to continue').
-                          " The following  two lines were causing problems 
+                          " The following  two lines were causing problems
                           " exiting insert mode when using the terminal.
 set timeout timeoutlen=5000 ttimeoutlen=0 " Lower the delay of escaping out of other modes
 set pastetoggle=<F10>     " F10 to enter paste mode. Super useful if you are
@@ -88,6 +88,8 @@ set sessionoptions-=options  " Don't save options in sessions.
 set noshowmatch           " Don't show matching brackets (%).
 
 set so=0                  " Lines of context at the bottom / top of document.
+" set list
+" set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 
 " Speed up vim's syntax highlighting.
 set nocursorcolumn
@@ -795,6 +797,23 @@ nnoremap U <c-r>
 " H: Go to beginning of line. Repeated invocation goes to previous line
 noremap <expr> H getpos('.')[2] == 1 ? 'k' : '^'
 nnoremap ^ H
+
+" Zip Right
+"
+" Moves the character under the cursor to the end of the line.  Handy when you
+" have something like:
+"
+"     foo
+"
+" And you want to wrap it in a method call, so you type:
+"
+"     println()foo
+"
+" Once you hit escape your cursor is on the closing paren, so you can 'zip' it
+" over to the right with this mapping.
+"
+" This should preserve your last yank/delete as well.
+nnoremap zl :let @z=@"<cr>x$p:let @"=@z<cr>
 
 " L: Go to end of line. Repeated invocation goes to next line
 " This doesn't actually work -- probably something to do with my virtual space
