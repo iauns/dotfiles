@@ -12,14 +12,14 @@ echo "  You might want to open the 'notifications' app and set the terminal-noti
 echo "  terminal-notifier source code is located at: https://github.com/alloy/terminal-notifier"
 install_gem terminal-notifier
 install_gem timetrap
-install_gem redcarpet
-install_gem pygments.rb
-install_gem wirble
-install_gem vrome
-install_gem travis
+# install_gem redcarpet
+# install_gem pygments.rb
+# install_gem wirble
+# install_gem vrome
+# install_gem travis
 
 # Github CLI issues interface.
-install_gem ghi
+# install_gem ghi
 
 # Install fzf command line tool if it is not already installed.
 if ! [ -e ~/.fzf ]; then
