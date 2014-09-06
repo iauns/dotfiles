@@ -266,7 +266,7 @@ NeoBundle 'mileszs/ack.vim.git'
 " Ag within vim. Youtube video: http://www.youtube.com/watch?v=XzN4h4dj4cE
 NeoBundle 'rking/ag.vim'
 " Slime
-NeoBundleLazy 'jpalardy/vim-slime.git'
+NeoBundle 'jpalardy/vim-slime.git'
 " Alignment plugin
 NeoBundle 'junegunn/vim-easy-align'
 " Clever-f - gets rid of ; and , when searching. Replaced by 'f' and 'F'.
@@ -1075,7 +1075,7 @@ let g:slime_target = "tmux"
 let g:slime_no_mappings = 1
 xmap <leader>i <Plug>SlimeRegionSend
 nmap <leader>i <Plug>SlimeMotionSend
-nmap <leader>il <Plug>SlimeLineSend
+nmap <leader>ii <Plug>SlimeLineSend
 
 " ---------------- Utl keys ------------------
 " Open manual
