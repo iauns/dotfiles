@@ -4,7 +4,7 @@ source .shutils
 # Ensure pip is installed.
 sudo easy_install pip
 
-sudo pip install googlecl   # Google command line tools. Primarily for CLI address book.
+# sudo pip install googlecl   # Google command line tools. Primarily for CLI address book.
 
-sudo pip install git+git://github.com/insanum/gcalcli.git@3da55a5b33270c9f29c4b0e157094177e9510d4c
+# sudo pip install git+git://github.com/insanum/gcalcli.git@3da55a5b33270c9f29c4b0e157094177e9510d4c
 

@@ -3,5 +3,5 @@ source .shutils
 
 cabal update
 
-cabal install pandoc
-cabal install ghc-mod
+# cabal install pandoc
+# cabal install ghc-mod

@@ -32,10 +32,10 @@ fi
 brew install lua 
 brew install vim --with-lua
 brew install wget --enable-iri
-#brew install ack
+brew install ack
 brew install ag
 brew install git
-brew install imagemagick
+#brew install imagemagick
 #brew install tree
 #brew install macvim --with-lua
 brew install watch
@@ -56,7 +56,7 @@ brew install moreutils    # For sponge
 #brew install ranger       # Awesome file manager.
 #brew install htop
 #brew install pidof        # Grab pid of process
-brew install pv           # Pipe viewer! View progress of tar! Try:
+#brew install pv           # Pipe viewer! View progress of tar! Try:
                           # dd if=/dev/urandom | pv -petra | dd of=/dev/null 
 #brew install atool        # General tool used for extracting various types of
 #                          # compressed archives.
