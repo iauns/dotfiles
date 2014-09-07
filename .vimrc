@@ -1575,7 +1575,7 @@ nnoremap <silent> [unite]f :<C-u>Unite -no-split -wipe -buffer-name=files -start
 nnoremap <silent> [unite]r :<C-u>UniteResume<CR>
 
 " Quick buffer and mru
-nnoremap <silent> [unite]b :<C-u>Unite -no-split -wipe -buffer-name=buffers buffer file_mru bookmark<CR>
+nnoremap <silent> [unite]b :<C-u>Unite -no-split -wipe -buffer-name=buffers buffer bookmark<CR>
 
 " Quick yank history
 nnoremap <silent> [unite]y :<C-u>Unite -buffer-name=yanks history/yank<CR>
