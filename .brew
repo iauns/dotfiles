@@ -109,7 +109,7 @@ brew install boost --with-c++11
 #brew install node
 #brew install ocaml
 #brew install opam       # Ocaml package manager.
-#brew install haskell-platform
+#brew install haskell-platform # Do *NOT* use this formula. Manually download haskell.
 #brew install gd         # For hosting a wiki site.
 #brew install scons      # Build system.
 brew install perceptualdiff  # For testing graphics algorithms.
