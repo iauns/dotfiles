@@ -1080,7 +1080,14 @@ nmap <leader>ii <Plug>SlimeLineSend
 " Debugging with GDB and Vim using Slime communication.
 " Eventually I could build a plugin that keeps track of breakpoints? May not
 " be too useful. But possibly.
-nmap <leader>ib :exe ':SlimeSend1 :b '.expand("%:p:t").":".line('.')<CR>
+nmap <leader>ib :exe ':SlimeSend1 b '.expand("%:p:t").":".line('.')<CR>
+
+" I will need to update the b:slime_config variable on a per buffer basis to
+" carry around the slime config. I can create global vim variables to do this
+" and <leader>ib can check the existence of this variable. If it is set,
+" then we should automatically set the buffer local configuration variables
+" then call slime. It is a hack to work around slime, but it should work
+" temporarily.
 
 " ---------------- Utl keys ------------------
 " Open manual
