@@ -1077,6 +1077,11 @@ xmap <leader>i <Plug>SlimeRegionSend
 nmap <leader>i <Plug>SlimeMotionSend
 nmap <leader>ii <Plug>SlimeLineSend
 
+" Debugging with GDB and Vim using Slime communication.
+" Eventually I could build a plugin that keeps track of breakpoints? May not
+" be too useful. But possibly.
+nmap <leader>ib :exe ':SlimeSend1 :b '.expand("%:p:t").":".line('.')<CR>
+
 " ---------------- Utl keys ------------------
 " Open manual
 "  " See: <url:vimhelp:uel#^a folder-URL. Utl.vim>
