@@ -152,7 +152,7 @@ vagrant plugin install vagrant-list
 ###############################################################################
 brew tap homebrew/versions
 
-brew install --HEAD llvm34 --with-clang
+#brew install --HEAD llvm34 --with-clang
 
 ###############################################################################
 # Cleanup                                                                     #
