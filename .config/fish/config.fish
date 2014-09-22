@@ -216,6 +216,18 @@ function muxs
   tmuxifier load-session $argv
 end
 
+function ghc-sandox
+  ghc -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d $argv
+end
+
+function ghci-sandox
+  ghci -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d $argv
+end
+
+function runhaskell-sandox
+  runhaskell -no-user-package-db -package-db .cabal-sandbox/*-packages.conf.d $argv
+end
+
 # Fish prompt that includes git.
 function fish_prompt
   set last_status $status
