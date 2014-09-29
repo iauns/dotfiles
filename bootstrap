@@ -115,7 +115,8 @@ install_dotfiles () {
     fi
     source="$current_dir/$sourceMinusDot"
 
-    if [ -f "$dest" ] || [ -d "$dest" ]
+    # We also check -L in case we have bad symbolic links.
+    if [ -f "$dest" ] || [ -d "$dest" ] || [ -e "$dest" ] || [ -L "$dest" ]
     then
 
       overwrite=false
