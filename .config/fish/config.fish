@@ -11,7 +11,7 @@ end
 set BROWSER open
 
 # Configure autojump.
-. (brew --prefix)/Cellar/autojump/HEAD/etc/autojump.fish
+. (brew --prefix)/etc/autojump.fish
 
 # MANPATH should NOT be set on Mac OS X. See 'man manpath'. Or run 'man -w'.
 
