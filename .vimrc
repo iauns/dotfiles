@@ -88,8 +88,8 @@ set sessionoptions-=options  " Don't save options in sessions.
 set noshowmatch           " Don't show matching brackets (%).
 
 set so=0                  " Lines of context at the bottom / top of document.
-" set list
-" set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
+set list
+set listchars=tab:▸\ ,trail:+,extends:❯,precedes:❮
 
 " Speed up vim's syntax highlighting.
 set nocursorcolumn
